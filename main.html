@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+        <title>메인</title>
+    </head>
+    <body>
+        <script>
+            /* 데이터 구조
+                var code01 = [
+                    {
+                        type: "input",
+                        state: {
+                            id: "input01",
+                            type: "text",
+                            value: "",
+                        }
+                    },
+                    {
+                        type: "button",
+                        state: {
+                            id: "button01",
+                            type: "button",
+                            value: "",
+                            label: "search1",
+                        }
+                    },
+                    {
+                        type: "input",
+                        state: {
+                            id: "input02",
+                            type: "text",
+                            value: "",
+                            readonly: true
+                        }
+                    }
+                ]
+            */
+
+            function Control(options) {
+                this.render(options);
+            }
+
+            Control.prototype = {
+                render: function (options) {
+                    var body = document.body;
+                    var div = this.createWrapper();
+                    var controlList = options;
+                    
+                    for (var i = 0, len = controlList.length; i < len; i++) {
+                        var control = controlList[i];
+                        var state = control.state;
+                        var dom = document.createElement(control.type);
+
+                        for (var key in state) {
+                            dom.setAttribute(key, state[key]);
+                        }
+
+                        if (state.label) {
+                            dom.innerText = state.label;
+                        }
+
+                        div.appendChild(dom);
+                    }
+
+                    body.appendChild(div);
+                },
+
+                createWrapper: function () {
+                    var div = document.createElement("div");
+                    div.className = "control";
+
+                    return div;
+                },
+            }
+
+
+
+
+
+            var code01 = new Control([
+                {
+                    type: "input",
+                    state: {
+                        id: "input01",
+                        type: "text",
+                        value: "",
+                    }
+                },
+                {
+                    type: "button",
+                    state: {
+                        id: "button01",
+                        type: "button",
+                        value: "",
+                        label: "search1",
+                    }
+                },
+                {
+                    type: "input",
+                    state: {
+                        id: "input02",
+                        type: "text",
+                        value: "",
+                        readonly: "readonly"
+                    }
+                }
+            ]);
+
+        </script>
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width initial-scale=1'>
+        <script src="js/control.js"></script>
+        <title>팝업1</title>
+    </head>
+    <body>
+        <script>
+            var radio = new Control([
+                {
+                    type: "input",
+                    state: {
+                        id: "radio01",
+                        type: "radio",
+                        value: "1",
+                        label: "규격명",
+                        name: "radio",
+                        checked: "checked"
+                    }
+                },
+                {
+                    type: "input",
+                    state: {
+                        id: "radio02",
+                        type: "radio",
+                        value: "2",
+                        label: "규격그룹",
+                        name: "radio"
+                    }
+                },
+                {
+                    type: "input",
+                    state: {
+                        id: "radio03",
+                        type: "radio",
+                        value: "3",
+                        label: "규격계산",
+                        name: "radio"
+                    }
+                },
+                {
+                    type: "input",
+                    state: {
+                        id: "radio04",
+                        type: "radio",
+                        value: "3",
+                        label: "규격계산그룹",
+                        name: "radio"
+                    }
+                },
+            ]);
+
+            var button = new Control([
+                {
+                    type: "button",
+                    state: {
+                        id: "save",
+                        type: "button",
+                        label: "저장",
+                        onClick: function (e) {
+                            console.log(e);
+                        }
+                    }
+                }
+            ])
+        </script>
+    </body>
+</html>

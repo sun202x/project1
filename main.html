@@ -1,86 +1,15 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> -->
+        <meta charset='UTF-8'>
+        <meta name='viewport' content='width=device-width initial-scale=1'>
+        <script src="js/control.js"></script>
         <title>메인</title>
     </head>
     <body>
         <script>
-            /* 데이터 구조
-                var code01 = [
-                    {
-                        type: "input",
-                        state: {
-                            id: "input01",
-                            type: "text",
-                            value: "",
-                        }
-                    },
-                    {
-                        type: "button",
-                        state: {
-                            id: "button01",
-                            type: "button",
-                            value: "",
-                            label: "search1",
-                        }
-                    },
-                    {
-                        type: "input",
-                        state: {
-                            id: "input02",
-                            type: "text",
-                            value: "",
-                            readonly: true
-                        }
-                    }
-                ]
-            */
-
-            function Control(options) {
-                this.render(options);
-            }
-
-            Control.prototype = {
-                render: function (options) {
-                    var body = document.body;
-                    var div = this.createWrapper();
-                    var controlList = options;
-                    
-                    for (var i = 0, len = controlList.length; i < len; i++) {
-                        var control = controlList[i];
-                        var state = control.state;
-                        var dom = document.createElement(control.type);
-
-                        for (var key in state) {
-                            dom.setAttribute(key, state[key]);
-                        }
-
-                        if (state.label) {
-                            dom.innerText = state.label;
-                        }
-
-                        // event binding
-                        // var aa = {handler : "onClick"}
-                        // Object.keys(aa).filter(function (name) { return name }) => 값 ["handler"]
-
-                        div.appendChild(dom);
-                    }
-
-                    body.appendChild(div);
-                },
-
-                createWrapper: function () {
-                    var div = document.createElement("div");
-                    div.className = "control";
-
-                    return div;
-                },
-            }
-
-
-
-
+            // 1. 부모팝업에서 값을 전달 했을 때 자식팝업에서 어떻게 그 값으로 리스트를 보여줘야 하는지?
+            // 2. 이벤트가 발생 했을 때 value값을 어떻게 가져오는지??
 
             var code01 = new Control([
                 {
@@ -89,6 +18,9 @@
                         id: "input01",
                         type: "text",
                         value: "",
+                        onDblclick: function (e) {
+                            console.log(e);
+                        },
                     }
                 },
                 {
@@ -98,6 +30,13 @@
                         type: "button",
                         value: "",
                         label: "search1",
+                        onClick: function (e) {
+                            var openWin;
+                            window.name = "parentForm";
+                            
+                            openWin = window.open("popup1.html", "popup1", "width = 500, height = 350");
+                            openWin.postMessage("abcde");
+                        }
                     }
                 },
                 {
@@ -111,6 +50,9 @@
                 }
             ]);
 
+            function setValue() {
+                console.log("aaaa");
+            }
         </script>
     </body>
 </html>

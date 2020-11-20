@@ -3,56 +3,113 @@
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width initial-scale=1'>
+        <script src="js/page.js"></script>
         <script src="js/control.js"></script>
         <title>메인</title>
     </head>
+
     <body>
         <script>
-            // 1. 부모팝업에서 값을 전달 했을 때 자식팝업에서 어떻게 그 값으로 리스트를 보여줘야 하는지?
-            // 2. 이벤트가 발생 했을 때 value값을 어떻게 가져오는지??
+            // 1. contents div 만들기
+            // 2. control div 만들기
+            // 3. input, button, input 컨트롤 만들기
+            var body = document.body;
 
-            var code01 = new Control([
-                {
-                    type: "input",
-                    state: {
-                        id: "input01",
-                        type: "text",
-                        value: "",
-                        onDblclick: function (e) {
-                            console.log(e);
-                        },
-                    }
-                },
-                {
-                    type: "button",
-                    state: {
-                        id: "button01",
-                        type: "button",
-                        value: "",
-                        label: "search1",
-                        onClick: function (e) {
-                            var openWin;
-                            window.name = "parentForm";
-                            
-                            openWin = window.open("popup1.html", "popup1", "width = 500, height = 350");
-                            openWin.postMessage("abcde");
-                        }
-                    }
-                },
-                {
-                    type: "input",
-                    state: {
-                        id: "input02",
-                        type: "text",
-                        value: "",
-                        readonly: "readonly"
-                    }
-                }
-            ]);
+            var contents = document.createElement("div");
+            contents.setAttribute("class", "contents");
 
-            function setValue() {
-                console.log("aaaa");
-            }
+            var control = document.createElement("div");
+            control.setAttribute("id", "code01");
+
+            var input01 = document.createElement("input");
+            input01.addEventListener("dblclick", function (e) {
+                console.log("dblclick");
+            });
+            control.appendChild(input01);
+
+            var button01 = document.createElement("button");
+            button01.setAttribute("type", "button");
+            button01.innerText = "search1";
+            button01.addEventListener("click", function (e) {
+                var popup = document.createElement("div");
+                popup.setAttribute("class", "popup");
+                popup.setAttribute("style", "position: absolute; top: 50px; left: 50px; width: 200px; height: 200px; border: 1px solid #000");
+                
+                body.appendChild(popup);
+            });
+            control.appendChild(button01);
+
+            var input02 = document.createElement("input");
+            input02.setAttribute("readonly", "readonly");
+            control.appendChild(input02);
+
+            contents.appendChild(control);
+            body.appendChild(contents);
+            
+
+
+
+
+
+
+
+
+
+            // var page = new Page({
+            //     oninitContents: function (contents) {
+            //         var code01 = new Control([
+            //             {
+            //                 type: "input",
+            //                 state: {
+            //                     id: "input01",
+            //                     type: "text",
+            //                     value: "",
+            //                     onDblclick: function (e) {
+            //                         console.log(e);
+            //                     },
+            //                 }
+            //             },
+            //             {
+            //                 type: "button",
+            //                 state: {
+            //                     id: "button01",
+            //                     type: "button",
+            //                     value: "",
+            //                     label: "search1",
+            //                     onClick: function (e) {
+            //                         // 모달팝업으로..
+            //                     }
+            //                 }
+            //             },
+            //             {
+            //                 type: "input",
+            //                 state: {
+            //                     id: "input02",
+            //                     type: "text",
+            //                     value: "",
+            //                     readonly: "readonly"
+            //                 }
+            //             }
+            //         ]);
+                    
+            //         contents.push(code01);
+            //     },
+            // });
+
+            // var test = new Control([
+            //     {
+            //         type: "button",
+            //         state: {
+            //             id: "button02",
+            //             type: "button",
+            //             label: "test11",
+            //             onClick: function () {
+            //                 this.setValue("label", "value");
+            //             }
+            //         }
+            //     }
+            // ]);
+
         </script>
     </body>
 </html>

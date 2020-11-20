@@ -59,12 +59,15 @@
                         id: "save",
                         type: "button",
                         label: "저장",
-                        onClick: function (e) {
-                            console.log(e);
+                        onClick: function () {
+                            opener.document.completeCallback("aa");
                         }
                     }
                 }
-            ])
+            ]);
+
+            
+
         </script>
     </body>
 </html>

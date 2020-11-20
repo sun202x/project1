@@ -1,15 +1,18 @@
 function Control(options) {
-    this.render(options);
+    this.init(options);
 }
 
 Control.prototype = {
-    render: function (options) {
+    init: function (options) {
+        this.setControls(options);
+    },
+
+    render: function () {
         var body = document.body;
         var div = this.createWrapper();
-        var controlList = options;
 
-        for (var i = 0, len = controlList.length; i < len; i++) {
-            var control = controlList[i];
+        for (var i = 0, len = this.controlList.length; i < len; i++) {
+            var control = this.controlList[i];
             var state = control.state;
             var dom = document.createElement(control.type);
             
@@ -57,6 +60,13 @@ Control.prototype = {
         return div;
     },
 
+    setControls: function (options) {
+        this.controlList = options;
+    },
+
+    getControls: function () {
+        return this.controlList;
+    },
 
     setValue: function () {
 

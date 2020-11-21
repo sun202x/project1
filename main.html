@@ -10,47 +10,71 @@
 
     <body>
         <script>
-            // 1. contents div 만들기
-            // 2. control div 만들기
-            // 3. input, button, input 컨트롤 만들기
             var body = document.body;
 
-            var contents = document.createElement("div");
-            contents.setAttribute("class", "contents");
+            function getCreateElement(type) {
+                return document.createElement(type);
+            }
 
-            var control = document.createElement("div");
-            control.setAttribute("id", "code01");
+            function setAttr(target, type, value) {
+                target.setAttribute(type, value);
+            }
 
-            var input01 = document.createElement("input");
-            input01.addEventListener("dblclick", function (e) {
-                console.log("dblclick");
+            function setEventBinding(target, type, func) {
+                target.addEventListener(type, func);
+            }
+
+            var contents = getCreateElement("div");
+            setAttr(contents, "class", "contents");
+
+            var control = getCreateElement("div");
+            setAttr(control, "id", "code01");
+
+            var input01 = getCreateElement("input");
+            setEventBinding(input01, "dblclick", function (e) {
+                window.open("popup1.html?val=" + e.target.tagName, "popup1", "width=500, height=300");
             });
             control.appendChild(input01);
 
-            var button01 = document.createElement("button");
-            button01.setAttribute("type", "button");
+            var button01 = getCreateElement("button");
             button01.innerText = "search1";
-            button01.addEventListener("click", function (e) {
-                var popup = document.createElement("div");
-                popup.setAttribute("class", "popup");
-                popup.setAttribute("style", "position: absolute; top: 50px; left: 50px; width: 200px; height: 200px; border: 1px solid #000");
-                
-                body.appendChild(popup);
+            setAttr(button01, "type", "button");
+            setEventBinding(button01, "click", function (e) {
+                window.open("popup1.html?val=" + e.target.tagName, "popup1", "width=500, height=300");
             });
             control.appendChild(button01);
 
-            var input02 = document.createElement("input");
-            input02.setAttribute("readonly", "readonly");
+            var input02 = getCreateElement("input");
+            setAttr(input02, "readonly", "readonly");
             control.appendChild(input02);
 
             contents.appendChild(control);
             body.appendChild(contents);
+
+
+
+            function getDatadd(search) {
+                var obj = {};
+                var uri = decodeURI(search);
+                uri = uri.slice(1, uri.length);
+
+                var param = uri.split("&");
+
+                for (var i = 0; i < param.length; i++) {
+                    var devide = param[i].split("=");
+                    obj[devide[0]] = devide[1];
+                }
+
+                return obj;
+            }
+
+            window.onload = function () {
+                var search = window.location.search;
+                var getData = getDatadd(search);
+
+            }
+
             
-
-
-
-
-
 
 
 

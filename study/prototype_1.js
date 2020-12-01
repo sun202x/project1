@@ -3,8 +3,6 @@
 // 프로토타입은 null 또는 object이다.
 // 모든 자바스크립트엔진에서는 __proto__를 지원한다
 
-
-
 // 1 프로토타입 생성
 const person = {
     name: "mike"
@@ -76,3 +74,35 @@ const programmer = {
 Object.setPrototypeOf(programmer, person);
 // programmer에는 sayHello라는 메서드가 존재하지 않지만, person prototype을 상속받았기 때문에 사용할 수 있다.
 programmer.sayHello();
+
+
+
+// 6 속성 나열
+const person = {
+    name: "mike",
+}
+const programmer = {
+    language: "javascript"
+}
+
+Object.setPrototypeOf(programmer, person);
+
+// 상속받은 속성까지 나열
+for (const key in programmer) {
+    console.log(key);
+}
+
+// 내가 가지고 있는 속성만 나열
+// 방법1
+// .hasOwnProperty() 사용
+for (const key in programmer) {
+    if (programmer.hasOwnProperty(key)) {
+        console.log(key);
+    }
+}
+
+// 방법2
+// Object.keys() 사용
+for (const key of Object.keys(programmer)) {
+    console.log(key);
+}

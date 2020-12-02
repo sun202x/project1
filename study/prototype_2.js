@@ -1,7 +1,7 @@
 // 생성자 함수
 // 자바스크립트에서의 모든 함수는 prototype속성을 갖게 된다.
 // 즉 함수가 만들어 질 때 생성되는 [[prototype]]과 [[prototype속성]]이 있다.
-function Person() {
+function Person(name) {
     // this = {};
     this.name = name;
     // return this;
@@ -30,7 +30,7 @@ console.log(Object.getPrototypeOf(Object.prototype) === null); // Object.prototy
 
 // 2
 // 기본 타입을 리터럴 방법으로 생성해도 기본 생성자 함수의 prototype을 가르킨다.
-// string과 number는 사실 객체가 아니지만 객체처럼 동작한다. 
+// string과 number는 사실 객체가 아니지만 객체처럼 사용하면 임시로 객체처럼 동작한다.
 const obj = {};
 const arr = [];
 const num = 123.456;

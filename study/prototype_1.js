@@ -3,6 +3,18 @@
 // 프로토타입은 null 또는 object이다.
 // 모든 자바스크립트엔진에서는 __proto__를 지원한다
 
+
+
+// 0 __proto__ vs prototype
+// __proto__
+// 1. __proto__속성은 모든 "객체"가 가지고 있는 속성
+// 2. 객체가 생성될 때 자신의 부모 객체인 prototype을 가르킨다.
+
+// prototype
+// 1. "함수" 객체만이 가지는 prototype
+// 2. "함수" 객체가 생서자로 사용될 때(생성자함수) 인스턴스의 부모 역할을 하는 객체를 가르킨다.
+
+
 // 1 프로토타입 생성
 const person = {
     name: "mike"
@@ -21,7 +33,7 @@ const programmer = {
     language: "javascript"
 }
 // programmer.__proto__ = person
-Object.setPrototypeOf(programmer, person); // 프로토타입 변경
+Object.setPrototypeOf(programmer, person); // 프로토타입 상속
 console.log(Object.getPrototypeOf(programmer) === person); // programmer의 프로토타입 == person
 console.log(programmer.name);
 
@@ -55,7 +67,7 @@ const programmer = {
     language: "javascript"
 }
 Object.setPrototypeOf(programmer, person);
-programmer.name = "jane"; // 내 자신에 대한 프로토타입 속성 추가
+programmer.name = "jane"; // 새로운 속성을 추가할 땐 프로토타입 체인에 속성을 추가하는 것이 아닌, 자기자신에게 속성을 추가해야한다.
 console.log(programmer.name);
 console.log(person.name);
 

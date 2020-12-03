@@ -12,15 +12,15 @@ function Person(name) {
     // return this;
 }
 const person = new Person("mike");
-console.log(person.name);
+console.log(person.name); // this == person
 
 
 
 // 2
 // 자바스크립트의 기본 타입은 생성자 함수를 갖고 있다
 // 하지만 생성자 함수로 값을 생성할 필요가 없고, 리터럴 문법을 사용하여 값을 생성하도록 한다.
-const obj = new Object({ a: 123 });
-const arr = new Array(10, 20, 30);
+const obj = new Object({ a: 123 }); // {}
+const arr = new Array(10, 20, 30); // []
 const num = new Number(123);
 const str = new String("abc");
 
@@ -30,7 +30,7 @@ console.log({ obj, arr, num, str });
 
 // 3
 // 자바스크립트에서의 모든 함수는 prototype속성을 갖게 된다.
-// 즉 함수가 만들어 질 때 생성되는 [[prototype]]과 [[prototype속성]]이 있다.
+// 즉 함수가 만들어 질 때 생성되는 [[prototype]] === __proto__과 prototype속성이 있다.
 function Person(name) {
     this.name = name;
 }
@@ -38,7 +38,7 @@ const person = new Person("mike");
 
 console.log(Person.prototype);
 // new 키워드로 생성 된 객체의 prototype은 생성자 함수의 prototype과 같다.
-console.log(Object.getPrototypeOf(person) === Person.prototype);
+console.log(Object.getPrototypeOf(person) === Person.prototype); // Person.prototype == person.__proto__
 
 
 
@@ -50,10 +50,10 @@ function Person(name) {
 const person = new Person("mike");
 
 // 샘성자 함수 Person의 prototype은 Person.prototype속성 과는 다르다.
-console.log(Object.getPrototypeOf(Person) !== Person.prototype);
+console.log(Object.getPrototypeOf(Person) !== Person.prototype); // Person 함수 !== Person.prototype 객체
 
-// new 키워드로 만들어진 객체의 prototype은 생성자 함수의 prototype 속성과 같다
-console.log(Object.getPrototypeOf(person) === Person.prototype);
+// // new 키워드로 만들어진 객체의 prototype은 생성자 함수의 prototype 속성과 같다
+// console.log(Object.getPrototypeOf(person) === Person.prototype);
 
 // Person의 prototype속성은 Object의 prototype속성과 같다.
 console.log(Object.getPrototypeOf(Person.prototype) === Object.prototype);
@@ -75,9 +75,9 @@ console.log(Object.getPrototypeOf(Object.prototype) === null);
 // 5
 // 기본 타입을 리터럴 방법으로 생성해도 해당 생성자 함수의 prototype을 가르킨다.
 // string과 number는 사실 객체가 아니지만 객체처럼(속성에 접근하는 문법 "num.???") 사용하면 해당 생성자 함수의 prototype을 참조하게 된다.
-const obj = {};
-const arr = [];
-const num = 123.456;
+const obj = {}; // new Object()
+const arr = []; // new Array()
+const num = 123.456; // new Number(123.456)
 const str = "abc";
 console.log(Object.getPrototypeOf(obj) === Object.prototype);
 console.log(Object.getPrototypeOf(arr) === Array.prototype);
@@ -93,6 +93,8 @@ function Person(name) {
     this.name = name;
 }
 const person1 = new Person("mike");
+
+
 const newPrototype = {
     values: [],
     push(value) {
@@ -167,7 +169,7 @@ function Person(name) {
 }
 
 console.log(Person.prototype.constructor === Person);
-// console.log(Person.constructor === ?(Function));
+console.log(Person.constructor === Function);
 
 
 // 10
@@ -189,5 +191,5 @@ function makeInstanceOf(obj) {
 }
 const person = new Person();
 const animal = new Animal();
-const newInst = makeInstanceOf(animal);
+const newInst = makeInstanceOf(person);
 newInst.sayHello();

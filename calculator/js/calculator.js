@@ -1,29 +1,31 @@
 class Calculator {
     constructor() {
-        this.init();
-        this.bindEvent();
-    }
+        this.result = 0;
 
-    init() {
         this.createCalculator();
+        this.numberBindEvent();
+        this.operatorBindEvent();
+        this.decimalBindEvent();
     }
 
     createCalculator() {
-        let wrapper = document.body;
-        let wrapperPad = "";
-        let displayPad = this.createDisplayPad();
-        let numberPad = this.createNumberPad();
-        let operationPad = this.createOperationPad();
+        let wrapper = document.body,
+            wrapperPad = "",
+            displayPad = this.createDisplayPad(),
+            numberPad = this.createNumberPad(),
+            operationPad = this.createOperationPad(),
+            decimalPad = this.createDecimalPad();
 
         wrapperPad += displayPad;
         wrapperPad += numberPad;
         wrapperPad += operationPad;
+        wrapperPad += decimalPad;
 
         wrapper.innerHTML = wrapperPad;
     }
 
     createDisplayPad() {
-        return `<input type="text" id="input" readonly="readonly" />`;
+        return `<input type="text" class="display" readonly="readonly" />`;
     }
 
     createNumberPad() {
@@ -38,31 +40,50 @@ class Calculator {
 
     createOperationPad() {
         return [
-            `<button type="button">+</button>`,
-            `<button type="button">-</button>`,
-            `<button type="button">*</button>`,
-            `<button type="button">/</button>`,
-            `<button type="button">=</button>`
+            `<button type="button" class="operator">+</button>`,
+            `<button type="button" class="operator">-</button>`,
+            `<button type="button" class="operator">*</button>`,
+            `<button type="button" class="operator">/</button>`
         ].join("");
     }
 
-    bindEvent() {
-        let buttons = document.getElementsByTagName("button");
-        let arr = [];
+    createDecimalPad() {
+        return `<button type="button" class="decimal">=</button>`;
+    }
 
-        for (let i = 0, len = buttons.length; i < len; i++) {
-            let button = buttons[i];
+    numberBindEvent() {
+        let numbers = document.querySelectorAll(".number");
 
-            button.addEventListener("click", function (event) {
+        numbers.forEach((button) => {
+            button.addEventListener("click", (event) => {
+                const display = document.querySelector(".display");
                 let value = event.target.innerText;
-                let input = document.getElementById("input");
 
-                if (value === "=") {
-                    
-                }
-
-                input.value += value;
+                display.value += value;
             });
-        }
+        });
+    }
+
+    operatorBindEvent() {
+        let operators = document.querySelectorAll(".operator");
+
+        operators.forEach((operator) => {
+            operator.addEventListener("click", (event) => {
+                const display = document.querySelector(".display");
+                let value = event.target.innerText;
+
+                display.value += value;
+            });
+        });
+    }
+
+    decimalBindEvent() {
+        let decimal = document.querySelector(".decimal");
+
+        decimal.addEventListener("click", (event) => {
+            const display = document.querySelector(".display");
+
+            display.value = eval(display.value);
+        });
     }
 }

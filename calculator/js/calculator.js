@@ -1,14 +1,10 @@
 class Calculator {
     constructor() {
         this.init();
-        this.render();
+        this.bindEvent();
     }
 
     init() {
-
-    }
-
-    render() {
         this.createCalculator();
     }
 
@@ -41,7 +37,32 @@ class Calculator {
     }
 
     createOperationPad() {
-        let operationStr = "";
+        return [
+            `<button type="button">+</button>`,
+            `<button type="button">-</button>`,
+            `<button type="button">*</button>`,
+            `<button type="button">/</button>`,
+            `<button type="button">=</button>`
+        ].join("");
+    }
 
+    bindEvent() {
+        let buttons = document.getElementsByTagName("button");
+        let arr = [];
+
+        for (let i = 0, len = buttons.length; i < len; i++) {
+            let button = buttons[i];
+
+            button.addEventListener("click", function (event) {
+                let value = event.target.innerText;
+                let input = document.getElementById("input");
+
+                if (value === "=") {
+                    
+                }
+
+                input.value += value;
+            });
+        }
     }
 }

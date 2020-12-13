@@ -1,34 +1,28 @@
 class Calculator {
     constructor() {
-        this.result = 0;
-
         this.createCalculator();
-        this.numberBindEvent();
-        this.operatorBindEvent();
-        this.decimalBindEvent();
+        this.calcBindEvent();
     }
 
     createCalculator() {
-        let wrapper = document.body,
-            wrapperPad = "",
-            displayPad = this.createDisplayPad(),
-            numberPad = this.createNumberPad(),
-            operationPad = this.createOperationPad(),
-            decimalPad = this.createDecimalPad();
+        let body = document.body,
+            calcWrapper = "",
+            calcDisplay = this.createCalcDisplay(),
+            calcNumberButton = this.createCalcNumberButton(),
+            calcEtcButton = this.createCalcEctButton();
 
-        wrapperPad += displayPad;
-        wrapperPad += numberPad;
-        wrapperPad += operationPad;
-        wrapperPad += decimalPad;
+        calcWrapper += calcDisplay;
+        calcWrapper += calcNumberButton;
+        calcWrapper += calcEtcButton;
 
-        wrapper.innerHTML = wrapperPad;
+        body.innerHTML = calcWrapper;
     }
 
-    createDisplayPad() {
-        return `<input type="text" class="display" readonly="readonly" />`;
+    createCalcDisplay() {
+        return `<input type="text" class="display" value="0" readonly="readonly" />`;
     }
 
-    createNumberPad() {
+    createCalcNumberButton() {
         let numberStr = "";
 
         for (let i = 0; i < 10; i++) {
@@ -38,52 +32,43 @@ class Calculator {
         return numberStr;
     }
 
-    createOperationPad() {
+    createCalcEctButton() {
         return [
             `<button type="button" class="operator">+</button>`,
             `<button type="button" class="operator">-</button>`,
             `<button type="button" class="operator">*</button>`,
-            `<button type="button" class="operator">/</button>`
+            `<button type="button" class="operator">/</button>`,
+            `<button type="button" class="decimal">=</button>`,
+            `<button type="button" class="clear">C</button>`
         ].join("");
     }
 
-    createDecimalPad() {
-        return `<button type="button" class="decimal">=</button>`;
-    }
+    calcBindEvent() {
+        let buttons = document.querySelectorAll("button");
 
-    numberBindEvent() {
-        let numbers = document.querySelectorAll(".number");
-
-        numbers.forEach((button) => {
+        buttons.forEach((button) => {
             button.addEventListener("click", (event) => {
-                const display = document.querySelector(".display");
-                let value = event.target.innerText;
-
-                display.value += value;
+                this.updateDisplay(event.target.innerText);
             });
         });
     }
 
-    operatorBindEvent() {
-        let operators = document.querySelectorAll(".operator");
+    updateDisplay(value) {
+        const display = document.querySelector(".display");
 
-        operators.forEach((operator) => {
-            operator.addEventListener("click", (event) => {
-                const display = document.querySelector(".display");
-                let value = event.target.innerText;
-
+        switch(value) {
+            case "=":
+                display.value = eval(display.value);
+                break;
+            case "C":
+                display.value = "0";
+                break;
+            default:
+                if (display.value === "0") {
+                    display.value = "";
+                }
                 display.value += value;
-            });
-        });
-    }
-
-    decimalBindEvent() {
-        let decimal = document.querySelector(".decimal");
-
-        decimal.addEventListener("click", (event) => {
-            const display = document.querySelector(".display");
-
-            display.value = eval(display.value);
-        });
+                break;
+        }
     }
 }

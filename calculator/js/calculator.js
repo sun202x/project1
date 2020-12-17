@@ -1,21 +1,29 @@
 class Calculator {
     constructor() {
-        this.itemList = [];
-        this.createCalculator();
+        this.init();
+        this.render();
         this.calcBindEvent();
+    }
+    
+    init() {
+        this.itemList = [];
+        this.wrapper = document.body;
+    }
+
+    render() {
+        this.createCalculator();
     }
 
     createCalculator() {
-        const body = document.body;
-        this.createCalcDisplay(body);
-        this.createCalcButton(body);
+        this.createCalcDisplay();
+        this.createCalcButton();
     }
 
-    createCalcDisplay(parent) {
-        parent.innerHTML = `<input type="text" class="display" value="0" readonly="readonly" />`;
+    createCalcDisplay() {
+        this.wrapper.innerHTML = `<input type="text" class="display" value="0" readonly="readonly" />`;
     }
 
-    createCalcButton(parent) {
+    createCalcButton() {
         let data = this.getData();
 
         data.forEach((item) => {
@@ -39,9 +47,8 @@ class Calculator {
                     button = new NumberButton(item.id, item.label);
                     break;
             }
-
             this.itemList.push(button);
-            button.render(parent);
+            button.render(this.wrapper);
         });
     }
 
@@ -144,27 +151,35 @@ class Calculator {
 
         buttons.forEach((button) => {
             button.addEventListener("click", (event) => {
-                this.updateDisplay(event.target.innerText);
+                this.onClick(event);
             });
         });
     }
 
-    updateDisplay(value) {
-        const display = document.querySelector(".display");
+    onClick(event) {
+        // target 찾아서 해당 버튼 onclick 호출
+        // find
+        var target = this.itemList[event.target.innerText];
 
-        switch(value) {
-            case "=":
-                display.value = eval(display.value);
-                break;
-            case "C":
-                display.value = "0";
-                break;
-            default:
-                if (display.value === "0") {
-                    display.value = "";
-                }
-                display.value += value;
-                break;
-        }
+        target.onClick();
     }
+
+    // updateDisplay(value) {
+    //     const display = document.querySelector(".display");
+
+    //     switch(value) {
+    //         case "=":
+    //             display.value = eval(display.value);
+    //             break;
+    //         case "C":
+    //             display.value = "0";
+    //             break;
+    //         default:
+    //             if (display.value === "0") {
+    //                 display.value = "";
+    //             }
+    //             display.value += value;
+    //             break;
+    //     }
+    // }
 }

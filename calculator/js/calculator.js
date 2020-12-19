@@ -20,7 +20,7 @@ class Calculator {
     }
 
     createCalcDisplay() {
-        this.wrapper.innerHTML = `<input type="text" class="display" value="0" readonly="readonly" />`;
+        this.wrapper.innerHTML = `<input type="text" id="display" value="0" readonly="readonly" />`;
     }
 
     createCalcButton() {
@@ -30,23 +30,24 @@ class Calculator {
             const type = item.type;
             let button = null;
 
-            // 자식에 대한 의존성이 너무 높음 - 버튼종류가 생기면 이부분 수정이 필요함
+            // 자식에 대한 의존성이 너무 높음 - 버튼이 추가될 때 매번 추가해줘야함
             // 의존성 역전으로 객체를 생성할 수 있도록 수정
             // 현재 의존성 : 부모 > 자식 || 수정 후 의존성 : 부모 < 자식
             switch(type) {
-                case "OperatorButton":
+                case "Operator":
                     button = new OperatorButton(item.id, item.label);
                     break;
-                case "EqualButton":
-                    button = new EqualButton(itqem.id, item.label);
+                case "Equal":
+                    button = new EqualButton(item.id, item.label);
                     break;
-                case "ClearButton":
-                    button = new ClearButton(itqem.id, item.label);
+                case "Clear":
+                    button = new ClearButton(item.id, item.label);
                     break;
                 default:
                     button = new NumberButton(item.id, item.label);
                     break;
             }
+
             this.itemList.push(button);
             button.render(this.wrapper);
         });
@@ -146,6 +147,10 @@ class Calculator {
         return this.itemList;
     }
 
+    getTarget(event) {
+        return event.target.getAttribute("id");
+    }
+
     calcBindEvent() {
         let buttons = document.querySelectorAll("button");
 
@@ -158,28 +163,14 @@ class Calculator {
 
     onClick(event) {
         // target 찾아서 해당 버튼 onclick 호출
-        // find
-        var target = this.itemList[event.target.innerText];
+        const display = document.getElementById("display");
 
-        target.onClick();
+        let target = this.itemList.find((button) => {
+            if (button.id === this.getTarget(event)) {
+                return button;
+            }
+        });
+
+        target.onClick(display);
     }
-
-    // updateDisplay(value) {
-    //     const display = document.querySelector(".display");
-
-    //     switch(value) {
-    //         case "=":
-    //             display.value = eval(display.value);
-    //             break;
-    //         case "C":
-    //             display.value = "0";
-    //             break;
-    //         default:
-    //             if (display.value === "0") {
-    //                 display.value = "";
-    //             }
-    //             display.value += value;
-    //             break;
-    //     }
-    // }
 }

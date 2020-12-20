@@ -3,6 +3,8 @@ class Calculator {
         this.init();
         this.render();
         this.calcBindEvent();
+
+        this.operator = new CalcOperator();
     }
     
     init() {
@@ -27,32 +29,14 @@ class Calculator {
         let data = this.getData();
 
         data.forEach((item) => {
-            const type = item.type;
-            let button = null;
-
-            // 자식에 대한 의존성이 너무 높음 - 버튼이 추가될 때 매번 추가해줘야함
-            // 의존성 역전으로 객체를 생성할 수 있도록 수정
-            // 현재 의존성 : 부모 > 자식 || 수정 후 의존성 : 부모 < 자식
-            switch(type) {
-                case "Operator":
-                    button = new OperatorButton(item.id, item.label);
-                    break;
-                case "Equal":
-                    button = new EqualButton(item.id, item.label);
-                    break;
-                case "Clear":
-                    button = new ClearButton(item.id, item.label);
-                    break;
-                default:
-                    button = new NumberButton(item.id, item.label);
-                    break;
-            }
+            const button = new Button(item.id, item.type, item.label);
 
             this.itemList.push(button);
             button.render(this.wrapper);
         });
     }
 
+    // 별도의 파일로 만들어서 사용(json 형태), import사용
     getData() {
         return [
             {
@@ -143,34 +127,34 @@ class Calculator {
         ]
     }
 
-    getItemList() {
-        return this.itemList;
-    }
-
     getTarget(event) {
         return event.target.getAttribute("id");
     }
 
     calcBindEvent() {
-        let buttons = document.querySelectorAll("button");
-
-        buttons.forEach((button) => {
-            button.addEventListener("click", (event) => {
-                this.onClick(event);
-            });
+        document.body.addEventListener('click', e => {
+            this.onClick(e);   
         });
     }
 
     onClick(event) {
         // target 찾아서 해당 버튼 onclick 호출
         const display = document.getElementById("display");
+        const target = this.itemList.find((button) => 
+            button.id === this.getTarget(event)
+        );
 
-        let target = this.itemList.find((button) => {
-            if (button.id === this.getTarget(event)) {
-                return button;
+        if (target) {
+            const result = this.operator.getCalcResult(target.type, target.label);
+
+            if (result !== undefined) {
+                display.value = result;
             }
-        });
-
-        target.onClick(display);
+        }
     }
+
+    update() {
+
+    }
+    
 }

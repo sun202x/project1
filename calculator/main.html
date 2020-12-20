@@ -3,6 +3,7 @@
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width initial-scale=1'>
+        <script src="js/calcOperator.js"></script>
         <script src="js/calculator.js"></script>
         <script src="js/button.js"></script>
         <title>계산기</title>
@@ -21,8 +22,9 @@
 
     <body>
         <script>
-            // 지수연산 추가 Math.pow(a, b);
-            // 버튼 클래스화
+            // 1. 로직정리: label 관련된 로직 제거, display 로직 분리
+            // 2. 표준계산기 모든 기능 구형: M* 기능들 제외, 기록 포함
+            // 3. 확장가능한 구조로 고민할 것: 프로그래머용 계산기 추후 추가될 것
             const calc = new Calculator();
         </script>
     </body>

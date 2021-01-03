@@ -1,6 +1,4 @@
-
-class CalcOperator { 
-
+class CalcOperator {
     constructor () {
         this.prevValue = 0;
         this.currentValue = 0;
@@ -8,34 +6,32 @@ class CalcOperator {
         this.operatorValue = "";
     }
 
-    getCalcResult(type, label) {
-        switch(type) {
+    getCalcResult(target) {
+        switch(target.type) {
             case "NumberButton":
-                return this.number(label);
-
+                return this.number(target.value);
             case "Operator":
-                return this.operator(label);
-
+                return this.operator(target.value);
             case "Equal":
-                return this.equal(label);
-
+                return this.equal();
+            case "Backspace":
+                return this.backspace(target.value);
             case "Clear":
                 this.clear();
                 return "0";
-
             default:
                 return "";
         }
     }
 
-    // @TODO label => id로 변경필요
-    // label들 value로 변경
-    calculateValue(label) {
-        var result,
-            prevValue = parseInt(this.prevValue),
-            currentValue = parseInt(this.currentValue);
+    // @TODO value => id로 변경필요
+    // value들 value로 변경
+    calculateValue(value) {
+        let result;
+        const prevValue = parseInt(this.prevValue);
+        const currentValue = parseInt(this.currentValue);
 
-        switch(label) {
+        switch(value) {
             case "+":
                 result = prevValue + currentValue;
                 break;
@@ -56,13 +52,13 @@ class CalcOperator {
         return result;
     }
 
-    number(label) {
+    number(value) {
         let result = this.currentValue;
 
         if (result == "0") {
-            result = (label + "");
+            result = (value + "");
         } else {
-            result += (label + "");
+            result += (value + "");
         }
 
         this.currentValue = result;
@@ -71,19 +67,23 @@ class CalcOperator {
         return result;
     }
 
-    operator(label) {
-        let result = "";
+    operator(value) {
+        let result = (this.operatorValue === value) ? this.prevValue + value : "";
 
         if (!this.operatorCheck) {
             this.operatorCheck = true;
-            this.operatorValue = label;
+            this.operatorValue = value;
             this.prevValue = this.currentValue;
             this.currentValue = "0";
 
-            result = this.prevValue + label;
+            result = this.prevValue + value;
         }
 
         return result;
+    }
+
+    backspace(value) {
+        return value;
     }
 
     clear() {
@@ -93,17 +93,16 @@ class CalcOperator {
         this.currentValue = "";
     }
 
-    equal(label) {
+    equal() {
         let result = "";
 
         if (this.prevValue !== "" && this.currentValue !== "") {
             result = this.calculateValue(this.operatorValue);
         }
-        
+
         this.prevValue = "";
         this.currentValue = "";
 
         return result;
     }
-
 }

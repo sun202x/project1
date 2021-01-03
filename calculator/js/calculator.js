@@ -3,13 +3,13 @@ class Calculator {
         this.init();
         this.render();
         this.calcBindEvent();
-
-        this.operator = new CalcOperator();
     }
-    
+
     init() {
         this.itemList = [];
         this.wrapper = document.body;
+        this.operator = new CalcOperator();
+        this.display = new CalcDisplay();
     }
 
     render() {
@@ -17,19 +17,15 @@ class Calculator {
     }
 
     createCalculator() {
-        this.createCalcDisplay();
+        this.display.render(this.wrapper);
         this.createCalcButton();
-    }
-
-    createCalcDisplay() {
-        this.wrapper.innerHTML = `<input type="text" id="display" value="0" readonly="readonly" />`;
     }
 
     createCalcButton() {
         let data = this.getData();
 
         data.forEach((item) => {
-            const button = new Button(item.id, item.type, item.label);
+            const button = new CalcButton(item);
 
             this.itemList.push(button);
             button.render(this.wrapper);
@@ -37,92 +33,98 @@ class Calculator {
     }
 
     // 별도의 파일로 만들어서 사용(json 형태), import사용
+    // CORS정책(?) 때문에 에러나서 되지 않음...
     getData() {
         return [
             {
                 id: "number0",
                 type: "NumberButton",
-                label: 0
+                value: 0
             },
             {
                 id: "number1",
                 type: "NumberButton",
-                label: 1
+                value: 1
             },
             {
                 id: "number2",
                 type: "NumberButton",
-                label: 2
+                value: 2
             },
             {
                 id: "number3",
                 type: "NumberButton",
-                label: 3
+                value: 3
             },
             {
                 id: "number4",
                 type: "NumberButton",
-                label: 4
+                value: 4
             },
             {
                 id: "number5",
                 type: "NumberButton",
-                label: 5
+                value: 5
             },
             {
                 id: "number6",
                 type: "NumberButton",
-                label: 6
+                value: 6
             },
             {
                 id: "number7",
                 type: "NumberButton",
-                label: 7
+                value: 7
             },
             {
                 id: "number8",
                 type: "NumberButton",
-                label: 8
+                value: 8
             },
             {
                 id: "number9",
                 type: "NumberButton",
-                label: 9
+                value: 9
             },
             {
                 id: "plus",
                 type: "Operator",
-                label: "+",
+                value: "+",
             },
             {
                 id: "minus",
                 type: "Operator",
-                label: "-",
+                value: "-",
             },
             {
                 id: "multiply",
                 type: "Operator",
-                label: "*",
+                value: "*",
             },
             {
                 id: "divition",
                 type: "Operator",
-                label: "/",
+                value: "/",
             },
             {
                 id: "squared",
                 type: "Operator",
-                label: "^"
+                value: "^"
             },
             {
                 id: "equal",
                 type: "Equal",
-                label: "="
+                value: "="
             },
             {
                 id: "clear",
                 type: "Clear",
-                label: "c"
+                value: "c"
+            },
+            {
+                id: "backspace",
+                type: "Backspace",
+                value: "<"
             }
         ]
     }
@@ -131,30 +133,25 @@ class Calculator {
         return event.target.getAttribute("id");
     }
 
+    // 이벤트 바인딩
     calcBindEvent() {
         document.body.addEventListener('click', e => {
-            this.onClick(e);   
+            this.onClick(e);
         });
     }
 
     onClick(event) {
         // target 찾아서 해당 버튼 onclick 호출
-        const display = document.getElementById("display");
-        const target = this.itemList.find((button) => 
+        const target = this.itemList.find((button) =>
             button.id === this.getTarget(event)
         );
 
         if (target) {
-            const result = this.operator.getCalcResult(target.type, target.label);
+            const result = this.operator.getCalcResult(target);
 
             if (result !== undefined) {
-                display.value = result;
+                this.display.update(result);
             }
         }
     }
-
-    update() {
-
-    }
-    
 }

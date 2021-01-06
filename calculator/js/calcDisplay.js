@@ -28,13 +28,6 @@ class CalcDisplay {
     update(result) {
         const display = this.getDisplay();
 
-        if (result === "<") {
-            const value = display.value.split("");
-            value.pop();
-
-            display.value = value.join("");
-        } else {
-            display.value = result;
-        }
+        display.value = result;
     }
 }

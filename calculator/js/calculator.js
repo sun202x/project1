@@ -7,6 +7,7 @@ class Calculator {
 
     init() {
         this.itemList = [];
+        this.operatorList = [];
         this.wrapper = document.body;
         this.operator = new CalcOperator();
         this.display = new CalcDisplay();
@@ -27,13 +28,17 @@ class Calculator {
         data.forEach((item) => {
             const button = new CalcButton(item);
 
+            if (button.type === "Operator") {
+                this.operatorList.push(button.value);
+            }
+
             this.itemList.push(button);
             button.render(this.wrapper);
         });
     }
 
     // 별도의 파일로 만들어서 사용(json 형태), import사용
-    // CORS정책(?) 때문에 에러나서 되지 않음...
+    // CORS정책(?) 때문에 에러나서 되지 않음... 우선 두는걸로..
     getData() {
         return [
             {
@@ -107,6 +112,11 @@ class Calculator {
                 value: "/",
             },
             {
+                id: "percent",
+                type: "Operator",
+                value: "%",
+            },
+            {
                 id: "squared",
                 type: "Operator",
                 value: "^"
@@ -117,13 +127,13 @@ class Calculator {
                 value: "="
             },
             {
-                id: "clear",
-                type: "Clear",
+                id: "clearAll",
+                type: "ClearAll",
                 value: "c"
             },
             {
-                id: "backspace",
-                type: "Backspace",
+                id: "clear",
+                type: "Clear",
                 value: "<"
             }
         ]
@@ -131,6 +141,10 @@ class Calculator {
 
     getTarget(event) {
         return event.target.getAttribute("id");
+    }
+
+    getOperatorList() {
+        return this.operatorList;
     }
 
     // 이벤트 바인딩

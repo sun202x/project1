@@ -14,10 +14,10 @@ class CalcOperator {
                 return this.operator(target.value);
             case "Equal":
                 return this.equal();
-            case "Backspace":
-                return this.backspace(target.value);
             case "Clear":
-                this.clear();
+                return this.clear();
+            case "ClearAll":
+                this.clearAll();
                 return "0";
             default:
                 return "";
@@ -28,8 +28,8 @@ class CalcOperator {
     // value들 value로 변경
     calculateValue(value) {
         let result;
-        const prevValue = parseInt(this.prevValue);
-        const currentValue = parseInt(this.currentValue);
+        const prevValue = (this.prevValue !== "") ? parseInt(this.prevValue) : "";
+        const currentValue = (this.currentValue !== "") ? parseInt(this.currentValue) : "";
 
         switch(value) {
             case "+":
@@ -47,6 +47,8 @@ class CalcOperator {
             case "^":
                 result = Math.pow(prevValue, currentValue);
                 break;
+            case "%":
+                result = this.prevValue * 0.1;
         }
 
         return result;
@@ -68,25 +70,40 @@ class CalcOperator {
     }
 
     operator(value) {
-        let result = (this.operatorValue === value) ? this.prevValue + value : "";
+        let result = (this.operatorValue === value) ? this.prevValue : "";
 
-        if (!this.operatorCheck) {
+        if (!this.operatorCheck && value !== "%") {
             this.operatorCheck = true;
             this.operatorValue = value;
             this.prevValue = this.currentValue;
             this.currentValue = "0";
 
             result = this.prevValue + value;
+        } else if (value === "%") {
+            result = this.calculateValue(value);
+            this.prevValue = result;
         }
 
         return result;
     }
 
-    backspace(value) {
-        return value;
+    clear() {
+        let result,
+            value = this.currentValue.split("");
+
+        value.pop();
+
+        if (value.length <= 0) {
+            value = ["0"];
+        }
+
+        result = value.join("");
+        this.currentValue = result;
+
+        return result;
     }
 
-    clear() {
+    clearAll() {
         this.operatorCheck = true;
         this.operatorValue = "";
         this.prevValue = "";
@@ -100,7 +117,7 @@ class CalcOperator {
             result = this.calculateValue(this.operatorValue);
         }
 
-        this.prevValue = "";
+        this.prevValue = result;
         this.currentValue = "";
 
         return result;

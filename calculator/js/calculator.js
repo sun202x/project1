@@ -7,10 +7,11 @@ class Calculator {
 
     init() {
         this.itemList = [];
-        this.operatorList = [];
         this.wrapper = document.body;
         this.operator = new CalcOperator();
         this.display = new CalcDisplay();
+        this.history = new CalcHistory();
+        this.record = new CalcRecord();
     }
 
     render() {
@@ -18,6 +19,8 @@ class Calculator {
     }
 
     createCalculator() {
+        this.history.render(this.wrapper);
+        this.record.render(this.wrapper);
         this.display.render(this.wrapper);
         this.createCalcButton();
     }
@@ -27,10 +30,6 @@ class Calculator {
 
         data.forEach((item) => {
             const button = new CalcButton(item);
-
-            if (button.type === "Operator") {
-                this.operatorList.push(button.value);
-            }
 
             this.itemList.push(button);
             button.render(this.wrapper);
@@ -143,10 +142,6 @@ class Calculator {
         return event.target.getAttribute("id");
     }
 
-    getOperatorList() {
-        return this.operatorList;
-    }
-
     // 이벤트 바인딩
     calcBindEvent() {
         document.body.addEventListener('click', e => {
@@ -156,15 +151,27 @@ class Calculator {
 
     onClick(event) {
         // target 찾아서 해당 버튼 onclick 호출
-        const target = this.itemList.find((button) =>
-            button.id === this.getTarget(event)
-        );
+        if (this.getTarget(event) === "history") {
+            this.history.toggleDisplay();
+        } else {
+            this.history.hideDisplay();
+            const target = this.itemList.find((button) =>
+                button.id === this.getTarget(event)
+            );
 
-        if (target) {
-            const result = this.operator.getCalcResult(target);
+            if (target) {
+                const result = this.operator.getCalcResult(target);
+                const type = target.type;
 
-            if (result !== undefined) {
-                this.display.update(result);
+                if (result !== undefined) {
+                    this.display.update(result);
+                }
+
+                
+                // if (type !== "NumberButton") {
+                //     this.history.setHistory(this.operator);
+                //     this.record.setRecordValue(this.operator);
+                // }
             }
         }
     }

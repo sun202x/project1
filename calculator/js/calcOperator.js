@@ -1,31 +1,36 @@
 class CalcOperator {
     constructor () {
+        this.init();
+    }
+
+    init() {
         this.prevValue = 0;
         this.currentValue = 0;
+        this.totalValue = 0;
         this.operatorCheck = true;
         this.operatorValue = "";
     }
 
     getCalcResult(target) {
+        const value = target.value;
+
         switch(target.type) {
             case "NumberButton":
-                return this.number(target.value);
+                return this.number(value);
             case "Operator":
-                return this.operator(target.value);
+                return this.operator(value);
             case "Equal":
-                return this.equal();
+                return this.equal(value);
             case "Clear":
-                return this.clear();
+                return this.clear(value);
             case "ClearAll":
-                this.clearAll();
+                this.clearAll(value);
                 return "0";
             default:
                 return "";
         }
     }
 
-    // @TODO value => id로 변경필요
-    // value들 value로 변경
     calculateValue(value) {
         let result;
         const prevValue = (this.prevValue !== "") ? parseInt(this.prevValue) : "";
@@ -87,9 +92,9 @@ class CalcOperator {
         return result;
     }
 
-    clear() {
-        let result,
-            value = this.currentValue.split("");
+    clear(str) {
+        let value = this.currentValue.split(""),
+            result;
 
         value.pop();
 
@@ -99,26 +104,32 @@ class CalcOperator {
 
         result = value.join("");
         this.currentValue = result;
+        this.operatorValue = str;
 
         return result;
     }
 
-    clearAll() {
+    clearAll(str) {
         this.operatorCheck = true;
-        this.operatorValue = "";
+        this.operatorValue = str;
         this.prevValue = "";
         this.currentValue = "";
+        this.totalValue = "";
     }
 
-    equal() {
+    equal(value) {
         let result = "";
 
         if (this.prevValue !== "" && this.currentValue !== "") {
             result = this.calculateValue(this.operatorValue);
+        } else {
+            result = "0";
         }
 
-        this.prevValue = result;
+        this.operatorValue = value;
+        this.prevValue =  this.currentValue;
         this.currentValue = "";
+        this.totalValue = result;
 
         return result;
     }

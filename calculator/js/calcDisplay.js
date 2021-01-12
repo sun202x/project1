@@ -4,7 +4,7 @@ class CalcDisplay {
     }
 
     init() {
-        this.wrapper = null;
+        
     }
 
     render(parent) {
@@ -19,10 +19,6 @@ class CalcDisplay {
 
     getDisplay() {
         return document.getElementById("display");
-    }
-
-    getValue() {
-        return this.getDisplay().value;
     }
 
     update(result) {

@@ -10,14 +10,9 @@ class CalcButton {
     }
 
     render(parent) {
-        const wrapperOperator = this.createWrapperOperator();
         const button = this.createButton();
 
         parent.innerHTML += button;
-    }
-
-    createWrapperOperator() {
-        return `<div class="wrapper-operator"></div>`;
     }
 
     createButton() {

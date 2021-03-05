@@ -149,29 +149,41 @@ class Calculator {
         });
     }
 
+    storeSnapShot() {
+        this.history.store(this.operator.createSnapshot());
+    }
+
     onClick(event) {
         // target 찾아서 해당 버튼 onclick 호출
         if (this.getTarget(event) === "history") {
             this.history.toggleDisplay();
+        } else if (this.getTarget(event) && this.getTarget(event).indexOf("list") > -1) {
+            // 기록보기에서 가져온 데이터 display에 업데이트
+            const getId = this.getTarget(event).split("list").pop();
+            const historyData = this.history.getHistoryData(getId);
+
+            this.record.setRecordValue(historyData.value);
+            this.display.update(historyData.totalValue);
+            this.history.hideDisplay();
         } else {
             this.history.hideDisplay();
-            const target = this.itemList.find((button) =>
-                button.id === this.getTarget(event)
-            );
+            const target = this.itemList.find((button) => button.id === this.getTarget(event));
 
             if (target) {
                 const result = this.operator.getCalcResult(target);
                 const type = target.type;
 
+                if (type !== "NumberButton") {
+                    this.record.setRecordValue(this.operator);
+                }
+                
+                if (type === "Equal") {
+                    this.storeSnapShot();
+                }
+
                 if (result !== undefined) {
                     this.display.update(result);
                 }
-
-                
-                // if (type !== "NumberButton") {
-                //     this.history.setHistory(this.operator);
-                //     this.record.setRecordValue(this.operator);
-                // }
             }
         }
     }

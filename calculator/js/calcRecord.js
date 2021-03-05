@@ -23,9 +23,13 @@ class CalcRecord {
 
     setRecordValue(data) {
         const target = this.getTarget();
+        const operatorValue = data.operatorValue;
+        const prevValue = data.prevValue;
 
-        if (data.operatorValue !== "c" && data.operatorValue !== "<") {
-            target.innerText += data.prevValue + data.operatorValue;
+        if (operatorValue !== "c" && operatorValue !== "<" && operatorValue !== undefined) {
+            target.innerText += prevValue + operatorValue;
+        } else if (operatorValue === undefined) {
+            target.innerText = data;
         } else {
             target.innerText = "";
         }

@@ -5,6 +5,8 @@ class CalcHistory {
 
     init() {
         this.display = false;
+        this.listCount = 0;
+        this.snapshotList = [];
     }
 
     render(parent) {
@@ -35,6 +37,15 @@ class CalcHistory {
         const target = this.getTarget("wrapper-history");
 
         target.style.display = "block";
+
+        if (this.snapshotList.length === 0) {
+            target.innerHTML = `<li id="empty">저장 된 내역이 없습니다.</li>`;
+        } else {
+            target.innerHTML = this.snapshotList.map((snapshot, index) => 
+                `<li id="list${index}">${this.getHistoryData(snapshot)}</li>`
+            ).join('');
+        }
+
         this.setDisplay(true);
     }
 
@@ -46,33 +57,26 @@ class CalcHistory {
     }
 
     toggleDisplay() {
-        if (this.display) {
-            this.hideDisplay();
-        } else {
-            this.showDisplay();
+        this.display === true ? this.hideDisplay() : this.showDisplay();
+    }
+
+    getHistoryData(data) {
+        let result = "";
+
+        for (let i = 0, len = data.historyList.length; i < len; i++) {
+            result += data.historyList[i];
         }
+
+        result += data.totalValue;
+
+        return result;
     }
 
-    append(data) {
-        const target = this.getTarget("history-list");
-        let li = "<li></li>";
-
-        target.innerHTML = li;
+    store(snapshot) {
+        this.snapshotList.push(snapshot);
     }
 
-    setHistory(data) {
-        
-    }
-
-    getHistory() {
-        
-    }
-
-    clearHistory() {
-        
-    }
-
-    onClick() {
-        
+    clear() {
+        this.snapshotList = [];
     }
 }

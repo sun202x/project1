@@ -9,6 +9,7 @@ class CalcOperator {
         this.totalValue = 0;
         this.operatorCheck = true;
         this.operatorValue = "";
+        this.historyList = [];
     }
 
     getCalcResult(target) {
@@ -89,6 +90,9 @@ class CalcOperator {
             this.prevValue = result;
         }
 
+        this.historyList.push(this.prevValue);
+        this.historyList.push(this.operatorValue);
+
         return result;
     }
 
@@ -115,6 +119,7 @@ class CalcOperator {
         this.prevValue = "";
         this.currentValue = "";
         this.totalValue = "";
+        this.historyList = [];
     }
 
     equal(value) {
@@ -131,6 +136,17 @@ class CalcOperator {
         this.currentValue = "";
         this.totalValue = result;
 
+        this.historyList.push(this.prevValue);
+        this.historyList.push(this.operatorValue);
+
         return result;
     }
+
+    createSnapshot() {
+        return {
+            totalValue: this.totalValue,
+            historyList: this.historyList
+        };
+    }
+
 }

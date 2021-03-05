@@ -1,6 +1,6 @@
 class CalcDisplay {
     constructor() {
-        this.init();
+
     }
 
     init() {

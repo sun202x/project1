@@ -3,28 +3,46 @@
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width initial-scale=1'>
+        <script src="js/calcFactory.js"></script>
         <script src="js/calcOperator.js"></script>
+        <script src="js/calcDisplay.js"></script>
+        <script src="js/calcRecord.js"></script>
+        <script src="js/calcHistory.js"></script>
+        <script src="js/calcButton.js"></script>
         <script src="js/calculator.js"></script>
-        <script src="js/button.js"></script>
         <title>계산기</title>
         <style>
+            * {
+                box-sizing: border-box;
+            }
             input {
                 display: block;
+                width: 300px;
+                height: 25px;
                 margin-bottom: 10px;
+                border: 1px solid #ccc;
             }
             button {
                 display: inline-block;
                 width: 60px;
                 height: 30px;
+                line-height: 1;
+                border: 1px solid #ccc;
+            }
+            button + button {
+                margin-left: 5px;
+            }
+            #record {
+                width: 300px;
+                height: 50px;
+                border: 1px solid #ccc;
+                margin-bottom: 10px;
             }
         </style>
     </head>
 
     <body>
         <script>
-            // 1. 로직정리: label 관련된 로직 제거, display 로직 분리
-            // 2. 표준계산기 모든 기능 구형: M* 기능들 제외, 기록 포함
-            // 3. 확장가능한 구조로 고민할 것: 프로그래머용 계산기 추후 추가될 것
             const calc = new Calculator();
         </script>
     </body>

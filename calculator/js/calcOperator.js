@@ -1,36 +1,43 @@
-class CalcOperator { 
-
+class CalcOperator {
     constructor () {
-        this.prevValue = 0;
-        this.currentValue = 0;
-        this.operatorCheck = true;
-        this.operatorValue = "";
+        this.init();
     }
 
-    getCalcResult(type, label) {
-        switch(type) {
+    init() {
+        this.prevValue = 0;
+        this.currentValue = 0;
+        this.totalValue = 0;
+        this.operatorCheck = true;
+        this.operatorValue = "";
+        this.historyList = [];
+    }
+
+    getCalcResult(target) {
+        const value = target.value;
+
+        switch(target.type) {
             case "NumberButton":
-                return this.number(label);
+                return this.number(value);
             case "Operator":
-                return this.operator(label);
+                return this.operator(value);
             case "Equal":
-                return this.equal(label);
+                return this.equal(value);
             case "Clear":
-                this.clear();
+                return this.clear(value);
+            case "ClearAll":
+                this.clearAll(value);
                 return "0";
             default:
                 return "";
         }
     }
 
-    // @TODO label => id로 변경필요
-    // label들 value로 변경
-    calculateValue(label) {
-        var result,
-            prevValue = parseInt(this.prevValue),
-            currentValue = parseInt(this.currentValue);
+    calculateValue(value) {
+        let result;
+        const prevValue = (this.prevValue !== "") ? parseInt(this.prevValue) : "";
+        const currentValue = (this.currentValue !== "") ? parseInt(this.currentValue) : "";
 
-        switch(label) {
+        switch(value) {
             case "+":
                 result = prevValue + currentValue;
                 break;
@@ -46,18 +53,20 @@ class CalcOperator {
             case "^":
                 result = Math.pow(prevValue, currentValue);
                 break;
+            case "%":
+                result = this.prevValue * 0.1;
         }
 
         return result;
     }
 
-    number(label) {
+    number(value) {
         let result = this.currentValue;
 
         if (result == "0") {
-            result = (label + "");
+            result = (value + "");
         } else {
-            result += (label + "");
+            result += (value + "");
         }
 
         this.currentValue = result;
@@ -66,39 +75,78 @@ class CalcOperator {
         return result;
     }
 
-    operator(label) {
-        let result = "";
+    operator(value) {
+        let result = (this.operatorValue === value) ? this.prevValue : "";
 
-        if (!this.operatorCheck) {
+        if (!this.operatorCheck && value !== "%") {
             this.operatorCheck = true;
-            this.operatorValue = label;
+            this.operatorValue = value;
             this.prevValue = this.currentValue;
             this.currentValue = "0";
 
-            result = this.prevValue + label;
+            result = this.prevValue + value;
+        } else if (value === "%") {
+            result = this.calculateValue(value);
+            this.prevValue = result;
         }
+
+        this.historyList.push(this.prevValue);
+        this.historyList.push(this.operatorValue);
 
         return result;
     }
 
-    clear() {
-        this.operatorCheck = true;
-        this.operatorValue = "";
-        this.prevValue = "";
-        this.currentValue = "";
+    clear(str) {
+        let value = this.currentValue.split(""),
+            result;
+
+        value.pop();
+
+        if (value.length <= 0) {
+            value = ["0"];
+        }
+
+        result = value.join("");
+        this.currentValue = result;
+        this.operatorValue = str;
+
+        return result;
     }
 
-    equal(label) {
+    clearAll(str) {
+        this.operatorCheck = true;
+        this.operatorValue = str;
+        this.prevValue = "";
+        this.currentValue = "";
+        this.totalValue = "";
+        this.historyList = [];
+    }
+
+    equal(value) {
         let result = "";
 
         if (this.prevValue !== "" && this.currentValue !== "") {
             result = this.calculateValue(this.operatorValue);
+        } else {
+            result = "0";
         }
-        
-        this.prevValue = "";
+
+        this.operatorValue = value;
+        this.prevValue =  this.currentValue;
         this.currentValue = "";
+        this.totalValue = result;
+
+        this.historyList.push(this.prevValue);
+        this.historyList.push(this.operatorValue);
 
         return result;
+    }
+
+    createSnapshot() {
+        return {
+            totalValue: this.totalValue,
+            historyList: this.historyList
+        };
     }
 
 }

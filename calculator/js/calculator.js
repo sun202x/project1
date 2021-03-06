@@ -3,13 +3,15 @@ class Calculator {
         this.init();
         this.render();
         this.calcBindEvent();
-
-        this.operator = new CalcOperator();
     }
-    
+
     init() {
         this.itemList = [];
         this.wrapper = document.body;
+        this.operator = new CalcOperator();
+        this.display = new CalcDisplay();
+        this.history = new CalcHistory();
+        this.record = new CalcRecord();
     }
 
     render() {
@@ -17,19 +19,17 @@ class Calculator {
     }
 
     createCalculator() {
-        this.createCalcDisplay();
+        this.history.render(this.wrapper);
+        this.record.render(this.wrapper);
+        this.display.render(this.wrapper);
         this.createCalcButton();
-    }
-
-    createCalcDisplay() {
-        this.wrapper.innerHTML = `<input type="text" id="display" value="0" readonly="readonly" />`;
     }
 
     createCalcButton() {
         let data = this.getData();
 
         data.forEach((item) => {
-            const button = new Button(item.id, item.type, item.label);
+            const button = new CalcButton(item);
 
             this.itemList.push(button);
             button.render(this.wrapper);
@@ -37,92 +37,103 @@ class Calculator {
     }
 
     // 별도의 파일로 만들어서 사용(json 형태), import사용
+    // CORS정책(?) 때문에 에러나서 되지 않음... 우선 두는걸로..
     getData() {
         return [
             {
                 id: "number0",
                 type: "NumberButton",
-                label: 0
+                value: 0
             },
             {
                 id: "number1",
                 type: "NumberButton",
-                label: 1
+                value: 1
             },
             {
                 id: "number2",
                 type: "NumberButton",
-                label: 2
+                value: 2
             },
             {
                 id: "number3",
                 type: "NumberButton",
-                label: 3
+                value: 3
             },
             {
                 id: "number4",
                 type: "NumberButton",
-                label: 4
+                value: 4
             },
             {
                 id: "number5",
                 type: "NumberButton",
-                label: 5
+                value: 5
             },
             {
                 id: "number6",
                 type: "NumberButton",
-                label: 6
+                value: 6
             },
             {
                 id: "number7",
                 type: "NumberButton",
-                label: 7
+                value: 7
             },
             {
                 id: "number8",
                 type: "NumberButton",
-                label: 8
+                value: 8
             },
             {
                 id: "number9",
                 type: "NumberButton",
-                label: 9
+                value: 9
             },
             {
                 id: "plus",
                 type: "Operator",
-                label: "+",
+                value: "+",
             },
             {
                 id: "minus",
                 type: "Operator",
-                label: "-",
+                value: "-",
             },
             {
                 id: "multiply",
                 type: "Operator",
-                label: "*",
+                value: "*",
             },
             {
                 id: "divition",
                 type: "Operator",
-                label: "/",
+                value: "/",
+            },
+            {
+                id: "percent",
+                type: "Operator",
+                value: "%",
             },
             {
                 id: "squared",
                 type: "Operator",
-                label: "^"
+                value: "^"
             },
             {
                 id: "equal",
                 type: "Equal",
-                label: "="
+                value: "="
+            },
+            {
+                id: "clearAll",
+                type: "ClearAll",
+                value: "c"
             },
             {
                 id: "clear",
                 type: "Clear",
-                label: "c"
+                value: "<"
             }
         ]
     }
@@ -131,30 +142,49 @@ class Calculator {
         return event.target.getAttribute("id");
     }
 
+    // 이벤트 바인딩
     calcBindEvent() {
         document.body.addEventListener('click', e => {
-            this.onClick(e);   
+            this.onClick(e);
         });
+    }
+
+    storeSnapShot() {
+        this.history.store(this.operator.createSnapshot());
     }
 
     onClick(event) {
         // target 찾아서 해당 버튼 onclick 호출
-        const display = document.getElementById("display");
-        const target = this.itemList.find((button) => 
-            button.id === this.getTarget(event)
-        );
+        if (this.getTarget(event) === "history") {
+            this.history.toggleDisplay();
+        } else if (this.getTarget(event) && this.getTarget(event).indexOf("list") > -1) {
+            // 기록보기에서 가져온 데이터 display에 업데이트
+            const getId = this.getTarget(event).split("list").pop();
+            const historyData = this.history.getHistoryData(getId);
 
-        if (target) {
-            const result = this.operator.getCalcResult(target.type, target.label);
+            this.record.setRecordValue(historyData.value);
+            this.display.update(historyData.totalValue);
+            this.history.hideDisplay();
+        } else {
+            this.history.hideDisplay();
+            const target = this.itemList.find((button) => button.id === this.getTarget(event));
 
-            if (result !== undefined) {
-                display.value = result;
+            if (target) {
+                const result = this.operator.getCalcResult(target);
+                const type = target.type;
+
+                if (type !== "NumberButton") {
+                    this.record.setRecordValue(this.operator);
+                }
+                
+                if (type === "Equal") {
+                    this.storeSnapShot();
+                }
+
+                if (result !== undefined) {
+                    this.display.update(result);
+                }
             }
         }
     }
-
-    update() {
-
-    }
-    
 }

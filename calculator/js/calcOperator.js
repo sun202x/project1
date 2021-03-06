@@ -1,4 +1,3 @@
-
 class CalcOperator { 
 
     constructor () {
@@ -12,17 +11,13 @@ class CalcOperator {
         switch(type) {
             case "NumberButton":
                 return this.number(label);
-
             case "Operator":
                 return this.operator(label);
-
             case "Equal":
                 return this.equal(label);
-
             case "Clear":
                 this.clear();
                 return "0";
-
             default:
                 return "";
         }

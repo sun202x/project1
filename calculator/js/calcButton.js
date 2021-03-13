@@ -7,6 +7,7 @@ class CalcButton {
         this.id = options.id;
         this.type = options.type;
         this.value = options.value;
+        this.template = "";
     }
 
     render(parent) {

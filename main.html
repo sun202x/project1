@@ -10,7 +10,21 @@
 
     <body>
         <script>
-            
+            var page = new Page([
+                {
+                    type: "input",
+                    id: "input",
+                    value:"input",
+                },
+                {
+                    type: "button",
+                    id: "button",
+                    value: "button",
+                    callback: function (e) {
+                        console.log("asdasd");
+                    }
+                }
+            ]);
         </script>
     </body>
 </html>

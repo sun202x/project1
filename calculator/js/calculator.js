@@ -7,7 +7,6 @@ class Calculator {
 
     init() {
         this.itemList = [];
-        this.wrapper = document.body;
         this.operator = new CalcOperator();
         this.display = new CalcDisplay();
         this.history = new CalcHistory();
@@ -19,20 +18,22 @@ class Calculator {
     }
 
     createCalculator() {
-        this.history.render(this.wrapper);
-        this.record.render(this.wrapper);
-        this.display.render(this.wrapper);
-        this.createCalcButton();
+        var parent = document.body;
+
+        this.history.render(parent);
+        this.record.render(parent);
+        this.display.render(parent);
+        this.createCalcButton(parent);
     }
 
-    createCalcButton() {
+    createCalcButton(parent) {
         let data = this.getData();
 
         data.forEach((item) => {
             const button = new CalcButton(item);
 
             this.itemList.push(button);
-            button.render(this.wrapper);
+            button.render(parent);
         });
     }
 

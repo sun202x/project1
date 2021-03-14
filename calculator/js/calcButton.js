@@ -12,7 +12,7 @@ class CalcButton {
 
     render(parent) {
         const button = this.createButton();
-
+        
         parent.innerHTML += button;
     }
 

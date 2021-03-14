@@ -3,11 +3,11 @@
     <head>
         <meta charset='UTF-8'>
         <meta name='viewport' content='width=device-width initial-scale=1'>
-        <script src="js/calcFactory.js"></script>
         <script src="js/calcOperator.js"></script>
         <script src="js/calcDisplay.js"></script>
         <script src="js/calcRecord.js"></script>
         <script src="js/calcHistory.js"></script>
+        <script src="js/calcBottomContents.js"></script>
         <script src="js/calcButton.js"></script>
         <script src="js/calculator.js"></script>
         <title>계산기</title>
@@ -22,15 +22,17 @@
                 margin-bottom: 10px;
                 border: 1px solid #ccc;
             }
+            .wrapper-button {
+                width: 300px;
+            }
             button {
                 display: inline-block;
                 width: 60px;
                 height: 30px;
                 line-height: 1;
                 border: 1px solid #ccc;
-            }
-            button + button {
                 margin-left: 5px;
+                margin-top: 5px;
             }
             #record {
                 width: 300px;

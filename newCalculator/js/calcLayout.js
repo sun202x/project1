@@ -1,25 +1,21 @@
+// import CalcHistory from './calcHistory.js';
 import Calculator from './calculator.js';
+import CalcGeneralCalculator from "./calcGeneralCalculator.js";
+// import CalcProgrammerCalculator from "./calcProgrammerCalculator.js";
 
 class CalcLayout {
     constructor() {
-        // this.historyDisplay
-        this.calculator = new Calculator();
+        // this.calcHistory = new CalcHistory();
+        // this.calculator = new Calculator();
+        this.calcGeneralCalculator = new CalcGeneralCalculator();
     }
 
     render() {
-        const layout = document.createElement('div');
-        layout.innerText = 'test';
+        const parent = document.querySelector("#calc");
 
-
-
-        return layout;
+        this.calcGeneralCalculator.render(parent);
     }
-
 }
 
-// console.log('hello');
-
-const div = document.querySelector('#calc');
-const layout = new CalcLayout();
-
-div.append(layout.render());
+const calc = new CalcLayout();
+calc.render();

@@ -2,10 +2,18 @@ import CalcHtmlView from "./calcHtmlView.js";
 
 export default class CalcView {
     constructor() {
-        this.CalcHtmlView = new CalcHtmlView();
+        this.calcHtmlView = new CalcHtmlView();
     }
 
-    render() {
-        
+    render(parent, datas) {
+        let result;
+        let data;
+
+        for (let i = 0; i < datas.length; i++ ) {
+            data = datas[i];
+            
+            result = this.calcHtmlView.render(data);
+            parent.append(result);
+        }
     }
 }

@@ -3,26 +3,31 @@ import Calculator from "./calculator.js";
 export default class CalcGeneralCalculator extends Calculator {
     constructor() {
         super();
-        const toolbar = this.calcGenerator.calcButtonLayout;
-        const control = this.calcGenerator.calcControl;
 
-        const button = control.define("button", "button1")
-            .value("0")
-            .label("0")
-            .end();
-        toolbar.add(button);
+        // this.createItem();
+    }
+
+    createItem() {
+        const data = this.getData();
+
+        this.calcGenerator.itemDefine(data);
+    }
+
+    render(parent) {
+        this.calcView.render(parent, this.getData());
     }
 
     getData() {
         return [
             {
-                type: "div",
-                id: "display",
+                type: "button",
+                id: "button0",
+                label: "0"
             },
             {
                 type: "button",
                 id: "button1",
-                value: "0"
+                label: "1"
             }
         ]
     }

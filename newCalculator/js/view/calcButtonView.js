@@ -1,9 +1,15 @@
-class CalcButtonView extends CalcHtmlView {
-    constructor() {
-        this.render();
-    }
+import CalcHtmlView from "./calcHtmlView.js";
 
+export default class CalcButtonView extends CalcHtmlView {
+    constructor() {
+        super();
+    }
     render() {
-        this.createButton();
+        const button = document.createElement("button");
+        button.setAttribute("type", options.type);
+        button.setAttribute("id", options.id);
+        button.innerText = options.label;
+
+        return button;
     }
 }

@@ -1,13 +1,9 @@
 export default class CalcButtonLayout {
     constructor() {
-        const obj = {};
+        this.itemList = [];
+    }
 
-        return {
-            add: function(item) {
-                obj.itemList = [];
-                obj.itemList.push(item);
-                return obj;
-            }
-        }
+    add(item) {
+        this.itemList.push(item);
     }
 }

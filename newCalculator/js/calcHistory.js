@@ -1,4 +1,4 @@
-export default class ClacHistory {
+export default class CalcHistory {
     constructor() {
         
     }

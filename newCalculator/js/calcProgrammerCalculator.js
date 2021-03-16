@@ -1,4 +1,4 @@
-class CalcProgrammerCalculator extends Calculator {
+export default class CalcProgrammerCalculator extends Calculator {
     constructor() {
         super();
     }

@@ -1,24 +1,24 @@
 export default class CalcControl {
     constructor() {
+        
+    }
+
+    define(type, id) {
+        const obj = { type: type, id: id };
+
         return {
-            define: function(type, id) {
-                const obj = { type: type, id: id };
+            value: function(value) {
+                obj.value = value;
+                return this;
+            },
 
-                return {
-                    value: function(value) {
-                        obj.value = value;
-                        return this;
-                    },
+            label: function(label) {
+                obj.label = label;
+                return this;
+            },
 
-                    label: function(label) {
-                        obj.label = label;
-                        return this;
-                    },
-
-                    end: function () {
-                        return obj;
-                    }
-                }
+            end: function () {
+                return obj;
             }
         }
     }

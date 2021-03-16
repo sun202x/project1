@@ -3,32 +3,34 @@ import Calculator from "./calculator.js";
 export default class CalcGeneralCalculator extends Calculator {
     constructor() {
         super();
-
-        // this.createItem();
+        this.onInitControl();
     }
 
-    createItem() {
-        const data = this.getData();
+    onInitControl() {
+        const g = this.calcGenerator;
+        const div = g.calcButtonLayout.div();
+        const control = g.calcControl.control();
 
-        this.calcGenerator.itemDefine(data);
+        const toggle = control.define("button", "toggle-button")
+            .label("토글")
+            .end();
+        div.add(toggle);
+
+        const title = control.define("div", "title")
+            .label("표준")
+            .end();
+        div.add(title);
+
+        const history = control.define("button", "history")
+            .label("기록")
+            .end();
+        div.add(history);
+        div.id("wrapper-toolbar");
+
+        console.log(div.end());
     }
 
-    render(parent) {
-        this.calcView.render(parent, this.getData());
-    }
+    render() {
 
-    getData() {
-        return [
-            {
-                type: "button",
-                id: "button0",
-                label: "0"
-            },
-            {
-                type: "button",
-                id: "button1",
-                label: "1"
-            }
-        ]
     }
 }

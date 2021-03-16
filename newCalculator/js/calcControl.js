@@ -3,22 +3,26 @@ export default class CalcControl {
         
     }
 
-    define(type, id) {
-        const obj = { type: type, id: id };
-
+    control() {
         return {
-            value: function(value) {
-                obj.value = value;
-                return this;
-            },
+            define: function(controlType, id) {
+                const obj = { controlType: controlType, id: id };
 
-            label: function(label) {
-                obj.label = label;
-                return this;
-            },
-
-            end: function () {
-                return obj;
+                return {
+                    value: function(value) {
+                        obj.value = value;
+                        return this;
+                    },
+        
+                    label: function(label) {
+                        obj.label = label;
+                        return this;
+                    },
+        
+                    end: function () {
+                        return obj;
+                    }
+                }
             }
         }
     }

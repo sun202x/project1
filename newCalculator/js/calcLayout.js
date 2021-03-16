@@ -11,11 +11,10 @@ class CalcLayout {
     }
 
     render() {
-        const parent = document.querySelector("#calc");
 
-        this.calcGeneralCalculator.render(parent);
     }
 }
 
+debugger;
 const calc = new CalcLayout();
-calc.render();
+// calc.render();

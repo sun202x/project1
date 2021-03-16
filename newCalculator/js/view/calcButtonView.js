@@ -1,9 +1,10 @@
 import CalcHtmlView from "./calcHtmlView.js";
 
-export default class CalcButtonView extends CalcHtmlView {
+export default class CalcButtonView {
     constructor() {
-        super();
+        // super();
     }
+
     render() {
         const button = document.createElement("button");
         button.setAttribute("type", options.type);

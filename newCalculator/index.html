@@ -37,25 +37,6 @@
 
         <!--
             <div id="calc">
-
-                >>>>>>>>>>>>>>> 상단 - header
-                <div id="wrapper-toolbar">
-                    <button id="toggle-button">토글</button>
-                    <div id="title">표준</div>
-                    <button id="history">기록</button>
-                </div>
-
-                var div = this.generator.div();
-                var control = this.generator.control();
-
-                
-                var button = control.define("button", "button")
-                    .value()
-                    .label()
-                    .end();
-                div.add(button);
-
-
                 [
                     {
                         id: wrapper-toolbar,
@@ -121,11 +102,17 @@
                         ]
                     }
                 ]
+                >>>>>>>>>>>>>>> 상단 - header
+                <div id="wrapper-toolbar">
+                    <button id="toggle-button">토글</button>
+                    <div id="title">표준</div>
+                    <button id="history">기록</button>
+                </div>
 
                 >>>>>>>>>>>>>>> 중단 - contents
                 <div id="wrapper-display">
                     <div id="record"></div>
-                    <div id="display"></div>
+                    <div id="display">0</div>
                 </div>
                 <div id="wrapper-top-operator">
                     <button tpye="button" id="mc" data-type="top-operator" value="MC">MC</button>
@@ -149,9 +136,6 @@
                 </div>
             </div>
         -->
-
-
-        <div id="calc"></div>
         <script type="module" src="js/calcLayout.js"></script>
     </body>
 </html>

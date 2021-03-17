@@ -18,6 +18,11 @@ export default class CalcControl {
                         obj.label = label;
                         return this;
                     },
+
+                    type: function(type) {
+                        obj.type = type;
+                        return this;
+                    },
         
                     end: function () {
                         return obj;

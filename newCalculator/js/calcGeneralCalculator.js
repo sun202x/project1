@@ -3,7 +3,11 @@ import Calculator from "./calculator.js";
 export default class CalcGeneralCalculator extends Calculator {
     constructor() {
         super();
-        this.onInitContents();
+    }
+
+    redner() {
+        const viewItems = this.getItems();
+        this.calcView.render(viewItems);
     }
 
     onInitContents() {
@@ -151,21 +155,21 @@ export default class CalcGeneralCalculator extends Calculator {
         const number7 = control.define("button", "number7")
             .label("7")
             .value("7")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number7);
 
         const number8 = control.define("button", "number8")
             .label("8")
             .value("8")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number8);
 
         const number9 = control.define("button", "number9")
             .label("9")
             .value("9")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number9);
 
@@ -179,21 +183,21 @@ export default class CalcGeneralCalculator extends Calculator {
         const number4 = control.define("button", "number4")
             .label("4")
             .value("4")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number4);
 
         const number5 = control.define("button", "number5")
             .label("5")
             .value("5")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number5);
 
         const number6 = control.define("button", "number6")
             .label("6")
             .value("6")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number6);
 
@@ -207,21 +211,21 @@ export default class CalcGeneralCalculator extends Calculator {
         const number1 = control.define("button", "number1")
             .label("1")
             .value("1")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number1);
 
         const number2 = control.define("button", "number2")
             .label("2")
             .value("2")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number2);
 
         const number3 = control.define("button", "number3")
             .label("3")
             .value("3")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number3);
 
@@ -242,7 +246,7 @@ export default class CalcGeneralCalculator extends Calculator {
         const number0 = control.define("button", "number0")
             .label("0")
             .value("0")
-            .type("operator")
+            .type("number")
             .end();
         contentsWrapper3.add(number0);
 
@@ -259,15 +263,11 @@ export default class CalcGeneralCalculator extends Calculator {
             .type("operator")
             .end();
         contentsWrapper3.add(equal);
-        contentsWrapper3.id("wrapper-operator")
+        contentsWrapper3.id("wrapper-operator");
 
         contents.add(contentsWrapper3.end());
         wrapper.add(contents.end());
-        
-        this.itemList.push(wrapper);
-    }
 
-    render() {
-
+        return wrapper.end();
     }
 }

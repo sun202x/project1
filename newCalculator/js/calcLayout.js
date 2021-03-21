@@ -11,10 +11,10 @@ class CalcLayout {
     }
 
     render() {
-
+        this.calcGeneralCalculator.render();
     }
-}
 
-debugger;
+
+}
 const calc = new CalcLayout();
-// calc.render();
+calc.render();

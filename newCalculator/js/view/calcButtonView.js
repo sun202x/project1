@@ -1,15 +1,18 @@
-import CalcHtmlView from "./calcHtmlView.js";
-
 export default class CalcButtonView {
-    constructor() {
+    constructor(options) {
         // super();
     }
 
     render() {
+        
+    }
+
+    createViewElement(viewData) {
         const button = document.createElement("button");
-        button.setAttribute("type", options.type);
-        button.setAttribute("id", options.id);
-        button.innerText = options.label;
+        button.setAttribute("type", viewData.type);
+        button.setAttribute("id", viewData.id);
+        button.setAttribute("value", viewData.value);
+        button.innerText = viewData.label;
 
         return button;
     }

@@ -19,6 +19,7 @@ export default class CalcButtonLayout {
             },
 
             end: function() {
+                obj.controlType = "div";
                 return obj;
             }
         }

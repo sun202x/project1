@@ -4,14 +4,22 @@ import CalcView from "./view/calcView.js";
 export default class Calculator {
     constructor() {
         this.calcGenerator = new CalcGenerator();
-        // this.calcView = new CalcView();
+        this.calcView = new CalcView();
         this.itemList = [];
+        this.setItems(this.onInitContents());
     }
 
-    createItem() {
-        const data = this.getData();
+    render() {
+        const viewData = this.getItems();
+        this.calcView.render(viewData);
+    }
 
-        this.calcGenerator.itemDefine(data);
+    setItems(items) {
+        this.itemList.push(items);
+    }
+    
+    getItems() {
+        return this.itemList;
     }
 
     getParent() {

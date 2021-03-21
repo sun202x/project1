@@ -6,8 +6,4 @@ export default class CalcGenerator {
         this.calcControl = new CalcControl();
         this.calcButtonLayout = new CalcButtonLayout();
     }
-    
-    define(type, id, value, label) {
-        
-    }
 }

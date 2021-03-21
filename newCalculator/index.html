@@ -36,105 +36,141 @@
         -->
 
         <!--
-            <div id="calc">
-                [
-                    {
-                        id: wrapper-toolbar,
-                        controlType: div,
-                        itemList: [
-                            {
-                                id: toggle-button,
-                                controlType: button,
-                                label: label,
-                            },
-                            {
-                                id: title,
-                                controlType: div,
-                                label: label
-                            },
-                            {
-                                id: history,
-                                controlType: button,
-                                label: label
-                            }
-                        ]
-                    },
-                    {
-                        id: wrapper-display,
-                        controlType: div,
-                        itemList: [
-                            {
-                                id: record,
-                                controlType: div,
-                                label: label
-                            },
-                            {
-                                id: display,
-                                controlType: input,
-                                value: value
-                            }
-                        ]
-                    },
-                    {
-                        id: wrapper-top-operator,
-                        controlType: div,
-                        itemList: [
-                            {
-                                id: id
-                                controlType: button,
-                                type: top-operator,
-                                value: value,
-                                label: label
-                            },
-                        ]
-                    },
-                    {
-                        id: wrapper-buttons,
-                        controlType: div,
-                        itemList: [
-                            {
-                                id: id
-                                controlType: button,
-                                type: top-operator,
-                                value: value,
-                                label: label
-                            },
-                        ]
-                    }
-                ]
-                >>>>>>>>>>>>>>> 상단 - header
-                <div id="wrapper-toolbar">
-                    <button id="toggle-button">토글</button>
-                    <div id="title">표준</div>
-                    <button id="history">기록</button>
-                </div>
+            const div = g.calcButtonLayout.define();
 
-                >>>>>>>>>>>>>>> 중단 - contents
-                <div id="wrapper-display">
-                    <div id="record"></div>
-                    <div id="display">0</div>
+            AS-IS > 현재 데이터를 받는 형식
+            const toggle = control.define("button", "toggle-button")
+                .label("토글")
+                .end();
+            headerWrapper.add(toggle);
+
+            TO-BE > 기존과 다른 데이터가공 방식 고민해보기..
+            근데 데이터를 define과 같이 함수형태(객체 리턴)로 받는것과
+            직접적으로(객체 생성)받는 차이가 무엇인가?
+            const toggle = control.define("button", "toggle-button")
+                .label("토글")
+                .end();
+            div.define("div", "wrapper-toolbar")
+                .addItemList([
+                    {
+                        controlType: button,
+                        id: toggle-button,
+                        label: "토글"",
+                    }
+                ])
+
+            /////////////// 데이터 구조 ///////////////
+            [
+                {
+                    id: calculator,
+                    controlType: div,
+                    itemList: [
+                        {
+                            id: wrapper-toolbar,
+                            controlType: div,
+                            itemList: [
+                                {
+                                    id: toggle-button,
+                                    controlType: button,
+                                    label: label,
+                                },
+                                {
+                                    id: title,
+                                    controlType: div,
+                                    label: label
+                                },
+                                {
+                                    id: history,
+                                    controlType: button,
+                                    label: label
+                                }
+                            ]
+                        },
+                        {
+                            id: wrapper-display,
+                            controlType: div,
+                            itemList: [
+                                {
+                                    id: record,
+                                    controlType: div,
+                                    label: label
+                                },
+                                {
+                                    id: display,
+                                    controlType: input,
+                                    value: value
+                                }
+                            ]
+                        },
+                        {
+                            id: wrapper-top-operator,
+                            controlType: div,
+                            itemList: [
+                                {
+                                    id: id
+                                    controlType: button,
+                                    type: top-operator,
+                                    value: value,
+                                    label: label
+                                },
+                            ]
+                        },
+                        {
+                            id: wrapper-buttons,
+                            controlType: div,
+                            itemList: [
+                                {
+                                    id: id
+                                    controlType: button,
+                                    type: top-operator,
+                                    value: value,
+                                    label: label
+                                },
+                            ]
+                        }
+                    ]
+                }
+            ]
+            /////////////// 데이터 구조 ///////////////
+
+
+            /////////////// 태그 구조 ///////////////
+            <div id="calculator">
+                <div id="header">
+                    <div id="wrapper-toolbar">
+                        <button id="toggle-button">토글</button>
+                        <div id="title">표준</div>
+                        <button id="history">기록</button>
+                    </div>
                 </div>
-                <div id="wrapper-top-operator">
-                    <button tpye="button" id="mc" data-type="top-operator" value="MC">MC</button>
-                    <button tpye="button" id="mp" data-type="top-operator" value="M+">M+</button>
-                    <button tpye="button" id="mm" data-type="top-operator" value="M-">M-</button>
-                    <button tpye="button" id="ms" data-type="top-operator" value="MS">MS</button>
-                    <button tpye="button" id="mh" data-type="top-operator" value="M?">M?</button>
-                </div>
-                <div id="wrapper-operator">
-                    <button type="button" id="percent" data-type="operator" value="&">label</button>
-                    <button type="button" id="clear" data-type="operator" value="CE">label</button>
-                    <button type="button" id="clearAll" data-type="operator" value="C">label</button>
-                    ...
-                    ..
-                    ..
-                    .
-                    <button type="button" id="number7" data-type="number" value="7">label</button>
-                    <button type="button" id="number8" data-type="number" value="8">label</button>
-                    ..
-                    .
+                <div id="contents">
+                    <div id="wrapper-display">
+                        <div id="record"></div>
+                        <div id="display">0</div>
+                    </div>
+                    <div id="wrapper-top-operator">
+                        <button tpye="button" id="mc" data-type="top-operator" value="MC">MC</button>
+                        <button tpye="button" id="mp" data-type="top-operator" value="M+">M+</button>
+                        <button tpye="button" id="mm" data-type="top-operator" value="M-">M-</button>
+                        <button tpye="button" id="ms" data-type="top-operator" value="MS">MS</button>
+                        <button tpye="button" id="mh" data-type="top-operator" value="M?">M?</button>
+                    </div>
+                    <div id="wrapper-operator">
+                        <button type="button" id="percent" data-type="operator" value="&">label</button>
+                        <button type="button" id="clear" data-type="operator" value="CE">label</button>
+                        <button type="button" id="clearAll" data-type="operator" value="C">label</button>
+                        ...
+                        ..
+                        ..
+                        .
+                        <button type="button" id="number7" data-type="number" value="7">label</button>
+                        <button type="button" id="number8" data-type="number" value="8">label</button>
+                        ..
+                        .
+                    </div>
                 </div>
             </div>
+            /////////////// 태그 구조 ///////////////
         -->
         <script type="module" src="js/calcLayout.js"></script>
     </body>

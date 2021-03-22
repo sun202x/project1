@@ -11,15 +11,15 @@ export default class CalcHtmlView {
         const body = document.body;
         const wrapper = this.createWrapper();
 
-        const data = {
-            id: "aaa",
-            type: "button",
-            controlType: "button",
-            label: "버튼",
-            value: "버튼"
-        }
+        // const data = {
+        //     id: "aaa",
+        //     type: "button",
+        //     controlType: "button",
+        //     label: "버튼",
+        //     value: "버튼"
+        // }
 
-        const item = this.calcButtonView.createViewElement(data);
+        // const item = this.calcButtonView.createViewElement(data);
         wrapper.append(item);
 
         body.append(wrapper);

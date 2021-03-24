@@ -1,28 +1,31 @@
 import CalcButtonView from "./calcButtonView.js";
 import CalcDisplayView from "./calcDisaplyView.js";
+import CalcDivView from "./calcDivView.js";
 
 export default class CalcHtmlView {
     constructor() {
-        this.calcButtonView = new CalcButtonView();
-        this.calcDisplayView = new CalcDisplayView();
+
     }
     
     render(viewData) {
-        const body = document.body;
-        const wrapper = this.createWrapper();
+        // const body = document.body;
+        // const wrapper = this.createWrapper();
 
-        // const data = {
-        //     id: "aaa",
-        //     type: "button",
-        //     controlType: "button",
-        //     label: "버튼",
-        //     value: "버튼"
-        // }
+        // wrapper.append(item);
 
-        // const item = this.calcButtonView.createViewElement(data);
-        wrapper.append(item);
+        // body.append(wrapper);
+        
+    }
 
-        body.append(wrapper);
+    createHtmlElement(data) {
+        const type = data.controlType;
+
+        switch(type) {
+            case "button":
+                return new CalcButtonView(data);
+            case "div":
+                return new CalcDivView(data);
+        }
     }
 
     createWrapper() {

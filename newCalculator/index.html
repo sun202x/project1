@@ -21,10 +21,52 @@
                 height: 30px;
                 line-height: 1;
                 border: 1px solid #ccc;
+                box-sizing: border-box;
             }
-            button + button {
-                margin-left: 5px;
+            #wrapper-toolbar > * {
+                float: left;
             }
+            #wrapper-toolbar #history {
+                float: right;
+            }
+            #wrapper-display #record {
+                height: 25px;
+                border: 1px solid #ccc;
+                border-bottom-style: none;
+            }
+            #wrapper-display #display {
+                width: 100%;
+                height: 50px;
+                border: 1px solid #ccc;
+                font-size: 24px;
+                font-weight: bold;
+                text-align: right;
+                line-height: 24px;
+            }
+            #wrapper-calculator {
+                width: 320px;
+            }
+            #wrapper-top-operator > button,
+            #wrapper-operator > button {
+                float: left;
+            }
+            #wrapper-top-operator > button {
+                width: 20%;
+            }
+            #wrapper-operator > button {
+                width: 25%;
+            }
+            #wrapper-toolbar:after,
+            #wrapper-toolbar:before,
+            #wrapper-top-operator:after,
+            #wrapper-top-operator:before,
+            #wrapper-operator:after,
+            #wrapper-operator:before {
+                content: "";
+                display: table;
+                clear: both;
+            }
+
         </style>
     </head>
 

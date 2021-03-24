@@ -27,16 +27,21 @@ export default class CalcGeneralCalculator extends Calculator {
         header.id("header");
         const toggle = control.define("button", "toggle-button")
             .label("토글")
+            .value("토글")
+            .type("button")
             .end();
         headerWrapper.add(toggle);
 
         const title = control.define("div", "title")
             .label("표준")
+            .value("표준")
             .end();
         headerWrapper.add(title);
 
         const history = control.define("button", "history")
             .label("기록")
+            .value("기록")
+            .type("button")
             .end();
         headerWrapper.add(history);
         headerWrapper.id("wrapper-toolbar");
@@ -258,8 +263,8 @@ export default class CalcGeneralCalculator extends Calculator {
         contentsWrapper3.add(dot);
 
         const equal = control.define("button", "equal")
-            .label("0")
-            .value("0")
+            .label("=")
+            .value("=")
             .type("operator")
             .end();
         contentsWrapper3.add(equal);

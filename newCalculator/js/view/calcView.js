@@ -18,6 +18,8 @@ export default class CalcView {
         });
     }
 
+    // 재귀로 데이터 가공하는 로직 구현했지만, 더 알아보기 쉽고 나은 방법이 있는지 고민해보기
+    // TODO 더 쉽게 데이터를 가공할 수 있는로직이 존재하지 않을까?? 재귀함수는 파악하기도 어렵고 비용낭비도 심해서 별로인거같음
     createViewItems(datas, parent) {
         const items = datas.itemList;
 
@@ -36,7 +38,7 @@ export default class CalcView {
     }
 
     // createViewItems(viewDatas) {
-    //     // 이건 우선 어떻게든 화면이 나오게 하려고 만든 코드임 > 한번쓰고 버려야되는 전형적인 쓰레기코드
+    //     // 이건 우선 어떻게든 화면이 나오게 하려고 만든 코드임 > 재사용성 전혀 없는 코드
     //     const body = document.body;
 
     //     for (let i = 0, len = viewDatas.length; i < len; i++ ) {

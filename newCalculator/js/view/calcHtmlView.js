@@ -8,12 +8,6 @@ export default class CalcHtmlView {
     }
     
     render(viewData) {
-        // const body = document.body;
-        // const wrapper = this.createWrapper();
-
-        // wrapper.append(item);
-
-        // body.append(wrapper);
         
     }
 

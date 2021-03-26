@@ -5,11 +5,6 @@ export default class CalcGeneralCalculator extends Calculator {
         super();
     }
 
-    redner() {
-        const viewItems = this.getItems();
-        this.calcView.render(viewItems);
-    }
-
     onInitContents() {
         const g = this.calcGenerator;
         const wrapper = g.calcButtonLayout.div();

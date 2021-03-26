@@ -7,6 +7,7 @@
         <style>
             * {
                 box-sizing: border-box;
+                margin: 0;
             }
             input {
                 display: block;
@@ -21,7 +22,11 @@
                 height: 30px;
                 line-height: 1;
                 border: 1px solid #ccc;
-                box-sizing: border-box;
+            }
+            #wrapper-calculator {
+                width: 320px;
+                margin: 50px auto 0;
+                border: 1px solid #ccc;
             }
             #wrapper-toolbar > * {
                 float: left;
@@ -42,9 +47,6 @@
                 font-weight: bold;
                 text-align: right;
                 line-height: 24px;
-            }
-            #wrapper-calculator {
-                width: 320px;
             }
             #wrapper-top-operator > button,
             #wrapper-operator > button {

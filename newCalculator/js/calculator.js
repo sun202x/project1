@@ -3,9 +3,9 @@ import CalcView from "./view/calcView.js";
 
 export default class Calculator {
     constructor() {
+        this.itemList = [];
         this.calcGenerator = new CalcGenerator();
         this.calcView = new CalcView();
-        this.itemList = [];
         this.setItems(this.onInitContents());
     }
 

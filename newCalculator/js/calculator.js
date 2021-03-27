@@ -14,15 +14,14 @@ export default class Calculator {
         this.calcView.render(viewData);
     }
 
+    // override
+    onInitContents() {}
+
     setItems(items) {
         this.itemList.push(items);
     }
     
     getItems() {
         return this.itemList;
-    }
-
-    getParent() {
-        return this.parent;
     }
 }

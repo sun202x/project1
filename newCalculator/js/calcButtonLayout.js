@@ -1,4 +1,4 @@
-export default class CalcButtonLayout {
+class CalcButtonLayout {
     constructor() {
         
     }

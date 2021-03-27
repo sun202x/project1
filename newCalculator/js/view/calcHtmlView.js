@@ -1,14 +1,13 @@
 import CalcButtonView from "./calcButtonView.js";
-import CalcDisplayView from "./calcDisaplyView.js";
 import CalcDivView from "./calcDivView.js";
 
 export default class CalcHtmlView {
     constructor() {
-
+        
     }
     
     render(viewData) {
-        
+        return this.createHtmlElement(viewData);
     }
 
     createHtmlElement(data) {
@@ -20,12 +19,5 @@ export default class CalcHtmlView {
             case "div":
                 return new CalcDivView(data);
         }
-    }
-
-    createWrapper() {
-        const div = document.createElement("div");
-        div.setAttribute("id", "calculator");
-
-        return div;
     }
 }

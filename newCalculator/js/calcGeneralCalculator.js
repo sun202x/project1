@@ -6,15 +6,15 @@ export default class CalcGeneralCalculator extends Calculator {
     }
 
     onInitContents() {
-        const g = this.calcGenerator;
-        const wrapper = g.calcButtonLayout.div();
-        const header = g.calcButtonLayout.div();
-        const headerWrapper = g.calcButtonLayout.div();
-        const contents = g.calcButtonLayout.div();
-        const contentsWrapper1 = g.calcButtonLayout.div();
-        const contentsWrapper2 = g.calcButtonLayout.div();
-        const contentsWrapper3 = g.calcButtonLayout.div();
-        const control = g.calcControl.control();
+        const generator = this.calcGenerator;
+        const wrapper = generator.div();
+        const header = generator.div();
+        const headerWrapper = generator.div();
+        const contents = generator.div();
+        const contentsWrapper1 = generator.div();
+        const contentsWrapper2 = generator.div();
+        const contentsWrapper3 = generator.div();
+        const control = generator.control();
 
         wrapper.id("wrapper-calculator");
 

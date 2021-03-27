@@ -9,10 +9,10 @@ export default class CalcView {
     // clacHtmlView에서는 넘겨받은 데이터를 각 view클래스에 전달하고 만들어진 element를 dom에 추가한다.
     // this.createViewItems(viewData);
     render(viewData) {
-        viewData.forEach((data) => {
+        viewData.forEach((datas) => {
             const body = document.body;
-            const wrapper = this.calcHtmlView.createHtmlElement(data);
-            const domElement = this.createViewItems(data, wrapper);
+            const wrapper = this.calcHtmlView.render(datas);
+            const domElement = this.createViewItems(datas, wrapper);
 
             body.append(domElement);
         });
@@ -25,7 +25,7 @@ export default class CalcView {
 
         for (let i = 0; i < items.length; i++) {
             const item = items[i];
-            const itemElement = this.calcHtmlView.createHtmlElement(item);
+            const itemElement = this.calcHtmlView.render(item);
 
             if (item.itemList) {
                 this.createViewItems(item, itemElement);

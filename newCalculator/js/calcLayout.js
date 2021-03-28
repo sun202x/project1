@@ -5,8 +5,8 @@ import CalcGeneralCalculator from "./calcGeneralCalculator.js";
 
 class CalcLayout {
     constructor() {
-        this.calcHistory = new CalcHistory();
-        this.calculator = new Calculator();
+        // this.calcHistory = new CalcHistory();
+        // this.calculator = new Calculator();
         this.calcGeneralCalculator = new CalcGeneralCalculator();
     }
 
@@ -16,5 +16,6 @@ class CalcLayout {
 
 
 }
+debugger;
 const calc = new CalcLayout();
 calc.render();

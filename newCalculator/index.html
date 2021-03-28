@@ -117,6 +117,7 @@
                         {
                             id: wrapper-toolbar,
                             controlType: div,
+
                             itemList: [
                                 {
                                     id: toggle-button,
@@ -221,6 +222,19 @@
             </div>
             /////////////// 태그 구조 ///////////////
         -->
+
+        <!-- 
+            1. calcGenerator 공통으로 사용할 수 있게 구조 정리하기 >> 필수값, 필수가 아닌값 구분해서 공통으로 만들기
+            2. view에서는 디테일한 DOM구조를 알아서는 안되고 render시 createElement에 데이터와 parent만 넘겨주어야 한다.
+            3. generator에서 노출되는 함수명은 직관적인 명으로 써도 되나(예: label) 실제 viewModel을 생성할 때는 attribute 명으로 맞춰 주어야 한다.
+              ㄴ label => innerText
+
+            next
+            1. event binding
+            2. view rendering 과정 파악
+            3. button 눌렀을 때 display 값 반영 될 수 있도록
+            번외편) viewModel update >> 디닥트 (할수있는데까지 해보기)
+         -->
         <script type="module" src="js/calcLayout.js"></script>
     </body>
 </html>

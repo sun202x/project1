@@ -270,4 +270,14 @@ export default class CalcGeneralCalculator extends Calculator {
 
         return wrapper.end();
     }
+
+    onClickEqual(e) {
+        
+
+        const display = this.itemList.find(/* item 찾아 */);
+        display = e.dataset.value;
+
+        this.render();
+    }
+    
 }

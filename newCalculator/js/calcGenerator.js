@@ -1,6 +1,6 @@
 export default class CalcGenerator {
     constructor() {
-
+        // 구조 다시 정리 - 공통화 시키기
     }
 
     div() {
@@ -53,4 +53,5 @@ export default class CalcGenerator {
             }
         }
     }
+
 }

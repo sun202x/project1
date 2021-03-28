@@ -1,23 +1,25 @@
-import CalcButtonView from "./calcButtonView.js";
-import CalcDivView from "./calcDivView.js";
+import ViewFactory from './viewFactory.js';
 
 export default class CalcHtmlView {
-    constructor() {
+    constructor(options) {
         
     }
     
     render(viewData) {
-        return this.createHtmlElement(viewData);
+        const parent = document.body;
+
+        for (let i = 0, len = viewData.length; i < len; i++) {
+            const data = viewData[i];
+
+            parent.append(
+                CalcHtmlView.createView(data)
+            );
+        }
     }
 
-    createHtmlElement(data) {
-        const type = data.controlType;
-
-        switch(type) {
-            case "button":
-                return new CalcButtonView(data);
-            case "div":
-                return new CalcDivView(data);
-        }
+    static createView(data) {
+        const view = ViewFactory.createInstance(data);
+        
+        return view.render(data);
     }
 }

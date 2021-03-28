@@ -1,11 +1,11 @@
 import CalcGenerator from "./calcGenerator.js";
-import CalcView from "./view/calcView.js";
+import CalcHtmlView from "./view/calcHtmlView.js";
 
 export default class Calculator {
     constructor() {
         this.itemList = [];
         this.calcGenerator = new CalcGenerator();
-        this.calcView = new CalcView();
+        this.calcView = new CalcHtmlView();
         this.setItems(this.onInitContents());
     }
 

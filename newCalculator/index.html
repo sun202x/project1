@@ -226,9 +226,13 @@
         <!--
             >> 수정해야할 목록
             1. calcGenerator 공통으로 사용할 수 있게 구조 정리하기 >> 필수값, 필수가 아닌값 구분해서 공통으로 만들기
-            2. view에서는 디테일한 DOM구조를 알아서는 안되고 render시 createElement에 데이터와 parent만 넘겨주어야 한다. - 정리
+                - 순환참조 오류 때문에 보류
+                - 참조 사이트 : https://ljs0705.medium.com/js-%EB%AA%A8%EB%93%88-%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B3%BC-%EC%88%9C%ED%99%98-%EC%B0%B8%EC%A1%B0-%EB%AC%B8%EC%A0%9C-a9e0c90c07e5
+            2. view에서는 디테일한 DOM구조를 알아서는 안되고 render시 createElement에 데이터와 parent만 넘겨주어야 한다.
+                - 흥식대원군이 이미 로직 완성
+                - 로직 흐름 파악
             3. generator에서 노출되는 함수명은 직관적인 명으로 써도 되나(예: label) 실제 viewModel을 생성할 때는 attribute 명으로 맞춰 주어야 한다.
-              ㄴ label => innerText
+                - label => innerText
 
             >> next 과제
             1. event binding

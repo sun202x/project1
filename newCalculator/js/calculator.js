@@ -24,4 +24,19 @@ export default class Calculator {
     getItems() {
         return this.itemList;
     }
+
+    getDisplay(items) {
+        let display = null;
+
+        items.forEach(item => {
+            if (item.id === "display") {
+                display = item;
+                return false;
+            }
+
+
+        });
+
+        return display;
+    }
 }

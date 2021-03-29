@@ -10,9 +10,7 @@ export default class CalcDivView extends HTMLComponent {
         });
 
         data.itemList?.forEach(item => {
-            element.append(
-                CalcHtmlView.createView(item)
-            );
+            element.append(CalcHtmlView.createView(item));
         });
     
         return element;

@@ -1,6 +1,7 @@
-import CalcGenerator from "./calcGenerator.js";
+// 순환참조 해결할때까지 잠시 보류
+// import CalcGenerator from "./calcGenerator.js";
 
-export default class CalcButtonLayout extends CalcGenerator {
+export class CalcButtonLayout {
     constructor() {
         super();
     }

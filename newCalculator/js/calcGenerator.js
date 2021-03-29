@@ -1,5 +1,5 @@
-import CalcButtonLayout from "./calcButtonLayout.js";
-import CalcControl from "./calcControl.js";
+// import CalcButtonLayout from "./calcButtonLayout.js";
+// import CalcControl from "./calcControl.js";
 
 export default class CalcGenerator {
     constructor() {
@@ -8,14 +8,15 @@ export default class CalcGenerator {
         // option porp - value, label, type
     }
 
-    define(type) {
-        switch(type) {
-            case "layout":
-                return new CalcButtonLayout();
-            case "control":
-                return new CalcControl();
-        }
-    }
+    // 순환참조 해결할때까지 잠시 보류
+    // define(type) {
+    //     switch(type) {
+    //         case "layout":
+    //             return new CalcButtonLayout();
+    //         case "control":
+    //             return new CalcControl();
+    //     }
+    // }
 
     div() {
         const obj = {};
@@ -52,6 +53,11 @@ export default class CalcGenerator {
         
                     label: function(label) {
                         obj.label = label;
+                        return this;
+                    },
+
+                    onclick: function(callback) {
+                        obj.onclick = callback;
                         return this;
                     },
 

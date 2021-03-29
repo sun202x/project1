@@ -11,9 +11,7 @@ export default class CalcHtmlView {
         for (let i = 0, len = viewData.length; i < len; i++) {
             const data = viewData[i];
 
-            parent.append(
-                CalcHtmlView.createView(data)
-            );
+            parent.append(CalcHtmlView.createView(data));
         }
     }
 

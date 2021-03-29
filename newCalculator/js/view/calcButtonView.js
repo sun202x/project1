@@ -7,7 +7,8 @@ export default class CalcButtonView extends HTMLComponent {
             type: data.type,
             id: data.id,
             value: data.value,
-            innerText: data.label
+            innerText: data.label,
+            onclick: data.onclick
         });
     
         return element;

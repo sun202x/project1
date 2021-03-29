@@ -16,6 +16,5 @@ class CalcLayout {
 
 
 }
-debugger;
 const calc = new CalcLayout();
 calc.render();

@@ -1,6 +1,8 @@
-class CalcControl {
+import CalcGenerator from "./calcGenerator.js";
+
+export default class CalcControl extends CalcGenerator {
     constructor() {
-        
+        super();
     }
 
     control() {

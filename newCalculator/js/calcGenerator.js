@@ -1,6 +1,20 @@
+import CalcButtonLayout from "./calcButtonLayout.js";
+import CalcControl from "./calcControl.js";
+
 export default class CalcGenerator {
     constructor() {
         // 구조 다시 정리 - 공통화 시키기
+        // common prop - id, controlType, tagName
+        // option porp - value, label, type
+    }
+
+    define(type) {
+        switch(type) {
+            case "layout":
+                return new CalcButtonLayout();
+            case "control":
+                return new CalcControl();
+        }
     }
 
     div() {

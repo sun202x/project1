@@ -1,6 +1,8 @@
-class CalcButtonLayout {
+import CalcGenerator from "./calcGenerator.js";
+
+export default class CalcButtonLayout extends CalcGenerator {
     constructor() {
-        
+        super();
     }
 
     div() {

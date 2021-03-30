@@ -20,23 +20,20 @@ export default class Calculator {
     setItems(items) {
         this.itemList.push(items);
     }
-    
+
     getItems() {
         return this.itemList;
     }
 
-    getDisplay(items) {
-        let display = null;
+    getControl(id) {
+        debugger;
+        let control = null;
+        const items = this.getItems();
 
-        items.forEach(item => {
-            if (item.id === "display") {
-                display = item;
-                return false;
-            }
+        // 모든 items을 돌면서 itemList들을 새로 정의한 빈배열에 push한다.
+        // itemList들이 push가 끝나면 해당 배열을 돌며 id랑 동일한 객체가 있는지 찾는다.
+        // id와 동일한 객체가 존재하면 해당 객체 리턴, 아니면 없다고 판단하고 null을 리턴한다.
 
-
-        });
-
-        return display;
+        return control;
     }
 }

@@ -275,7 +275,8 @@ export default class CalcGeneralCalculator extends Calculator {
     onChangeControl(e) {
         // const display = this.itemList.find(/* item 찾아 */);
         const display = this.getControl("display");
-        display = e.dataset.value;
+        const value = e.target.value;
+        display.label = value;
 
         this.render();
     }

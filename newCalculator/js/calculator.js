@@ -30,7 +30,7 @@ export default class Calculator {
             const itemList = item.itemList;
 
             if (itemList) {
-                callback(itemList);
+                callback(item);
                 this.find(itemList, callback);
             }
         });
@@ -43,10 +43,15 @@ export default class Calculator {
 
         // 모든 items을 돌면서 itemList들을 새로 정의한 빈배열에 넣는다.
         // itemList들이 push가 끝나면 해당 배열을 돌며 id랑 동일한 객체가 있는지 찾는다.
-        // id와 동일한 객체가 존재하면 해당 객체 리턴, null을 리턴한다.
+        // id와 동일한 객체가 존재하면 해당 객체 리턴, 없으면 null을 리턴한다.
+        this.find(items, (citem) => {
+            const citemList = citem.itemList;
 
-        this.find(items, (cList) => {
-            cList.forEach(function(c) {
+            if (citem.id === "wrapper-calculator") {
+                result.push(citem);
+            }
+
+            citemList.forEach(function(c) {
                 result.push(c);
             });
         });

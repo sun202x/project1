@@ -27,8 +27,14 @@ export default class CalcHtmlView {
         // https://velog.io/@wickedev/%EB%B2%88%EC%97%AD-Didact-DOM-%EC%9A%94%EC%86%8CElements-%EB%A0%8C%EB%8D%94%EB%A7%81%ED%95%98%EA%B8%B0 - 양형 Github
         // didact 응용해서 프로젝트에 맞는 형태로 변환해야함
 
+
+        // reconciliation 먼저 구현해서 어떤식으로 흘러가는지 파악하기
+        // https://github.com/sun202x/study_didact/blob/main/public/src/reconciliation.js
+
+
+        const parentDom = CalcHtmlView.createView(container);
         const prevInstance = this.rootInstance;
-        const nextInstance = this.reconcile(container, prevInstance, element);
+        const nextInstance = this.reconcile(parentDom, prevInstance, element);
         this.rootInstance = nextInstance;
     }
 
@@ -49,10 +55,30 @@ export default class CalcHtmlView {
             return newInstance;
         } else if (typeof element.controlType === "string") {
             // instance 업데이트
-            this.updateDomProperties(instance.dom, instance.element.props, element.props);
-
-
+            this.updateDomProperties(instance.dom, instance.element, element);
+            instance.childInstances = this.reconcileChildren(instance, element);
+            instance.element = element;
+            return instance;
+        } else {
+            instance.publicInstance = element;
         }
+    }
+
+    reconcileChildren(instance, element) {
+        const dom = instance.dom;
+        const childInstances = instance.childInstances;
+        const nextChildElements = element.itemList || [];
+        const newChildInstance = [];
+        const count = Math.max(childInstances.length, nextChildElements.length);
+
+        for (let i = 0; i < count.length; i++) {
+            const childInstance = childInstances[i];
+            const childElement = nextChildElements[i];
+            const newChildInstance = this.reconcile(com, childInstance, childElement);
+            newChildInstance.push(newChildInstance);
+        }
+
+        return newChildInstances.filter(instance => instance != null);
     }
 
     instantiate(element) {
@@ -60,8 +86,9 @@ export default class CalcHtmlView {
         // const { controlType, id } = element;
         const instance = {};
         const publicInstance = this.createPublicInstance(element, instance);
+        const childElement = publicInstance
         const dom = publicInstance;
-        // const childInstance = this.instantiate(childElement);
+        const childInstance = this.instantiate(childElement);
 
         Object.assign(instance, { dom, element, publicInstance });
         return instance;

@@ -164,6 +164,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("8")
             .value("8")
             .type("number")
+            .onclick(this.onChangeControl.bind(this))
             .end();
         contentsWrapper3.add(number8);
 
@@ -274,8 +275,6 @@ export default class CalcGeneralCalculator extends Calculator {
 
     onChangeControl(e) {
         // const display = this.itemList.find(/* item 찾아 */);
-        debugger;
-
         const wrapper = this.getControl("wrapper-calculator");
         const display = this.getControl("display");
         const value = e.target.value;

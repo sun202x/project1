@@ -1,13 +1,31 @@
 class Didact {
-    constructor() {}
+    constructor() {
+        this.TEXT_ELEMENT = "TEXT ELEMENT";
+        this.rootInstance = null;
+    }
 
-    render() {}
+    render(element, container) {
+        const prevInstance = this.rootInstance;
+        const nextInstance = this.reconcile(container, prevInstance, element);
+        this.rootInstance = nextInstance;
+    }
 
-    reconcile() {}
+    reconcile(parentDom, instance, element) {
+        if (instance == null) {
+            const newInstance = this.instantiate(element);
+            parentDom.appendChild(newInstance.dom);
+        }
+
+    }
 
     reconcileChildren() {}
 
-    instantiate() {}
+    instantiate(element) {
+        const { type, props } = element;
+
+        const isTextElement = type === this.TEXT_ELEMENT;
+        const dom = isTextElement ? document.createTextNode("") : document.createElement(type);
+    }
 
     updateDomProperties() {}
 

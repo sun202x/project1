@@ -6,10 +6,53 @@
         <script src="js/didact.js"></script>
         <title>개인연습</title>
     </head>
-
     <body>
+        <div id="root"></div>
+
         <script>
+            const root = document.getElementById("root");
+            const randomLikes = () => Math.ceil(Math.random() * 100);
+            const stories = [
+                {
+                    name: "JDW",
+                    url: "https://www.naver.com",
+                    likes: randomLikes()
+                },
+                {
+                    name: "LHA",
+                    url: "https://www.daum.net",
+                    likes: randomLikes()
+                },
+                {
+                    name: "KHS",
+                    url: "https://login.ecount.com",
+                    likes: randomLikes()
+                },
+                {
+                    name: "KSS",
+                    url: "https://www.dusan.com",
+                    likes: randomLikes()
+                },
+                {
+                    name: "NDK",
+                    url: "https://www.namsan.com",
+                    likes: randomLikes()
+                },
+            ];
+
+            const appElement = () => `<div><ul>${stories.map(storyElement)}</ul></div>`;
+
+            function storyElement(story) {
+                return `<li><button>${story.likes}<b>❤️</b></button><a href="${story.url}">${story.name}</a></li>`;
+            }
+
+            function handleClick(story) {
+                story.likes += 1;
+                didact.render(appElement(), root);
+            }
+
             const didact = new Didact();
+            didact.render(appElement(), root);
         </script>
     </body>
 </html>

@@ -5,13 +5,13 @@ export default class Calculator {
     constructor() {
         this.itemList = [];
         this.calcGenerator = new CalcGenerator();
-        this.calcView = new CalcHtmlView();
+        this.calcHtmlView = new CalcHtmlView();
         this.setItems(this.onInitContents());
     }
 
     render() {
         const viewData = this.getItems();
-        this.calcView.render(viewData);
+        this.calcHtmlView.render(viewData);
     }
 
     // override
@@ -59,9 +59,35 @@ export default class Calculator {
         result.forEach(function (c) {
             if (c.id === id) {
                 control = c;
-            }    
+            }
         })
 
         return control;
+    }
+
+    updateProperty(items, cb) {
+        items.forEach((item) => {
+            const itemList = item.itemList;
+
+            if (item.id) {
+                cb(item);
+            }
+
+            if (itemList && itemList.length > 0) {
+                this.updateProperty(itemList, cb);
+            }
+        })
+    }
+
+    updateElement(target, value) {
+        const items = this.getItems();
+
+        this.updateProperty(items, (item) => {
+            if (item.id === target.id) {
+                target.label = value;
+            }
+        });
+
+        this.calcHtmlView.updateView(target, value);
     }
 }

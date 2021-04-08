@@ -24,5 +24,4 @@ export default class HTMLComponent {
         
         return element;
     }
-
 }

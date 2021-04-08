@@ -275,12 +275,12 @@ export default class CalcGeneralCalculator extends Calculator {
 
     onChangeControl(e) {
         // const display = this.itemList.find(/* item 찾아 */);
-        const wrapper = this.getControl("wrapper-calculator");
         const display = this.getControl("display");
-        const value = e.target.value;
-        display.label = value;
+        const value = this.getControl(e.target.id).value;
+        
+        // // display가 아니라 viewModel을 통째로 넘겨야 할거같음
+        // this.calcView.updateView(display, wrapper);
 
-        // display가 아니라 viewModel을 통째로 넘겨야 할거같음
-        this.calcView.updateView(display, wrapper);
+        this.updateElement(display, value);
     }
 }

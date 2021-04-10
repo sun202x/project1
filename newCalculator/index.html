@@ -237,6 +237,10 @@
             1. event binding - ok
             2. view rendering 과정 파악
             3. button 눌렀을 때 display 값 반영 될 수 있도록
+                ㄴ 직관적이름의 함수 추가, type에 따라 view에 정의되어 있는 함수 동적으로 호출할 수 있도록 수정
+                    ㄴ 호출하는 이벤트에 따라 이벤트명도 동적으로 변경될 수 있도록 작업해야함. >> 현재는 type만 동적으로 변경, 나머지는 하드코딩 되어있음
+                    ㄴ 하지만 이방법도 매번 새로운 type이 추가될 때마다 함수를 추가해줘야 하는데 이게 맞는것인가 고민..
+
             번외편) viewModel update >> 디닥트 (할수있는데까지 해보기) https://github.com/sun202x/study_didact >> 디닥트
                 ㄴ viewModel의 attribute가 변경되면 변경 된 부분만 render할 수 있도록
                 ㄴ react render DIY할 수 있는 디닥트 분석하여 적용해보기

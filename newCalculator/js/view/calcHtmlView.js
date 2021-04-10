@@ -21,16 +21,24 @@ export default class CalcHtmlView {
         return view.render(data);
     }
 
-    // update를 이곳에서 하는게 맞는가???
-    // 각 component단위로 나눠놓은 곳에서 업데이트를 해야하지 않을까??
-    updateView(target, value) {
-        const dom = document.querySelector("#" + target.id);
+    getDomElement(id) {
+        return document.querySelector("#" + id);
+    }
 
-        if (dom.innerText === "0") {
-            dom.innerText = value;
+    // render할 때 새로운 데이터를 넘겨서 그려지게 해야할까? 그렇다면 dom에서 해당되는 부분만 찾아서 어떻게 지우고 추가할 수 있을까?
+    // 데이터 전체의 가상dom만들어서 현재dom과 비교하여 바뀐부분만 업데이트...? 다른방법은 없는지 고민
+    onChangeLabel(target, type) {
+        const element = this.getDomElement(target.id);
+
+        if (element.innerText === "0") {
+            element.innerText = target[type];
         } else {
-            dom.innerText += value;
+            element.innerText += target[type];
         }
+    }
+
+    onChangeValue() {
+
     }
 
     // updateView(element, container) {

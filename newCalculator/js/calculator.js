@@ -25,6 +25,10 @@ export default class Calculator {
         return this.itemList;
     }
 
+    toCamelCase(str) {
+        return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+    }
+
     find(items, callback) {
         items.forEach((item) => {
             const itemList = item.itemList;
@@ -38,9 +42,9 @@ export default class Calculator {
     }
 
     getControl(id) {
-        let control = null;
         const items = this.getItems();
         const result = [];
+        let control = null;
 
         this.find(items, (citem) => {
             if (citem.id === id) {
@@ -51,15 +55,40 @@ export default class Calculator {
         return control;
     }
 
-    updateElement(target, value) {
-        const items = this.getItems();
+    setValue(target, value) {
+        this.setState(target, value, "value");
+    }
 
+    setLabel(target, label) {
+        this.setState(target, label, "label");
+    }
+
+    setState(target, state, type) {
+        const items = this.getItems();
+        const funcName = this.toCamelCase("on_change_" + type); // 추후 수정
+
+        // 1. 데이터의 속성값을 찾아 변경해준다.
         this.find(items, (item) => {
             if (item.id === target.id) {
-                target.label = value;
+                target[type] = state;
             }
         });
 
-        this.calcHtmlView.updateView(target, value);
+        // 2. 데이터 속성값을 변경 후 HTML을 업데이트 해준다.
+        if (this.calcHtmlView[funcName] && typeof this.calcHtmlView[funcName] === "function") {
+            this.calcHtmlView[funcName](target, type);
+        }
     }
+
+    // updateElement(target, value) {
+    //     const items = this.getItems();
+
+    //     this.find(items, (item) => {
+    //         if (item.id === target.id) {
+    //             target.label = value;
+    //         }
+    //     });
+
+    //     this.calcHtmlView.updateView(target, value);
+    // }
 }

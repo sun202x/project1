@@ -21,6 +21,8 @@ export default class CalcHtmlView {
         return view.render(data);
     }
 
+    // update를 이곳에서 하는게 맞는가???
+    // 각 component단위로 나눠놓은 곳에서 업데이트를 해야하지 않을까??
     updateView(target, value) {
         const dom = document.querySelector("#" + target.id);
 

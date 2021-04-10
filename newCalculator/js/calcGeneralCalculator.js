@@ -274,6 +274,7 @@ export default class CalcGeneralCalculator extends Calculator {
     }
 
     onChangeControl(e) {
+        debugger;
         // const display = this.itemList.find(/* item 찾아 */);
         const display = this.getControl("display");
         const value = this.getControl(e.target.id).value;

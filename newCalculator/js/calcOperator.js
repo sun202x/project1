@@ -20,15 +20,15 @@ export default class CalcOperator {
         const value = target.value;
 
         switch(target.type) {
-            case "NumberButton":
+            case "number":
                 return this.number(value);
-            case "Operator":
+            case "operator":
                 return this.operator(value);
-            case "Equal":
+            case "equal":
                 return this.equal(value);
-            case "Clear":
+            case "clear":
                 return this.clear(value);
-            case "ClearAll":
+            case "clearAll":
                 this.clearAll(value);
                 return "0";
             default:

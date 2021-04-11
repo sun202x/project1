@@ -16,15 +16,15 @@ class CalcOperator {
         const value = target.value;
 
         switch(target.type) {
-            case "NumberButton":
+            case "number":
                 return this.number(value);
-            case "Operator":
+            case "operator":
                 return this.operator(value);
-            case "Equal":
+            case "equal":
                 return this.equal(value);
-            case "Clear":
+            case "clear":
                 return this.clear(value);
-            case "ClearAll":
+            case "clearAll":
                 this.clearAll(value);
                 return "0";
             default:
@@ -90,8 +90,8 @@ class CalcOperator {
             this.prevValue = result;
         }
 
-        this.historyList.push(this.prevValue);
-        this.historyList.push(this.operatorValue);
+        // this.historyList.push(this.prevValue);
+        // this.historyList.push(this.operatorValue);
 
         return result;
     }
@@ -142,11 +142,11 @@ class CalcOperator {
         return result;
     }
 
-    createSnapshot() {
-        return {
-            totalValue: this.totalValue,
-            historyList: this.historyList
-        };
-    }
+    // createSnapshot() {
+    //     return {
+    //         totalValue: this.totalValue,
+    //         historyList: this.historyList
+    //     };
+    // }
 
 }

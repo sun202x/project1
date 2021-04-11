@@ -1,48 +1,17 @@
 import Calculator from "./calculator.js";
 
 export default class CalcGeneralCalculator extends Calculator {
-    constructor() {
-        super();
+    constructor(parentID) {
+        super(parentID);
     }
 
     onInitContents() {
         const generator = this.calcGenerator;
-        const wrapper = generator.div();
-        const header = generator.div();
-        const headerWrapper = generator.div();
         const contents = generator.div();
         const contentsWrapper1 = generator.div();
         const contentsWrapper2 = generator.div();
         const contentsWrapper3 = generator.div();
         const control = generator.control();
-
-        wrapper.id("wrapper-calculator");
-
-        /////////////////////// header ///////////////////////
-        header.id("header");
-        const toggle = control.define("button", "toggle-button")
-            .label("토글")
-            .value("토글")
-            .type("button")
-            .end();
-        headerWrapper.add(toggle);
-
-        const title = control.define("div", "title")
-            .label("표준")
-            .value("표준")
-            .end();
-        headerWrapper.add(title);
-
-        const history = control.define("button", "history")
-            .label("기록")
-            .value("기록")
-            .type("button")
-            .end();
-        headerWrapper.add(history);
-        headerWrapper.id("wrapper-toolbar");
-
-        header.add(headerWrapper.end());
-        wrapper.add(header.end());
 
         /////////////////////// contents ///////////////////////
         contents.id("contents");
@@ -100,27 +69,31 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("%")
             .value("%")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(percent);
 
         const clear = control.define("button", "clear")
             .label("CE")
             .value("CE")
-            .type("operator")
+            .type("clearAll")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(clear);
 
         const clearAll = control.define("button", "clearAll")
             .label("C")
             .value("C")
-            .type("operator")
+            .type("clearAll")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(clearAll);
 
         const backSapce = control.define("button", "backSapce")
             .label("<")
             .value("<")
-            .type("operator")
+            .type("clear")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(backSapce);
 
@@ -128,6 +101,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("½")
             .value("½")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(fountain);
 
@@ -135,6 +109,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("제곱")
             .value("제곱")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(squared);
 
@@ -142,6 +117,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("루트")
             .value("루트")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(root);
 
@@ -149,6 +125,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("/")
             .value("/")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(division);
 
@@ -156,7 +133,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("7")
             .value("7")
             .type("number")
-            .onclick(this.onChangeControl.bind(this))
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number7);
 
@@ -164,7 +141,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("8")
             .value("8")
             .type("number")
-            .onclick(this.onChangeControl.bind(this))
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number8);
 
@@ -172,6 +149,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("9")
             .value("9")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number9);
 
@@ -179,6 +157,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("*")
             .value("*")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(multiply);
 
@@ -186,6 +165,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("4")
             .value("4")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number4);
 
@@ -193,6 +173,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("5")
             .value("5")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number5);
 
@@ -200,6 +181,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("6")
             .value("6")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number6);
 
@@ -207,6 +189,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("-")
             .value("-")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(minus);
 
@@ -214,6 +197,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("1")
             .value("1")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number1);
 
@@ -221,6 +205,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("2")
             .value("2")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number2);
 
@@ -228,6 +213,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("3")
             .value("3")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number3);
 
@@ -235,6 +221,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("+")
             .value("+")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(plus);
 
@@ -242,6 +229,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("+/-")
             .value("+/-")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(plusMinus);
 
@@ -249,6 +237,7 @@ export default class CalcGeneralCalculator extends Calculator {
             .label("0")
             .value("0")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(number0);
 
@@ -256,33 +245,37 @@ export default class CalcGeneralCalculator extends Calculator {
             .label(".")
             .value(".")
             .type("operator")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(dot);
 
         const equal = control.define("button", "equal")
             .label("=")
             .value("=")
-            .type("operator")
+            .type("equal")
+            .onclick(this.onClick.bind(this))
             .end();
         contentsWrapper3.add(equal);
         contentsWrapper3.id("wrapper-operator");
 
         contents.add(contentsWrapper3.end());
-        wrapper.add(contents.end());
 
-        return wrapper.end();
+        return contents.end();
     }
 
-    onChangeControl(e) {
-        debugger;
-        // const display = this.itemList.find(/* item 찾아 */);
-        const display = this.getControl("display");
-        const value = this.getControl(e.target.id).value;
-        
+    onClick(e) {
+        // const display = this.getControl("display");
+        const target = this.getControl(e.target.id);
+        const value = this.operator.getCalcResult(target);
+
+        if (target.type === "equal") {
+            this.historyData.push(this.operator.createSnapshot());
+        }
+
         // display가 아니라 viewModel을 통째로 넘겨야 할거같음 - didact
         // this.calcView.updateView(display, wrapper);
 
         // 단순 데이터객체만 넘어오기때문에 변경대상, 변경값을 넘겨줘야한다.
-        this.setLabel(display, value);
+        this.setLabel("display", value);
     }
 }

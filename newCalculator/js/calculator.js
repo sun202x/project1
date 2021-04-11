@@ -1,11 +1,14 @@
 import CalcGenerator from "./calcGenerator.js";
+import CalcOperator from "./calcOperator.js";
 import CalcHtmlView from "./view/calcHtmlView.js";
 
 export default class Calculator {
-    constructor() {
+    constructor(parentID) {
         this.itemList = [];
+        this.historyData = [];
         this.calcGenerator = new CalcGenerator();
-        this.calcHtmlView = new CalcHtmlView();
+        this.calcHtmlView = new CalcHtmlView(parentID);
+        this.operator = new CalcOperator();
         this.setItems(this.onInitContents());
     }
 
@@ -25,10 +28,15 @@ export default class Calculator {
         return this.itemList;
     }
 
+    getHistoryData() {
+        return this.historyData;
+    }
+
     toCamelCase(str) {
         return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
     }
 
+    // @TODO 제거
     find(items, callback) {
         items.forEach((item) => {
             const itemList = item.itemList;
@@ -43,7 +51,6 @@ export default class Calculator {
 
     getControl(id) {
         const items = this.getItems();
-        const result = [];
         let control = null;
 
         this.find(items, (citem) => {
@@ -55,40 +62,25 @@ export default class Calculator {
         return control;
     }
 
-    setValue(target, value) {
-        this.setState(target, value, "value");
+    setValue(id, value) {
+        this.setState(id, "value", value);
     }
 
-    setLabel(target, label) {
-        this.setState(target, label, "label");
+    setLabel(id, label) {
+        this.setState(id, "label", label);
     }
 
-    setState(target, state, type) {
+    setState(id, state, value) {
         const items = this.getItems();
-        const funcName = this.toCamelCase("on_change_" + type); // 추후 수정
 
         // 1. 데이터의 속성값을 찾아 변경해준다.
-        this.find(items, (item) => {
-            if (item.id === target.id) {
-                target[type] = state;
+        this.find(items, item => {
+            if (item.id === id) {
+                item[state] = value;
             }
         });
 
         // 2. 데이터 속성값을 변경 후 HTML을 업데이트 해준다.
-        if (this.calcHtmlView[funcName] && typeof this.calcHtmlView[funcName] === "function") {
-            this.calcHtmlView[funcName](target, type);
-        }
+        this.calcHtmlView.render(items);
     }
-
-    // updateElement(target, value) {
-    //     const items = this.getItems();
-
-    //     this.find(items, (item) => {
-    //         if (item.id === target.id) {
-    //             target.label = value;
-    //         }
-    //     });
-
-    //     this.calcHtmlView.updateView(target, value);
-    // }
 }

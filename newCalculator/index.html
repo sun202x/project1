@@ -23,9 +23,23 @@
                 line-height: 1;
                 border: 1px solid #ccc;
             }
+            #button-block {
+                width: 100%;
+                display:block;
+            }
             #wrapper-calculator {
+                position: relative;
                 width: 320px;
                 margin: 50px auto 0;
+                border: 1px solid #ccc;
+            }
+            #wrapper-history {
+                position: absolute;
+                top: 30px;
+                left: 20%;
+                right: 0px;
+                bottom: 0px;
+                background-color: #fff;
                 border: 1px solid #ccc;
             }
             #wrapper-toolbar > * {
@@ -67,191 +81,273 @@
                 display: table;
                 clear: both;
             }
+            #wrapper-notation button {
+
+            }
+            #wrapper-operator-keypad {
+
+            }
+            #wrapper-operator-keypad #keypad-header button {
+                width: auto;
+            }
+            #wrapper-operator-keypad #keypad-contents button {
+                width: 20%;
+            }
 
         </style>
     </head>
 
     <body>
-        <!--
-            1. view에서 사용할 데이터형식을 어떤식으로 할지 고민하기
-            2. 해당 데이터를 어떤식으로 가공할지 고민
-            3. 어떤 클래스의 인터페이스를 누가 가져다 쓸지 고민하기
+<!--
+    1. view에서 사용할 데이터형식을 어떤식으로 할지 고민하기
+    2. 해당 데이터를 어떤식으로 가공할지 고민
+    3. 어떤 클래스의 인터페이스를 누가 가져다 쓸지 고민하기
 
-            0322
-            1. 최하위 view에서는 데이터 가공하는 로직 없게
-            2. view에서 htmlView로 가공 된 데이터 전달
-            3. htmlView에서 세부 데이터를 가공해야하나?? 고민..
-        -->
+    0322
+    1. 최하위 view에서는 데이터 가공하는 로직 없게
+    2. view에서 htmlView로 가공 된 데이터 전달
+    3. htmlView에서 세부 데이터를 가공해야하나?? 고민..
+-->
 
-        <!--
-            const div = g.calcButtonLayout.define();
+<!--
+    const div = g.calcButtonLayout.define();
 
-            AS-IS > 현재 데이터를 받는 형식
-            const toggle = control.define("button", "toggle-button")
-                .label("토글")
-                .end();
-            headerWrapper.add(toggle);
+    AS-IS > 현재 데이터를 받는 형식
+    const toggle = control.define("button", "toggle-button")
+        .label("토글")
+        .end();
+    headerWrapper.add(toggle);
 
-            TO-BE > 기존과 다른 데이터가공 방식 고민해보기..
-            근데 데이터를 define과 같이 함수형태(객체 리턴)로 받는것과
-            직접적으로(객체 생성)받는 차이가 무엇인가?
-            const toggle = control.define("button", "toggle-button")
-                .label("토글")
-                .end();
-            div.define("div", "wrapper-toolbar")
-                .addItemList([
-                    {
-                        controlType: button,
-                        id: toggle-button,
-                        label: "토글"",
-                    }
-                ])
+    TO-BE > 기존과 다른 데이터가공 방식 고민해보기..
+    근데 데이터를 define과 같이 함수형태(객체 리턴)로 받는것과
+    직접적으로(객체 생성)받는 차이가 무엇인가?
+    const toggle = control.define("button", "toggle-button")
+        .label("토글")
+        .end();
+    div.define("div", "wrapper-toolbar")
+        .addItemList([
+            {
+                controlType: button,
+                id: toggle-button,
+                label: "토글"",
+            }
+        ])
 
-            /////////////// 데이터 구조 ///////////////
-            [
+    /////////////// 데이터 구조 ///////////////
+    [
+        {
+            id: calculator,
+            controlType: div,
+            itemList: [
                 {
-                    id: calculator,
+                    id: wrapper-toolbar,
+                    controlType: div,
+
+                    itemList: [
+                        {
+                            id: toggle-button,
+                            controlType: button,
+                            label: label,
+                        },
+                        {
+                            id: title,
+                            controlType: div,
+                            label: label
+                        },
+                        {
+                            id: history,
+                            controlType: button,
+                            label: label
+                        }
+                    ]
+                },
+                {
+                    id: wrapper-display,
                     controlType: div,
                     itemList: [
                         {
-                            id: wrapper-toolbar,
+                            id: record,
                             controlType: div,
-
-                            itemList: [
-                                {
-                                    id: toggle-button,
-                                    controlType: button,
-                                    label: label,
-                                },
-                                {
-                                    id: title,
-                                    controlType: div,
-                                    label: label
-                                },
-                                {
-                                    id: history,
-                                    controlType: button,
-                                    label: label
-                                }
-                            ]
+                            label: label
                         },
                         {
-                            id: wrapper-display,
-                            controlType: div,
-                            itemList: [
-                                {
-                                    id: record,
-                                    controlType: div,
-                                    label: label
-                                },
-                                {
-                                    id: display,
-                                    controlType: input,
-                                    value: value
-                                }
-                            ]
-                        },
-                        {
-                            id: wrapper-top-operator,
-                            controlType: div,
-                            itemList: [
-                                {
-                                    id: id
-                                    controlType: button,
-                                    type: top-operator,
-                                    value: value,
-                                    label: label
-                                },
-                            ]
-                        },
-                        {
-                            id: wrapper-buttons,
-                            controlType: div,
-                            itemList: [
-                                {
-                                    id: id
-                                    controlType: button,
-                                    type: top-operator,
-                                    value: value,
-                                    label: label
-                                },
-                            ]
+                            id: display,
+                            controlType: input,
+                            value: value
                         }
+                    ]
+                },
+                {
+                    id: wrapper-top-operator,
+                    controlType: div,
+                    itemList: [
+                        {
+                            id: id
+                            controlType: button,
+                            type: top-operator,
+                            value: value,
+                            label: label
+                        },
+                    ]
+                },
+                {
+                    id: wrapper-buttons,
+                    controlType: div,
+                    itemList: [
+                        {
+                            id: id
+                            controlType: button,
+                            type: top-operator,
+                            value: value,
+                            label: label
+                        },
                     ]
                 }
             ]
-            /////////////// 데이터 구조 ///////////////
+        }
+    ]
+    /////////////// 데이터 구조 ///////////////
 
 
-            /////////////// 태그 구조 ///////////////
-            <div id="calculator">
-                <div id="header">
-                    <div id="wrapper-toolbar">
-                        <button id="toggle-button">토글</button>
-                        <div id="title">표준</div>
-                        <button id="history">기록</button>
-                    </div>
+    /////////////// 태그 구조 - 일반계산기 ///////////////
+    <div id="calculator">
+        <div id="header">
+            <div id="wrapper-toolbar">
+                <button id="toggle-button">토글</button>
+                <div id="title">표준</div>
+                <button id="history">기록</button>
+            </div>
+        </div>
+        <div id="contents">
+            <div id="wrapper-display">
+                <div id="record"></div>
+                <div id="display">0</div>
+            </div>
+            <div id="wrapper-top-operator">
+                <button tpye="button" id="mc" data-type="top-operator" value="MC">MC</button>
+                <button tpye="button" id="mp" data-type="top-operator" value="M+">M+</button>
+                <button tpye="button" id="mm" data-type="top-operator" value="M-">M-</button>
+                <button tpye="button" id="ms" data-type="top-operator" value="MS">MS</button>
+                <button tpye="button" id="mh" data-type="top-operator" value="M?">M?</button>
+            </div>
+            <div id="wrapper-operator">
+                <button type="button" id="percent" data-type="operator" value="&">label</button>
+                <button type="button" id="clear" data-type="operator" value="CE">label</button>
+                <button type="button" id="clearAll" data-type="operator" value="C">label</button>
+                ...
+                ..
+                .
+                <button type="button" id="number7" data-type="number" value="7">label</button>
+                <button type="button" id="number8" data-type="number" value="8">label</button>
+                .
+                ..
+                ...
+            </div>
+        </div>
+    </div>
+    /////////////// 태그 구조 - 일반계산기 ///////////////
+
+
+    /////////////// 태그 구조 - 프로그래머용 계산기 ///////////////
+    <div id="calculator">
+        <div id="header">
+            <div id="wrapper-toolbar">
+                <button id="toggle-button">토글</button>
+                <div id="title">표준</div>
+                <button id="history">기록</button>
+            </div>
+        </div>
+        <div id="contents">
+            <div id="wrapper-display">
+                <div id="record"></div>
+                <div id="display">0</div>
+            </div>
+
+            <div id="wrapper-notation">
+                <button type="button" id="hex" class="button-block" data-type="base-notation" value="HEX">HEX</button>
+                <button type="button" id="dec" class="button-block" data-type="base-notation" value="DEC">DEC</button>
+                <button type="button" id="oct" class="button-block" data-type="base-notation" value="OCT">OCT</button>
+                <button type="button" id="bin" class="button-block" data-type="base-notation" value="BIN">BIN</button>
+            </div>
+
+            <div id="wrapper-top-operator">
+                <button type="button" id="key-pad" data-type="key-pad" value="KEYPAD">KEYPAD</button>
+                <button type="button" id="bit-pad" data-type="bit-pad" value="BITPAD">BITPAD</button>
+                <button type="button" id="bit-unit" data-type="bit-unit" value="WORD">WORD</button>
+                <button type="button" id="memory-storage" data-type="top-operator" value="MS">MS</button>
+                <button type="button" id="memory-history" data-type="top-operator" value="MH">MH</button>
+            </div>
+            
+            // 전체 키패드
+            <div id="wrapper-operator-keypad">
+                <div id="keypad-header">
+                    <button type="button" id="bit-selector" data-type="select" value="bit-selector">비트선택</button>
+                    <button type="button" id="bit-shift" data-type="select" value="bit-shift">비트시프트</button>
                 </div>
-                <div id="contents">
-                    <div id="wrapper-display">
-                        <div id="record"></div>
-                        <div id="display">0</div>
-                    </div>
-                    <div id="wrapper-top-operator">
-                        <button tpye="button" id="mc" data-type="top-operator" value="MC">MC</button>
-                        <button tpye="button" id="mp" data-type="top-operator" value="M+">M+</button>
-                        <button tpye="button" id="mm" data-type="top-operator" value="M-">M-</button>
-                        <button tpye="button" id="ms" data-type="top-operator" value="MS">MS</button>
-                        <button tpye="button" id="mh" data-type="top-operator" value="M?">M?</button>
-                    </div>
-                    <div id="wrapper-operator">
-                        <button type="button" id="percent" data-type="operator" value="&">label</button>
-                        <button type="button" id="clear" data-type="operator" value="CE">label</button>
-                        <button type="button" id="clearAll" data-type="operator" value="C">label</button>
-                        ...
-                        ..
-                        ..
-                        .
-                        <button type="button" id="number7" data-type="number" value="7">label</button>
-                        <button type="button" id="number8" data-type="number" value="8">label</button>
-                        ..
-                        .
-                    </div>
+                <div id="keypad-contents">
+                    ...
+                    ..
+                    .
+                    <button type="button" id="number7" data-type="number" value="7">label</button>
+                    <button type="button" id="number8" data-type="number" value="8">label</button>
+                    .
+                    ..
+                    ...
                 </div>
             </div>
-            /////////////// 태그 구조 ///////////////
-        -->
 
-        <!--
-            >> 수정해야할 목록
-            1. calcGenerator 공통으로 사용할 수 있게 구조 정리하기 >> 필수값, 필수가 아닌값 구분해서 공통으로 만들기
-                - 순환참조 오류 때문에 보류
-                - 참조 사이트 : https://ljs0705.medium.com/js-%EB%AA%A8%EB%93%88-%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B3%BC-%EC%88%9C%ED%99%98-%EC%B0%B8%EC%A1%B0-%EB%AC%B8%EC%A0%9C-a9e0c90c07e5
-            2. view에서는 디테일한 DOM구조를 알아서는 안되고 render시 createElement에 데이터와 parent만 넘겨주어야 한다.
-                - 흥식대원군이 이미 로직 완성
-                - 로직 흐름 파악
-            3. generator에서 노출되는 함수명은 직관적인 명으로 써도 되나(예: label) 실제 viewModel을 생성할 때는 attribute 명으로 맞춰 주어야 한다.
-                - label => innerText
+            // 비트 키패드
+            <div id="wrapper-operator-bitpad">
+                <div id="bitpad-contents">
+                    <div class="bit-box">
+                        <div>
+                            <button>0</button>
+                            <button>0</button>
+                            <button>0</button>
+                            <button>0</button>
+                        </div>
+                        <div>60</div>
+                    </div>
+                    ...
+                    ..
+                    .
+                </div>
+            </div>
+        </div>
+    </div>
+    /////////////// 태그 구조 - 프로그래머용 계산기 ///////////////
+-->
 
-            >> next 과제 - 0328
-            1. event binding - ok
-            2. view rendering 과정 파악
-            3. button 눌렀을 때 display 값 반영 될 수 있도록
-                ㄴ 직관적이름의 함수 추가, type에 따라 view에 정의되어 있는 함수 동적으로 호출할 수 있도록 수정
-                    ㄴ 호출하는 이벤트에 따라 이벤트명도 동적으로 변경될 수 있도록 작업해야함. >> 현재는 type만 동적으로 변경, 나머지는 하드코딩 되어있음
-                    ㄴ 하지만 이방법도 매번 새로운 type이 추가될 때마다 함수를 추가해줘야 하는데 이게 맞는것인가 고민..
+<!--
+    >> 수정해야할 목록
+    1. calcGenerator 공통으로 사용할 수 있게 구조 정리하기 >> 필수값, 필수가 아닌값 구분해서 공통으로 만들기
+        - 순환참조 오류 때문에 보류
+        - 참조 사이트 : https://ljs0705.medium.com/js-%EB%AA%A8%EB%93%88-%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B3%BC-%EC%88%9C%ED%99%98-%EC%B0%B8%EC%A1%B0-%EB%AC%B8%EC%A0%9C-a9e0c90c07e5
+    2. view에서는 디테일한 DOM구조를 알아서는 안되고 render시 createElement에 데이터와 parent만 넘겨주어야 한다.
+        - 흥식대원군이 이미 로직 완성
+        - 로직 흐름 파악
+    3. generator에서 노출되는 함수명은 직관적인 명으로 써도 되나(예: label) 실제 viewModel을 생성할 때는 attribute 명으로 맞춰 주어야 한다.
+        - label => innerText
 
-            번외편) viewModel update >> 디닥트 (할수있는데까지 해보기) https://github.com/sun202x/study_didact >> 디닥트
-                ㄴ viewModel의 attribute가 변경되면 변경 된 부분만 render할 수 있도록
-                ㄴ react render DIY할 수 있는 디닥트 분석하여 적용해보기
-                    ㄴ 1. 흐름도를 먼저 파악해보기
-                    ㄴ codepen에서 확인 https://codepen.io/pomber/pen/WjLqYW?editors=0010
+    >> next 과제 - 0328
+    1. event binding - ok
+    2. view rendering 과정 파악
+    3. button 눌렀을 때 display 값 반영 될 수 있도록
+        ㄴ 직관적이름의 함수 추가, type에 따라 view에 정의되어 있는 함수 동적으로 호출할 수 있도록 수정
+            ㄴ 호출하는 이벤트에 따라 이벤트명도 동적으로 변경될 수 있도록 작업해야함. >> 현재는 type만 동적으로 변경, 나머지는 하드코딩 되어있음
+            ㄴ 하지만 이방법도 매번 새로운 type이 추가될 때마다 함수를 추가해줘야 하는데 이게 맞는것인가 고민..
+
+    번외편) viewModel update >> 디닥트 (할수있는데까지 해보기) https://github.com/sun202x/study_didact >> 디닥트
+        ㄴ viewModel의 attribute가 변경되면 변경 된 부분만 render할 수 있도록
+        ㄴ react render DIY할 수 있는 디닥트 분석하여 적용해보기
+            ㄴ 1. 흐름도를 먼저 파악해보기
+            ㄴ codepen에서 확인 https://codepen.io/pomber/pen/WjLqYW?editors=0010
 
 
-            >> next 과제 - 0411
-            1. 프로그래머용 계산기 추가 - operator 구조 고민
-            2. history기능 정리 - 기능 구현 및 수정
-         -->
+    >> next 과제 - 0411
+    1. 프로그래머용 계산기 추가 - operator 구조 고민
+    2. history기능 정리 - 기능 구현 및 수정
+    -->
         <script type="module" src="js/calcLayout.js"></script>
     </body>
 </html>

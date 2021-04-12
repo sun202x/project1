@@ -1,17 +1,20 @@
-import CalcGeneralCalculator from "./calcGeneralCalculator.js";
 import CalcHistory from "./calcHistory.js";
-// import CalcProgrammerCalculator from "./calcProgrammerCalculator.js";
+// import Calculator from "./calculator.js";
+import CalcGeneralCalculator from "./calcGeneralCalculator.js";
+import CalcProgrammerCalculator from "./calcProgrammerCalculator.js";
 
 class CalcLayout {
     constructor() {
-        // this.calculator = new Calculator();
         this.calcHistory = new CalcHistory();
-        this.calcGeneralCalculator = new CalcGeneralCalculator("#wrapper-calculator");
+        // this.calculator = new Calculator();
+        // this.calcGeneralCalculator = new CalcGeneralCalculator("#wrapper-calculator");
+        this.calcProgrammerCalculator = new CalcProgrammerCalculator("#wrapper-calculator");
     }
 
     render() {
         this.createHeaderElement();
-        this.calcGeneralCalculator.render();
+        // this.calcGeneralCalculator.render(); // 표준계산기
+        this.calcProgrammerCalculator.render(); // 프로그래머용 계산기
     }
 
     createHeaderElement() {

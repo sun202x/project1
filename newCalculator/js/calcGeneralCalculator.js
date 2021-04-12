@@ -14,7 +14,6 @@ export default class CalcGeneralCalculator extends Calculator {
         const control = generator.control();
 
         /////////////////////// contents ///////////////////////
-        contents.id("contents");
         const record = control.define("div", "record")
             .end();
         contentsWrapper1.add(record);
@@ -259,7 +258,7 @@ export default class CalcGeneralCalculator extends Calculator {
         contentsWrapper3.id("wrapper-operator");
 
         contents.add(contentsWrapper3.end());
-
+        contents.id("contents");
         return contents.end();
     }
 

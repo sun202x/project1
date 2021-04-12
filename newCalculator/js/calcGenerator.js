@@ -56,6 +56,11 @@ export default class CalcGenerator {
                         return this;
                     },
 
+                    css: function (css) {
+                        obj.css = css;
+                        return this;                        
+                    },
+
                     onclick: function(callback) {
                         obj.onclick = callback;
                         return this;

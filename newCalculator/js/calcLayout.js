@@ -32,7 +32,7 @@ class CalcLayout {
         title.innerText = "계산기";
         const history = document.createElement("button");
         history.setAttribute("id", "history");
-        history.addEventListener("click", this.onClickHistory.bind(this));
+        // history.addEventListener("click", this.onClickHistory.bind(this));
         history.innerText = "기록";
 
         toolbar.append(toggle);

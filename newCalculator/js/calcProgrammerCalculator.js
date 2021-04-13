@@ -9,7 +9,11 @@ export default class CalcProgrammerCalculator extends Calculator {
         const generator = this.calcGenerator;
         const contents = generator.div();
         const displayWrap = generator.div();
-        const notation = generator.div();
+        const notationWrap = generator.div();
+        const notation1 = generator.div();
+        const notation2 = generator.div();
+        const notation3 = generator.div();
+        const notation4 = generator.div();
         const topOperator = generator.div();
         const keypad = generator.div();
         const keypadHeader = generator.div();
@@ -31,35 +35,59 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("HEX")
             .value("HEX")
             .type("base-notation")
-            .css("button-block")
             .end();
-        notation.add(hex);
+        notation1.add(hex);
+        const hexLabel = control.define("span", "hexLabel")
+            .label("0")
+            .type("hex-label")
+            .end();
+        notation1.add(hexLabel);
+        notation1.css("notation-box");
+        notationWrap.add(notation1.end());
 
         const dec = control.define("button", "dec")
             .label("DEC")
             .value("DEC")
             .type("base-notation")
-            .css("button-block")
             .end();
-        notation.add(dec);
+        notation2.add(dec);
+        const decLabel = control.define("span", "decLabel")
+            .label("0")
+            .type("dec-label")
+            .end();
+        notation2.add(decLabel);
+        notation2.css("notation-box");
+        notationWrap.add(notation2.end());
 
         const oct = control.define("button", "oct")
             .label("OCT")
             .value("OCT")
             .type("base-notation")
-            .css("button-block")
             .end();
-        notation.add(oct);
+        notation3.add(oct);
+        const octLabel = control.define("span", "octLabel")
+            .label("0")
+            .type("oct-label")
+            .end();
+        notation3.add(octLabel);
+        notation3.css("notation-box");
+        notationWrap.add(notation3.end());
 
         const bin = control.define("button", "bin")
             .label("BIN")
             .value("BIN")
             .type("base-notation")
-            .css("button-block")
             .end();
-        notation.add(bin);
-        notation.id("wrapper-notation");
-        contents.add(notation.end());
+        notation4.add(bin);
+        const binLabel = control.define("span", "binLabel")
+            .label("0")
+            .type("bin-label")
+            .end();
+        notation4.add(binLabel);
+        notation4.css("notation-box");
+        notationWrap.add(notation4.end());
+        notationWrap.id("wrapper-notation");
+        contents.add(notationWrap.end());
 
         const keyPad = control.define("button", "key-pad")
             .label("KEYPAD")
@@ -326,8 +354,65 @@ export default class CalcProgrammerCalculator extends Calculator {
         keypadContents.id("keypad-contents");
         keypad.add(keypadContents.end());
         keypad.id("wrapper-operator-keypad");
+        keypad.css("hidden");
         
         contents.add(keypad.end());
+
+        const bitpad = generator.div();
+        const bitPadBox1 = generator.div();
+        const bitPadInner = generator.div();
+        const bitPadLabel1 = generator.div();
+
+        const bitPadBox2 = generator.div();
+        const bitPadBox3 = generator.div();
+        const bitPadBox4 = generator.div();
+        const bitPadBox5 = generator.div();
+        const bitPadBox6 = generator.div();
+        const bitPadBox7 = generator.div();
+        const bitPadBox8 = generator.div();
+        const bitPadBox9 = generator.div();
+        const bitPadBox10 = generator.div();
+        const bitPadBox11 = generator.div();
+        const bitPadBox12 = generator.div();
+        const bitPadBox13 = generator.div();
+        const bitPadBox14 = generator.div();
+        const bitPadBox15 = generator.div();
+        const bitPadBox16 = generator.div();
+        const bitContents = generator.div();
+
+        const aa = control.define("div")
+            .label("0")
+            .end();
+        bitPadInner.add(aa);
+        const aa1 = control.define("div")
+            .label("0")
+            .end();
+        bitPadInner.add(aa1);
+        const aa2 = control.define("div")
+            .label("0")
+            .end();
+        bitPadInner.add(aa2);
+        const aa3 = control.define("div")
+            .label("0")
+            .end();
+        bitPadInner.add(aa3);
+        bitPadInner.css("qwrod");
+        bitPadBox1.add(bitPadInner.end());
+        const label = control.define("div")
+            .label("60")
+            .end();
+        bitPadBox1.add(label);
+        bitPadBox1.css("bit-box");
+        
+        bitContents.add(bitPadBox1.end());
+        bitContents.id("bitpad-contents");
+        bitpad.add(bitContents.end());
+        bitpad.id("wrapper-operator-bitpad");
+
+
+
+
+        contents.add(bitpad.end());
         contents.id("contents");
         return contents.end();
     }

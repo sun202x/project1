@@ -1,7 +1,6 @@
 import CalcHtmlView from './calcHtmlView.js';
 
 export default class HTMLComponent {
-
     element;
     children;
     oldState;
@@ -40,13 +39,8 @@ export default class HTMLComponent {
 
     reconciliation = (data) => {
         if (data.controlType !== this.oldState?.controlType) {
-            this.element = this.createHtmlElement(
-                {
-                    id: data.id,
-                    tagName: data.controlType,
-                    ...this.getHtmlOption(data)
-                }
-            );
+            const options = this.getHtmlOption(data);
+            this.element = this.createHtmlElement(options);
         }
 
         // 자식 렌더링
@@ -72,9 +66,11 @@ export default class HTMLComponent {
                 element.addEventListener(eventName, data[property]);
             } else if (property === 'innerText') {
                 element.innerText = data[property] ?? '';
+            } else if (property === "css") {
+                (data[property] !== undefined) ? element.className = data[property] : "";
             } else {
                 if (!['tagName', 'itemList'].includes(property)) {
-                    element.setAttribute(property, data[property]);
+                    (data[property] !== undefined) ? element.setAttribute(property, data[property]) : "";
                 }
             }
         });

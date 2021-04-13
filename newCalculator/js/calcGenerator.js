@@ -32,6 +32,11 @@ export default class CalcGenerator {
                 obj.itemList.push(item);
                 return this;
             },
+            
+            css: function(css) {
+                obj.css = css;
+                return this;                
+            },
 
             end: function() {
                 obj.controlType = "div";

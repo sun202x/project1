@@ -11,7 +11,7 @@ export default class CalcHtmlView {
 
     // HTMLComponent 상속받아서 처리하는게 맞다
     // viewData도 htmlview에 맞는 viewModel로 정의 필요
-    render(viewData) {
+    render(viewData, state) {
         // @TODO update 로직 정리
         if (!this.viewItems) {
             const parent = document.querySelector(this.parentID);
@@ -35,7 +35,7 @@ export default class CalcHtmlView {
                     this.viewItems.push(view);
                 }
 
-                view.render(data);
+                view.render(data, state);
             });
         }
     }

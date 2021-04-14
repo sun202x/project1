@@ -18,6 +18,40 @@ export default class CalcProgrammerCalculator extends Calculator {
         const keypad = generator.div();
         const keypadHeader = generator.div();
         const keypadContents = generator.div();
+        const bitpad = generator.div();
+        const bitPadBox1 = generator.div();
+        const bitPadBox1Inner = generator.div();
+        const bitPadBox2 = generator.div();
+        const bitPadBox2Inner = generator.div();
+        const bitPadBox3 = generator.div();
+        const bitPadBox3Inner = generator.div();
+        const bitPadBox4 = generator.div();
+        const bitPadBox4Inner = generator.div();
+        const bitPadBox5 = generator.div();
+        const bitPadBox5Inner = generator.div();
+        const bitPadBox6 = generator.div();
+        const bitPadBox6Inner = generator.div();
+        const bitPadBox7 = generator.div();
+        const bitPadBox7Inner = generator.div();
+        const bitPadBox8 = generator.div();
+        const bitPadBox8Inner = generator.div();
+        const bitPadBox9 = generator.div();
+        const bitPadBox9Inner = generator.div();
+        const bitPadBox10 = generator.div();
+        const bitPadBox10Inner = generator.div();
+        const bitPadBox11 = generator.div();
+        const bitPadBox11Inner = generator.div();
+        const bitPadBox12 = generator.div();
+        const bitPadBox12Inner = generator.div();
+        const bitPadBox13 = generator.div();
+        const bitPadBox13Inner = generator.div();
+        const bitPadBox14 = generator.div();
+        const bitPadBox14Inner = generator.div();
+        const bitPadBox15 = generator.div();
+        const bitPadBox15Inner = generator.div();
+        const bitPadBox16 = generator.div();
+        const bitPadBox16Inner = generator.div();
+        const bitContents = generator.div();
         const control = generator.control();
 
         const record = control.define("div", "record")
@@ -93,6 +127,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("KEYPAD")
             .value("KEYPAD")
             .type("key-pad")
+            .onclick(this.onClick.bind(this))
             .end();
         topOperator.add(keyPad);
 
@@ -100,6 +135,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("BITPAD")
             .value("BITPAD")
             .type("bit-pad")
+            .onclick(this.onClick.bind(this))
             .end();
         topOperator.add(bitPad);
 
@@ -354,66 +390,191 @@ export default class CalcProgrammerCalculator extends Calculator {
         keypadContents.id("keypad-contents");
         keypad.add(keypadContents.end());
         keypad.id("wrapper-operator-keypad");
-        keypad.css("hidden");
-        
         contents.add(keypad.end());
 
-        const bitpad = generator.div();
-        const bitPadBox1 = generator.div();
-        const bitPadInner = generator.div();
-        const bitPadLabel1 = generator.div();
-
-        const bitPadBox2 = generator.div();
-        const bitPadBox3 = generator.div();
-        const bitPadBox4 = generator.div();
-        const bitPadBox5 = generator.div();
-        const bitPadBox6 = generator.div();
-        const bitPadBox7 = generator.div();
-        const bitPadBox8 = generator.div();
-        const bitPadBox9 = generator.div();
-        const bitPadBox10 = generator.div();
-        const bitPadBox11 = generator.div();
-        const bitPadBox12 = generator.div();
-        const bitPadBox13 = generator.div();
-        const bitPadBox14 = generator.div();
-        const bitPadBox15 = generator.div();
-        const bitPadBox16 = generator.div();
-        const bitContents = generator.div();
-
-        const aa = control.define("div")
-            .label("0")
-            .end();
-        bitPadInner.add(aa);
-        const aa1 = control.define("div")
-            .label("0")
-            .end();
-        bitPadInner.add(aa1);
-        const aa2 = control.define("div")
-            .label("0")
-            .end();
-        bitPadInner.add(aa2);
-        const aa3 = control.define("div")
-            .label("0")
-            .end();
-        bitPadInner.add(aa3);
-        bitPadInner.css("qwrod");
-        bitPadBox1.add(bitPadInner.end());
-        const label = control.define("div")
-            .label("60")
-            .end();
-        bitPadBox1.add(label);
+        bitPadBox1Inner.add(control.define("span").label("0").end());
+        bitPadBox1Inner.add(control.define("span").label("0").end());
+        bitPadBox1Inner.add(control.define("span").label("0").end());
+        bitPadBox1Inner.add(control.define("span").label("0").end());
+        bitPadBox1Inner.css("qwrod");
+        bitPadBox1.add(bitPadBox1Inner.end());
+        bitPadBox1.add(control.define("div").label("60").end());
         bitPadBox1.css("bit-box");
-        
         bitContents.add(bitPadBox1.end());
+
+        bitPadBox2Inner.add(control.define("span").label("0").end());
+        bitPadBox2Inner.add(control.define("span").label("0").end());
+        bitPadBox2Inner.add(control.define("span").label("0").end());
+        bitPadBox2Inner.add(control.define("span").label("0").end());
+        bitPadBox2Inner.css("qwrod");
+        bitPadBox2.add(bitPadBox2Inner.end());
+        bitPadBox2.add(control.define("div").label("56").end());
+        bitPadBox2.css("bit-box");
+        bitContents.add(bitPadBox2.end());
+
+        bitPadBox3Inner.add(control.define("span").label("0").end());
+        bitPadBox3Inner.add(control.define("span").label("0").end());
+        bitPadBox3Inner.add(control.define("span").label("0").end());
+        bitPadBox3Inner.add(control.define("span").label("0").end());
+        bitPadBox3Inner.css("qwrod");
+        bitPadBox3.add(bitPadBox3Inner.end());
+        bitPadBox3.add(control.define("div").label("52").end());
+        bitPadBox3.css("bit-box");
+        bitContents.add(bitPadBox3.end());
+
+        bitPadBox4Inner.add(control.define("span").label("0").end());
+        bitPadBox4Inner.add(control.define("span").label("0").end());
+        bitPadBox4Inner.add(control.define("span").label("0").end());
+        bitPadBox4Inner.add(control.define("span").label("0").end());
+        bitPadBox4Inner.css("qwrod");
+        bitPadBox4.add(bitPadBox4Inner.end());
+        bitPadBox4.add(control.define("div").label("48").end());
+        bitPadBox4.css("bit-box");
+        bitContents.add(bitPadBox4.end());
+
+        bitPadBox5Inner.add(control.define("span").label("0").end());
+        bitPadBox5Inner.add(control.define("span").label("0").end());
+        bitPadBox5Inner.add(control.define("span").label("0").end());
+        bitPadBox5Inner.add(control.define("span").label("0").end());
+        bitPadBox5Inner.css("qwrod");
+        bitPadBox5.add(bitPadBox5Inner.end());
+        bitPadBox5.add(control.define("div").label("44").end());
+        bitPadBox5.css("bit-box");
+        bitContents.add(bitPadBox5.end());
+
+        bitPadBox6Inner.add(control.define("span").label("0").end());
+        bitPadBox6Inner.add(control.define("span").label("0").end());
+        bitPadBox6Inner.add(control.define("span").label("0").end());
+        bitPadBox6Inner.add(control.define("span").label("0").end());
+        bitPadBox6Inner.css("qwrod");
+        bitPadBox6.add(bitPadBox6Inner.end());
+        bitPadBox6.add(control.define("div").label("40").end());
+        bitPadBox6.css("bit-box");
+        bitContents.add(bitPadBox6.end());
+
+        bitPadBox7Inner.add(control.define("span").label("0").end());
+        bitPadBox7Inner.add(control.define("span").label("0").end());
+        bitPadBox7Inner.add(control.define("span").label("0").end());
+        bitPadBox7Inner.add(control.define("span").label("0").end());
+        bitPadBox7Inner.css("qwrod");
+        bitPadBox7.add(bitPadBox7Inner.end());
+        bitPadBox7.add(control.define("div").label("36").end());
+        bitPadBox7.css("bit-box");
+        bitContents.add(bitPadBox7.end());
+
+        bitPadBox8Inner.add(control.define("span").label("0").end());
+        bitPadBox8Inner.add(control.define("span").label("0").end());
+        bitPadBox8Inner.add(control.define("span").label("0").end());
+        bitPadBox8Inner.add(control.define("span").label("0").end());
+        bitPadBox8Inner.css("qwrod");
+        bitPadBox8.add(bitPadBox8Inner.end());
+        bitPadBox8.add(control.define("div").label("32").end());
+        bitPadBox8.css("bit-box");
+        bitContents.add(bitPadBox8.end());
+
+        bitPadBox9Inner.add(control.define("span").label("0").end());
+        bitPadBox9Inner.add(control.define("span").label("0").end());
+        bitPadBox9Inner.add(control.define("span").label("0").end());
+        bitPadBox9Inner.add(control.define("span").label("0").end());
+        bitPadBox9Inner.css("dword");
+        bitPadBox9.add(bitPadBox9Inner.end());
+        bitPadBox9.add(control.define("div").label("28").end());
+        bitPadBox9.css("bit-box");
+        bitContents.add(bitPadBox9.end());
+
+        bitPadBox10Inner.add(control.define("span").label("0").end());
+        bitPadBox10Inner.add(control.define("span").label("0").end());
+        bitPadBox10Inner.add(control.define("span").label("0").end());
+        bitPadBox10Inner.add(control.define("span").label("0").end());
+        bitPadBox10Inner.css("dword");
+        bitPadBox10.add(bitPadBox10Inner.end());
+        bitPadBox10.add(control.define("div").label("24").end());
+        bitPadBox10.css("bit-box");
+        bitContents.add(bitPadBox10.end());
+
+        bitPadBox11Inner.add(control.define("span").label("0").end());
+        bitPadBox11Inner.add(control.define("span").label("0").end());
+        bitPadBox11Inner.add(control.define("span").label("0").end());
+        bitPadBox11Inner.add(control.define("span").label("0").end());
+        bitPadBox11Inner.css("dword");
+        bitPadBox11.add(bitPadBox11Inner.end());
+        bitPadBox11.add(control.define("div").label("20").end());
+        bitPadBox11.css("bit-box");
+        bitContents.add(bitPadBox11.end());
+
+        bitPadBox12Inner.add(control.define("span").label("0").end());
+        bitPadBox12Inner.add(control.define("span").label("0").end());
+        bitPadBox12Inner.add(control.define("span").label("0").end());
+        bitPadBox12Inner.add(control.define("span").label("0").end());
+        bitPadBox12Inner.css("dword");
+        bitPadBox12.add(bitPadBox12Inner.end());
+        bitPadBox12.add(control.define("div").label("16").end());
+        bitPadBox12.css("bit-box");
+        bitContents.add(bitPadBox12.end());
+
+        bitPadBox13Inner.add(control.define("span").label("0").end());
+        bitPadBox13Inner.add(control.define("span").label("0").end());
+        bitPadBox13Inner.add(control.define("span").label("0").end());
+        bitPadBox13Inner.add(control.define("span").label("0").end());
+        bitPadBox13Inner.css("word");
+        bitPadBox13.add(bitPadBox13Inner.end());
+        bitPadBox13.add(control.define("div").label("12").end());
+        bitPadBox13.css("bit-box");
+        bitContents.add(bitPadBox13.end());
+
+        bitPadBox14Inner.add(control.define("span").label("0").end());
+        bitPadBox14Inner.add(control.define("span").label("0").end());
+        bitPadBox14Inner.add(control.define("span").label("0").end());
+        bitPadBox14Inner.add(control.define("span").label("0").end());
+        bitPadBox14Inner.css("word");
+        bitPadBox14.add(bitPadBox14Inner.end());
+        bitPadBox14.add(control.define("div").label("8").end());
+        bitPadBox14.css("bit-box");
+        bitContents.add(bitPadBox14.end());
+
+        bitPadBox15Inner.add(control.define("span").label("0").end());
+        bitPadBox15Inner.add(control.define("span").label("0").end());
+        bitPadBox15Inner.add(control.define("span").label("0").end());
+        bitPadBox15Inner.add(control.define("span").label("0").end());
+        bitPadBox15Inner.css("byte");
+        bitPadBox15.add(bitPadBox15Inner.end());
+        bitPadBox15.add(control.define("div").label("4").end());
+        bitPadBox15.css("bit-box");
+        bitContents.add(bitPadBox15.end());
+
+        bitPadBox16Inner.add(control.define("span").label("0").end());
+        bitPadBox16Inner.add(control.define("span").label("0").end());
+        bitPadBox16Inner.add(control.define("span").label("0").end());
+        bitPadBox16Inner.add(control.define("span").label("0").end());
+        bitPadBox16Inner.css("byte");
+        bitPadBox16.add(bitPadBox16Inner.end());
+        bitPadBox16.add(control.define("div").label("0").end());
+        bitPadBox16.css("bit-box");
+        bitContents.add(bitPadBox16.end());
+
         bitContents.id("bitpad-contents");
         bitpad.add(bitContents.end());
         bitpad.id("wrapper-operator-bitpad");
-
-
-
+        bitpad.css("hide");
 
         contents.add(bitpad.end());
         contents.id("contents");
         return contents.end();
+    }
+
+    onClick(e) {
+        debugger;
+        const value = e.target.value;
+        const keypad = "wrapper-operator-keypad";
+        const bitpad = "wrapper-operator-bitpad";
+
+        if (value === "KEYPAD") {
+            this.showDisplay(keypad);
+            this.hideDisplay(bitpad);
+        } else {
+            this.showDisplay(bitpad);
+            this.hideDisplay(keypad);
+        }
+        
     }
 }

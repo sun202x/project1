@@ -34,7 +34,7 @@ export default class CalcGenerator {
             },
             
             css: function(css) {
-                obj.css = css;
+                obj.className = css;
                 return this;                
             },
 
@@ -57,12 +57,12 @@ export default class CalcGenerator {
                     },
         
                     label: function(label) {
-                        obj.label = label;
+                        obj.innerText = label;
                         return this;
                     },
 
                     css: function (css) {
-                        obj.css = css;
+                        obj.className = css;
                         return this;                        
                     },
 

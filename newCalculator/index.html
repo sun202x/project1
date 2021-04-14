@@ -23,7 +23,10 @@
                 line-height: 1;
                 border: 1px solid #ccc;
             }
-            .hidden {
+            .show {
+                display: block !important;
+            }
+            .hide {
                 display: none !important;
             }
             #button-block {
@@ -79,7 +82,9 @@
             #wrapper-top-operator:after,
             #wrapper-top-operator:before,
             #wrapper-operator:after,
-            #wrapper-operator:before {
+            #wrapper-operator:before,
+            #bitpad-contents:after,
+            #bitpad-contents:before {
                 content: "";
                 display: table;
                 clear: both;
@@ -99,6 +104,26 @@
             }
             #wrapper-operator-keypad #keypad-contents button {
                 width: 20%;
+            }
+            #bitpad-contents .bit-box {
+                float: left;
+                width: 25%;
+                padding: 5px 5px 8px;
+                border: 1px solid #ccc;
+                background-color: #efefef;
+            }
+            #bitpad-contents .bit-box > div {
+                text-align: center;
+            }
+            #bitpad-contents .bit-box > div + div {
+                font-size: 12px;
+                text-align: right;
+            }
+            #bitpad-contents .bit-box > div > span {
+                padding-left: 3px;
+                padding-right: 3px;
+                font-size: 20px;
+                cursor: pointer;
             }
 
         </style>
@@ -388,6 +413,7 @@
         ㄴ calcLayout으로 뺀 상단 구조 다시 calculator별로 정의해야할듯 - 기능은 같은데 위치가 contents내부에 있는 경우도 있음.
             ㄴ 각 calculator별로 기능 구현 해야할듯, operator만 calculator별로 나눠서 작업
     2. history기능 정리 - 기능 구현 및 수정
+    3. 리액트 컴포넌트까지 만들어보고 흐름 파악해보기
     -->
         <script type="module" src="js/calcLayout.js"></script>
     </body>

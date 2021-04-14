@@ -67,7 +67,15 @@ export default class Calculator {
     }
 
     setLabel(id, label) {
-        this.setState(id, "label", label);
+        this.setState(id, "innerText", label);
+    }
+
+    showDisplay(id) {
+        this.setState(id, "className", "show");
+    }
+
+    hideDisplay(id) {
+        this.setState(id, "className", "hide");
     }
 
     setState(id, state, value) {
@@ -81,6 +89,6 @@ export default class Calculator {
         });
 
         // 2. 데이터 속성값을 변경 후 HTML을 업데이트 해준다.
-        this.calcHtmlView.render(items);
+        this.calcHtmlView.render(items, state);
     }
 }

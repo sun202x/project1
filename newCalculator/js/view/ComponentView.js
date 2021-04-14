@@ -6,10 +6,10 @@ export default class ComponentView extends HTMLComponent {
         return {
             id: data.id,
             tagName: data.controlType,
-            css: data.css,
+            className: data.className,
             type: data.type,
             value: data.value,
-            innerText: data.label,
+            innerText: data.innerText,
             onclick: data.onclick
         };
     }

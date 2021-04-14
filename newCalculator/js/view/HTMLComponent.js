@@ -17,7 +17,7 @@ export default class HTMLComponent {
         }
     }
 
-    renderChildren(children) {
+    renderChildren(children, state) {
         if (!children) {
             this.element.innerHtml = '';
         } else {
@@ -31,25 +31,25 @@ export default class HTMLComponent {
                         childView.render(child)
                     );
                 } else {
-                    childView.render(child);
+                    childView.render(child, state);
                 }
             });
         }
     }
 
-    reconciliation = (data) => {
+    reconciliation = (data, state) => {
         if (data.controlType !== this.oldState?.controlType) {
             const options = this.getHtmlOption(data);
             this.element = this.createHtmlElement(options);
         }
 
-        // 자식 렌더링
-        this.renderChildren(data.itemList);
+        // 자식 랜더링
+        this.renderChildren(data.itemList, state);
 
         // @TODO 공통화 필요
         if (this.oldState) {
-            if (this.oldState.label !== data.label) {
-                this.element.innerText = data.label;
+            if (this.oldState[state] !== data[state]) {
+                this.element[state] = data[state];
             }
         }
 
@@ -66,7 +66,7 @@ export default class HTMLComponent {
                 element.addEventListener(eventName, data[property]);
             } else if (property === 'innerText') {
                 element.innerText = data[property] ?? '';
-            } else if (property === "css") {
+            } else if (property === "className") {
                 (data[property] !== undefined) ? element.className = data[property] : "";
             } else {
                 if (!['tagName', 'itemList'].includes(property)) {
@@ -78,8 +78,8 @@ export default class HTMLComponent {
         return element;
     }
 
-    render(data) {
-        this.reconciliation(data);
+    render(data, state) {
+        this.reconciliation(data, state);
 
         return this.element;
     }

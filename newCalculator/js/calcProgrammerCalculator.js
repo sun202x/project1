@@ -1,8 +1,10 @@
 import Calculator from "./calculator.js";
+import CalcProgrammerOperator from "./calcProgrammerOperator.js";
 
 export default class CalcProgrammerCalculator extends Calculator {
     constructor(parentID) {
         super(parentID);
+        this.calcProgrammerOperator = new CalcProgrammerOperator();
     }
 
     onInitContents() {
@@ -69,6 +71,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("HEX")
             .value("HEX")
             .type("base-notation")
+            .onclick(this.changeKeyPad.bind(this))
             .end();
         notation1.add(hex);
         const hexLabel = control.define("span", "hexLabel")
@@ -83,6 +86,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("DEC")
             .value("DEC")
             .type("base-notation")
+            .onclick(this.changeKeyPad.bind(this))
             .end();
         notation2.add(dec);
         const decLabel = control.define("span", "decLabel")
@@ -97,6 +101,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("OCT")
             .value("OCT")
             .type("base-notation")
+            .onclick(this.changeKeyPad.bind(this))
             .end();
         notation3.add(oct);
         const octLabel = control.define("span", "octLabel")
@@ -111,6 +116,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("BIN")
             .value("BIN")
             .type("base-notation")
+            .onclick(this.changeKeyPad.bind(this))
             .end();
         notation4.add(bin);
         const binLabel = control.define("span", "binLabel")
@@ -127,7 +133,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("KEYPAD")
             .value("KEYPAD")
             .type("key-pad")
-            .onclick(this.onClick.bind(this))
+            .onclick(this.toggleKeyPad.bind(this))
             .end();
         topOperator.add(keyPad);
 
@@ -135,7 +141,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("BITPAD")
             .value("BITPAD")
             .type("bit-pad")
-            .onclick(this.onClick.bind(this))
+            .onclick(this.toggleKeyPad.bind(this))
             .end();
         topOperator.add(bitPad);
 
@@ -203,6 +209,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("C")
             .value("C")
             .type("clearAll")
+            .onclick(this.onClick.bind(this))
             .end();
         keypadContents.add(clear);
 
@@ -259,12 +266,14 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("7")
             .value("7")
             .type("number")
+            .onclick(this.onClick.bind(this))
             .end();
         keypadContents.add(number7);
 
         const number8 = control.define("button", "number8")
             .label("8")
             .value("8")
+            .onclick(this.onClick.bind(this))
             .type("number")
             .end();
         keypadContents.add(number8);
@@ -378,6 +387,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label(".")
             .value(".")
             .type("operator")
+            .disabled(true)
             .end();
         keypadContents.add(dot);
 
@@ -564,6 +574,22 @@ export default class CalcProgrammerCalculator extends Calculator {
 
     onClick(e) {
         debugger;
+        const target = this.getControl(e.target.id);
+        const value = this.calcProgrammerOperator.getCalcResult(target);
+
+        if (target.type === "equal") {
+            this.historyData.push(this.calcProgrammerOperator.createSnapshot());
+        }
+
+        // display가 아니라 viewModel을 통째로 넘겨야 할거같음 - didact
+        // this.calcView.updateView(display, wrapper);
+
+        // 단순 데이터객체만 넘어오기때문에 변경대상, 변경값을 넘겨줘야한다.
+        this.setLabel("display", value);
+        this.setLabel("hexLabel", value);
+    }
+
+    toggleKeyPad(e) {
         const value = e.target.value;
         const keypad = "wrapper-operator-keypad";
         const bitpad = "wrapper-operator-bitpad";
@@ -575,6 +601,16 @@ export default class CalcProgrammerCalculator extends Calculator {
             this.showDisplay(bitpad);
             this.hideDisplay(keypad);
         }
-        
     }
+
+    changeKeyPad(e) {
+        debugger;
+        const value = e.target.value;
+        // hex = all
+        // dec = 0123456789
+        // oct = 01234567
+        // bin = 012
+
+    }
+
 }

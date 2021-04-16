@@ -381,39 +381,40 @@
 
 <!--
     >> 수정해야할 목록
-    1. calcGenerator 공통으로 사용할 수 있게 구조 정리하기 >> 필수값, 필수가 아닌값 구분해서 공통으로 만들기
-        - 순환참조 오류 때문에 보류
-        - 참조 사이트 : https://ljs0705.medium.com/js-%EB%AA%A8%EB%93%88-%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B3%BC-%EC%88%9C%ED%99%98-%EC%B0%B8%EC%A1%B0-%EB%AC%B8%EC%A0%9C-a9e0c90c07e5
-    2. view에서는 디테일한 DOM구조를 알아서는 안되고 render시 createElement에 데이터와 parent만 넘겨주어야 한다.
-        - 흥식대원군이 이미 로직 완성
-        - 로직 흐름 파악
-    3. generator에서 노출되는 함수명은 직관적인 명으로 써도 되나(예: label) 실제 viewModel을 생성할 때는 attribute 명으로 맞춰 주어야 한다.
-        - label => innerText
+        1. calcGenerator 공통으로 사용할 수 있게 구조 정리하기 >> 필수값, 필수가 아닌값 구분해서 공통으로 만들기
+            - 순환참조 오류 때문에 보류
+            - 참조 사이트 : https://ljs0705.medium.com/js-%EB%AA%A8%EB%93%88-%EC%8B%9C%EC%8A%A4%ED%85%9C%EA%B3%BC-%EC%88%9C%ED%99%98-%EC%B0%B8%EC%A1%B0-%EB%AC%B8%EC%A0%9C-a9e0c90c07e5
+        2. view에서는 디테일한 DOM구조를 알아서는 안되고 render시 createElement에 데이터와 parent만 넘겨주어야 한다.
+            - 흥식대원군이 이미 로직 완성
+            - 로직 흐름 파악
+        3. generator에서 노출되는 함수명은 직관적인 명으로 써도 되나(예: label) 실제 viewModel을 생성할 때는 attribute 명으로 맞춰 주어야 한다.
+            - label => innerText
 
     >> next 과제 - 0328
-    1. event binding - ok
-    2. view rendering 과정 파악
-    3. button 눌렀을 때 display 값 반영 될 수 있도록
-        ㄴ 직관적이름의 함수 추가, type에 따라 view에 정의되어 있는 함수 동적으로 호출할 수 있도록 수정
-            ㄴ 호출하는 이벤트에 따라 이벤트명도 동적으로 변경될 수 있도록 작업해야함. >> 현재는 type만 동적으로 변경, 나머지는 하드코딩 되어있음
-            ㄴ 하지만 이방법도 매번 새로운 type이 추가될 때마다 함수를 추가해줘야 하는데 이게 맞는것인가 고민..
+        1. event binding - ok
+        2. view rendering 과정 파악
+        3. button 눌렀을 때 display 값 반영 될 수 있도록
+            ㄴ 직관적이름의 함수 추가, type에 따라 view에 정의되어 있는 함수 동적으로 호출할 수 있도록 수정
+                ㄴ 호출하는 이벤트에 따라 이벤트명도 동적으로 변경될 수 있도록 작업해야함. >> 현재는 type만 동적으로 변경, 나머지는 하드코딩 되어있음
+                ㄴ 하지만 이방법도 매번 새로운 type이 추가될 때마다 함수를 추가해줘야 하는데 이게 맞는것인가 고민..
 
-    번외편) viewModel update >> 디닥트 (할수있는데까지 해보기) https://github.com/sun202x/study_didact >> 디닥트
-        ㄴ viewModel의 attribute가 변경되면 변경 된 부분만 render할 수 있도록
-        ㄴ react render DIY할 수 있는 디닥트 분석하여 적용해보기
-            ㄴ 1. 흐름도를 먼저 파악해보기
-            ㄴ codepen에서 확인 https://codepen.io/pomber/pen/WjLqYW?editors=0010
+        번외편) viewModel update >> 디닥트 (할수있는데까지 해보기) https://github.com/sun202x/study_didact >> 디닥트
+            ㄴ viewModel의 attribute가 변경되면 변경 된 부분만 render할 수 있도록
+            ㄴ react render DIY할 수 있는 디닥트 분석하여 적용해보기
+                ㄴ 1. 흐름도를 먼저 파악해보기
+                ㄴ codepen에서 확인 https://codepen.io/pomber/pen/WjLqYW?editors=0010
 
 
     >> next 과제 - 0411
-    1. 프로그래머용 계산기 추가 - operator 구조 고민
-        ㄴ calcDivView, calcButtonView >> componentView로 통합 > 새로운 형태의 태그가 만들어질 때마다 viewFactory에 추가해야함
-            ㄴ componentView도 사실 attr options만 넘겨주는데 굳이 필요할까 싶지만 우선은 그냥 두는걸로..
-        ㄴ 프로그래머용 계산기 기능붙이는것 고민해도 모자랄시간에 태그 만드는데 시간 다보내고 있음.. 굉장히 비효율적인듯
-        ㄴ calcLayout으로 뺀 상단 구조 다시 calculator별로 정의해야할듯 - 기능은 같은데 위치가 contents내부에 있는 경우도 있음.
-            ㄴ 각 calculator별로 기능 구현 해야할듯, operator만 calculator별로 나눠서 작업
-    2. history기능 정리 - 기능 구현 및 수정
-    3. 리액트 컴포넌트까지 만들어보고 흐름 파악해보기
+        1. 프로그래머용 계산기 추가 - operator 구조 고민
+            ㄴ calcDivView, calcButtonView >> componentView로 통합 > 새로운 형태의 태그가 만들어질 때마다 viewFactory에 추가해야함
+                ㄴ componentView도 사실 attr options만 넘겨주는데 굳이 필요할까 싶지만 우선은 그냥 두는걸로..
+            ㄴ 프로그래머용 계산기 기능붙이는것 고민해도 모자랄시간에 태그 만드는데 시간 다보내고 있음.. 굉장히 비효율적인듯
+            ㄴ calcLayout으로 뺀 상단 구조 다시 calculator별로 정의해야할듯 - 기능은 같은데 위치가 contents내부에 있는 경우도 있음.
+                ㄴ 각 calculator별로 기능 구현 해야할듯, operator만 calculator별로 나눠서 작업
+                ㄴ 0416추가 - history만 모듈화해서 따로 분리하면 어디에 위치하든 사용할 수 있음.
+        2. history기능 정리 - 기능 구현 및 수정
+        3. 리액트 컴포넌트까지 만들어보고 흐름 파악해보기
     -->
         <script type="module" src="js/calcLayout.js"></script>
     </body>

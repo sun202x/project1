@@ -10,6 +10,7 @@ export default class ComponentView extends HTMLComponent {
             type: data.type,
             value: data.value,
             innerText: data.innerText,
+            disabled: data.disabled,
             onclick: data.onclick
         };
     }

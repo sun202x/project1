@@ -43,7 +43,7 @@ class CalcLayout {
         wrapper.append(header);
 
         this.calcHistory.render(header);
-        
+
         document.body.append(wrapper);
     }
 

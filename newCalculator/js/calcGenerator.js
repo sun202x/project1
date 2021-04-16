@@ -61,9 +61,14 @@ export default class CalcGenerator {
                         return this;
                     },
 
-                    css: function (css) {
+                    css: function(css) {
                         obj.className = css;
                         return this;                        
+                    },
+                    
+                    disabled: function(flag) {
+                        obj.disabled = flag;
+                        return this;
                     },
 
                     onclick: function(callback) {
@@ -76,7 +81,7 @@ export default class CalcGenerator {
                         return this;
                     },
         
-                    end: function () {
+                    end: function() {
                         return obj;
                     }
                 }

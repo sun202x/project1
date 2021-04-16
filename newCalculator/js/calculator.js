@@ -8,7 +8,6 @@ export default class Calculator {
         this.historyData = [];
         this.calcGenerator = new CalcGenerator();
         this.calcHtmlView = new CalcHtmlView(parentID);
-        this.operator = new CalcOperator();
         this.setItems(this.onInitContents());
     }
 

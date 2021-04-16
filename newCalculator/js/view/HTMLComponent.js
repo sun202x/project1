@@ -68,6 +68,8 @@ export default class HTMLComponent {
                 element.innerText = data[property] ?? '';
             } else if (property === "className") {
                 (data[property] !== undefined) ? element.className = data[property] : "";
+            } else if (property === "disabled") {
+                (data[property]) ? element.setAttribute(property, data[property]) : element.removeAttribute(data[property]);
             } else {
                 if (!['tagName', 'itemList'].includes(property)) {
                     (data[property] !== undefined) ? element.setAttribute(property, data[property]) : "";

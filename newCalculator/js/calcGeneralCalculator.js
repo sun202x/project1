@@ -1,8 +1,10 @@
+import CalcGeneralOperator from "./calcGeneralOperator.js";
 import Calculator from "./calculator.js";
 
 export default class CalcGeneralCalculator extends Calculator {
     constructor(parentID) {
         super(parentID);
+        this.generalOperator = new CalcGeneralOperator();
     }
 
     onInitContents() {
@@ -265,10 +267,10 @@ export default class CalcGeneralCalculator extends Calculator {
     onClick(e) {
         // const display = this.getControl("display");
         const target = this.getControl(e.target.id);
-        const value = this.operator.getCalcResult(target);
+        const value = this.generalOperator.getCalcResult(target);
 
         if (target.type === "equal") {
-            this.historyData.push(this.operator.createSnapshot());
+            this.historyData.push(this.generalOperator.createSnapshot());
         }
 
         // display가 아니라 viewModel을 통째로 넘겨야 할거같음 - didact

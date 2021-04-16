@@ -2,18 +2,12 @@ import CalcCareTaker from "./calcCareTaker.js";
 
 export default class CalcOperator {
     constructor () {
-        this.init();
-    }
-
-    init() {
         this.prevValue = 0;
         this.currentValue = 0;
         this.totalValue = 0;
         this.operatorCheck = true;
         this.operatorValue = "";
         this.historyList = [];
-
-        this.calcCareTaker = new CalcCareTaker();
     }
 
     getCalcResult(target) {
@@ -36,33 +30,33 @@ export default class CalcOperator {
         }
     }
 
-    calculateValue(value) {
-        let result;
-        const prevValue = (this.prevValue !== "") ? parseInt(this.prevValue) : "";
-        const currentValue = (this.currentValue !== "") ? parseInt(this.currentValue) : "";
+    // calculateValue(value) {
+    //     let result;
+    //     const prevValue = (this.prevValue !== "") ? parseInt(this.prevValue) : "";
+    //     const currentValue = (this.currentValue !== "") ? parseInt(this.currentValue) : "";
 
-        switch(value) {
-            case "+":
-                result = prevValue + currentValue;
-                break;
-            case "-":
-                result = prevValue - currentValue;
-                break;
-            case "*":
-                result = prevValue * currentValue;
-                break;
-            case "/":
-                result = prevValue / currentValue;
-                break;
-            case "^":
-                result = Math.pow(prevValue, currentValue);
-                break;
-            case "%":
-                result = this.prevValue * 0.1;
-        }
+    //     switch(value) {
+    //         case "+":
+    //             result = prevValue + currentValue;
+    //             break;
+    //         case "-":
+    //             result = prevValue - currentValue;
+    //             break;
+    //         case "*":
+    //             result = prevValue * currentValue;
+    //             break;
+    //         case "/":
+    //             result = prevValue / currentValue;
+    //             break;
+    //         case "^":
+    //             result = Math.pow(prevValue, currentValue);
+    //             break;
+    //         case "%":
+    //             result = this.prevValue * 0.1;
+    //     }
 
-        return result;
-    }
+    //     return result;
+    // }
 
     number(value) {
         let result = this.currentValue;

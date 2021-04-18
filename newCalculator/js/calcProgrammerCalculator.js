@@ -572,8 +572,24 @@ export default class CalcProgrammerCalculator extends Calculator {
         return contents.end();
     }
 
+    onClickHanldler(value) {
+        if (typeof value === "object") {
+            this.setLabel("display", value.hex);
+            this.setLabel("hexLabel", value.hex);
+            this.setLabel("decLabel", value.dec);
+            this.setLabel("octLabel", value.oct);
+            this.setLabel("binLabel", value.bin);
+        } else {
+            this.setLabel("display", value);
+            this.setLabel("hexLabel", value);
+            this.setLabel("decLabel", value);
+            this.setLabel("octLabel", value);
+            this.setLabel("binLabel", value);
+        }
+    }
+
     onClick(e) {
-        debugger;
+        // 프로그래머용 계산기는 객체형태로 값을 받아야함 - 진수변환때문에
         const target = this.getControl(e.target.id);
         const value = this.calcProgrammerOperator.getCalcResult(target);
 
@@ -581,12 +597,8 @@ export default class CalcProgrammerCalculator extends Calculator {
             this.historyData.push(this.calcProgrammerOperator.createSnapshot());
         }
 
-        // display가 아니라 viewModel을 통째로 넘겨야 할거같음 - didact
-        // this.calcView.updateView(display, wrapper);
-
-        // 단순 데이터객체만 넘어오기때문에 변경대상, 변경값을 넘겨줘야한다.
-        this.setLabel("display", value);
-        this.setLabel("hexLabel", value);
+        // viewModel update
+        this.onClickHanldler(value);
     }
 
     toggleKeyPad(e) {
@@ -606,11 +618,25 @@ export default class CalcProgrammerCalculator extends Calculator {
     changeKeyPad(e) {
         debugger;
         const value = e.target.value;
+        const display = "display";
         // hex = all
         // dec = 0123456789
         // oct = 01234567
         // bin = 012
 
+        switch(value) {
+            case "HEX":
+                this.setLabel(display, value.hex);
+                break;
+            case "DEC":
+                this.setLabel(display, value.dec);
+                break;
+            case "OCT":
+                this.setLabel(display, value.oct);
+                break;
+            case "BIN":
+                this.setLabel(display, value.bin);
+        }
     }
 
 }

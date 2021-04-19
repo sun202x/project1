@@ -23,8 +23,7 @@ export default class CalcOperator {
             case "clear":
                 return this.clear(value);
             case "clearAll":
-                this.clearAll(value);
-                return "0";
+                return this.clearAll(value);
             default:
                 return "";
         }
@@ -58,15 +57,15 @@ export default class CalcOperator {
     //     return result;
     // }
 
-    // _number(value) {
+    // number(value) {
     //     this.number(value);
     // }
 
-    // _operator(value) {
+    // operator(value) {
     //     this.operator(value);
     // }
 
-    // _clear(str) {
+    // clear(str) {
     //     this.clear(str);
     // }
 
@@ -74,12 +73,13 @@ export default class CalcOperator {
         this.operatorCheck = true;
         this.operatorValue = str;
         this.prevValue = "";
-        this.currentValue = "";
         this.totalValue = "";
         this.historyList = [];
+
+        return this.currentValue;
     }
 
-    // _equal(value) {
+    // equal(value) {
     //     this.equal(value);
     // }
 

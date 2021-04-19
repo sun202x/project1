@@ -3,6 +3,7 @@ import CalcOperator from "./calcOperator.js";
 export default class CalcProgrammerOperator extends CalcOperator {
     constructor () {
         super();
+        this.currentValue = { hex: "0", dec: "0", oct: "0", bin: "0" };
     }
 
     calculateValue(value) {
@@ -33,10 +34,9 @@ export default class CalcProgrammerOperator extends CalcOperator {
         return result;
     }
 
-
     number(value) {
         let currentValue = this.currentValue;
-        let result;
+        const result = {};
 
         if (currentValue.hex == "0") {
             currentValue.hex = (value + "");
@@ -44,21 +44,19 @@ export default class CalcProgrammerOperator extends CalcOperator {
             currentValue.hex += (value + "");
         }
 
-        result = this.getNumberType(currentValue);
+        result.hex = parseInt(currentValue.hex, 16).toString(16); // 16진수
+        result.dec = parseInt(currentValue.hex, 16).toString(10); // 10진수
+        result.oct = parseInt(currentValue.hex, 16).toString(8);  // 8진수
+        result.bin = parseInt(currentValue.hex, 16).toString(2);  // 2진수
+
         this.operatorCheck = false;
         this.currentValue = result;
         return result;
     }
 
-    getNumberType(value) {
-        const result = {};
-
-        result.hex = parseInt(value, 16).toString(16); // 16진수
-        result.dec = parseInt(value, 16).toString(10); // 10진수
-        result.oct = parseInt(value, 16).toString(8);  // 8진수
-        result.bin = parseInt(value, 16).toString(2);  // 2진수
-
-        return result;
+    clearAll(str) {
+        this.currentValue = { hex: "0", dec: "0", oct: "0", bin: "0" };
+        return super.clearAll(str);
     }
 
     createSnapshot() {

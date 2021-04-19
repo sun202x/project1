@@ -86,6 +86,11 @@ export default class CalcGeneralOperator extends CalcOperator {
         return result;
     }
 
+    clearAll(str) {
+        this.currentValue = "0";
+        return super.clearAll(str);
+    }
+
     equal(value) {
         let result = "";
 

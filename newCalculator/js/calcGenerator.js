@@ -80,6 +80,11 @@ export default class CalcGenerator {
                         obj.type = type;
                         return this;
                     },
+
+                    kind: function(type) {
+                        obj["data-kind"] = type;
+                        return this;
+                    },
         
                     end: function() {
                         return obj;

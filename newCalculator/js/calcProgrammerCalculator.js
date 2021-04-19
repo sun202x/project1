@@ -187,7 +187,8 @@ export default class CalcProgrammerCalculator extends Calculator {
         const a = control.define("button", "a")
             .label("A")
             .value("A")
-            .type("operator")
+            .type("number")
+            .kind("hex")
             .end();
         keypadContents.add(a);
 
@@ -223,7 +224,8 @@ export default class CalcProgrammerCalculator extends Calculator {
         const b = control.define("button", "b")
             .label("B")
             .value("B")
-            .type("clear")
+            .type("number")
+            .kind("hex")
             .end();
         keypadContents.add(b);
 
@@ -258,7 +260,8 @@ export default class CalcProgrammerCalculator extends Calculator {
         const c = control.define("button", "c")
             .label("C")
             .value("C")
-            .type("operator")
+            .type("number")
+            .kind("hex")
             .end();
         keypadContents.add(c);
 
@@ -266,6 +269,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("7")
             .value("7")
             .type("number")
+            .kind("oct")
             .onclick(this.onClick.bind(this))
             .end();
         keypadContents.add(number7);
@@ -273,8 +277,9 @@ export default class CalcProgrammerCalculator extends Calculator {
         const number8 = control.define("button", "number8")
             .label("8")
             .value("8")
-            .onclick(this.onClick.bind(this))
             .type("number")
+            .kind("dec")
+            .onclick(this.onClick.bind(this))
             .end();
         keypadContents.add(number8);
 
@@ -282,6 +287,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("9")
             .value("9")
             .type("number")
+            .kind("dec")
             .end();
         keypadContents.add(number9);
 
@@ -295,7 +301,8 @@ export default class CalcProgrammerCalculator extends Calculator {
         const d = control.define("button", "d")
             .label("D")
             .value("D")
-            .type("operator")
+            .type("number")
+            .kind("hex")
             .end();
         keypadContents.add(d);
 
@@ -303,6 +310,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("4")
             .value("4")
             .type("number")
+            .kind("oct")
             .end();
         keypadContents.add(number4);
 
@@ -310,6 +318,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("5")
             .value("5")
             .type("number")
+            .kind("oct")
             .end();
         keypadContents.add(number5);
 
@@ -317,6 +326,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("6")
             .value("6")
             .type("number")
+            .kind("oct")
             .end();
         keypadContents.add(number6);
 
@@ -330,7 +340,8 @@ export default class CalcProgrammerCalculator extends Calculator {
         const e = control.define("button", "e")
             .label("E")
             .value("E")
-            .type("operator")
+            .type("number")
+            .kind("hex")
             .end();
         keypadContents.add(e);
 
@@ -338,6 +349,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("1")
             .value("1")
             .type("number")
+            .kind("bin")
             .end();
         keypadContents.add(number1);
 
@@ -345,6 +357,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("2")
             .value("2")
             .type("number")
+            .kind("oct")
             .end();
         keypadContents.add(number2);
 
@@ -352,6 +365,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("3")
             .value("3")
             .type("number")
+            .kind("oct")
             .end();
         keypadContents.add(number3);
 
@@ -365,7 +379,8 @@ export default class CalcProgrammerCalculator extends Calculator {
         const f = control.define("button", "f")
             .label("F")
             .value("F")
-            .type("operator")
+            .type("number")
+            .kind("hex")
             .end();
         keypadContents.add(f);
 
@@ -380,6 +395,7 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label("0")
             .value("0")
             .type("number")
+            .kind("bin")
             .end();
         keypadContents.add(number0);
 
@@ -573,19 +589,11 @@ export default class CalcProgrammerCalculator extends Calculator {
     }
 
     onClickHanldler(value) {
-        if (typeof value === "object") {
-            this.setLabel("display", value.hex);
-            this.setLabel("hexLabel", value.hex);
-            this.setLabel("decLabel", value.dec);
-            this.setLabel("octLabel", value.oct);
-            this.setLabel("binLabel", value.bin);
-        } else {
-            this.setLabel("display", value);
-            this.setLabel("hexLabel", value);
-            this.setLabel("decLabel", value);
-            this.setLabel("octLabel", value);
-            this.setLabel("binLabel", value);
-        }
+        this.setLabel("display", value.hex);
+        this.setLabel("hexLabel", value.hex);
+        this.setLabel("decLabel", value.dec);
+        this.setLabel("octLabel", value.oct);
+        this.setLabel("binLabel", value.bin);
     }
 
     onClick(e) {
@@ -616,15 +624,11 @@ export default class CalcProgrammerCalculator extends Calculator {
     }
 
     changeKeyPad(e) {
-        debugger;
-        const value = e.target.value;
+        const valueType = e.target.value;
+        const value = this.calcProgrammerOperator.currentValue;
         const display = "display";
-        // hex = all
-        // dec = 0123456789
-        // oct = 01234567
-        // bin = 012
 
-        switch(value) {
+        switch(valueType) {
             case "HEX":
                 this.setLabel(display, value.hex);
                 break;

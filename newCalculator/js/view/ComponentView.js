@@ -11,7 +11,8 @@ export default class ComponentView extends HTMLComponent {
             value: data.value,
             innerText: data.innerText,
             disabled: data.disabled,
-            onclick: data.onclick
+            onclick: data.onclick,
+            ["data-kind"]: data["data-kind"]
         };
     }
 

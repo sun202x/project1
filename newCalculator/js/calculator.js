@@ -60,6 +60,10 @@ export default class Calculator {
 
         return control;
     }
+    
+    setReadOnly(id, flag) {
+        this.setState(id, "disabled", flag);
+    }
 
     setValue(id, value) {
         this.setState(id, "value", value);

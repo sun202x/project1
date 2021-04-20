@@ -623,10 +623,35 @@ export default class CalcProgrammerCalculator extends Calculator {
         }
     }
 
+    getReadOnlyItems(type) {
+        // return this.find(this.getItems(), function (item) {
+        //     if (item["data-kind"] === type.toLowerCase()) {
+        //         console.log(item);
+        //     }
+        // });
+
+        if (type == "hex") {
+            item.disabled = false;
+        } else if (type == "dec") {
+            if (item.id == "a" || item.id == "b") {
+                item.disabled = true;
+            }
+        } else if (type == "oct") {
+            if (item.id == "7" || item.id == "8") {
+                item.disabled = true;
+            }
+        } else if (type == "bin") {
+            if (item.id == "0" || item.id == "1") {
+                item.disabled = false
+            }
+        }
+    }
+
     changeKeyPad(e) {
         const valueType = e.target.value;
         const value = this.calcProgrammerOperator.currentValue;
         const display = "display";
+        const items = this.getReadOnlyItems(valueType);
 
         switch(valueType) {
             case "HEX":

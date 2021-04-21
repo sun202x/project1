@@ -630,21 +630,10 @@ export default class CalcProgrammerCalculator extends Calculator {
         //     }
         // });
 
-        if (type == "hex") {
-            item.disabled = false;
-        } else if (type == "dec") {
-            if (item.id == "a" || item.id == "b") {
-                item.disabled = true;
-            }
-        } else if (type == "oct") {
-            if (item.id == "7" || item.id == "8") {
-                item.disabled = true;
-            }
-        } else if (type == "bin") {
-            if (item.id == "0" || item.id == "1") {
-                item.disabled = false
-            }
-        }
+        // bin = 0, 1
+        // oct = 0, 1, 2, 3, 4, 5, 6, 7
+        // dec = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+        // hex = all
     }
 
     changeKeyPad(e) {

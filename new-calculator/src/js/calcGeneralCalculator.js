@@ -265,6 +265,8 @@ export default class CalcGeneralCalculator extends Calculator {
     }
 
     onClick(e) {
+        debugger;
+
         // const display = this.getControl("display");
         const target = this.getControl(e.target.id);
         const value = this.generalOperator.getCalcResult(target);

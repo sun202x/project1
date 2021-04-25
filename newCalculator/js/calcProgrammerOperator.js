@@ -35,7 +35,21 @@ export default class CalcProgrammerOperator extends CalcOperator {
     }
 
     number(value) {
-        let currentValue = this.currentValue;
+        let result = this.currentValue;
+
+        if (result == "0") {
+            result = (value + "");
+        } else {
+            result += (value + "");
+        }
+
+        this.currentValue = this.convertData(result);
+        this.operatorCheck = false;
+
+        return result;
+    }
+
+    convertData(value) {
         const result = {};
 
         if (currentValue.hex == "0") {
@@ -49,8 +63,6 @@ export default class CalcProgrammerOperator extends CalcOperator {
         result.oct = parseInt(currentValue.hex, 16).toString(8);  // 8진수
         result.bin = parseInt(currentValue.hex, 16).toString(2);  // 2진수
 
-        this.operatorCheck = false;
-        this.currentValue = result;
         return result;
     }
 

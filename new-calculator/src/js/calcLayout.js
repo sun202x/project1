@@ -7,21 +7,21 @@ class CalcLayout {
     constructor() {
         this.calcHistory = new CalcHistory();
         // this.calculator = new Calculator();
-        // this.calcGeneralCalculator = new CalcGeneralCalculator("#wrapper-calculator");
-        this.calcProgrammerCalculator = new CalcProgrammerCalculator("#wrapper-calculator");
+        this.calcGeneralCalculator = new CalcGeneralCalculator("#wrapper-calculator");
+        // this.calcProgrammerCalculator = new CalcProgrammerCalculator("#wrapper-calculator");
     }
 
     render() {
         this.createHeaderElement();
-        // this.calcGeneralCalculator.render(); // 표준계산기
-        this.calcProgrammerCalculator.render(); // 프로그래머용 계산기
+        this.calcGeneralCalculator.render(); // 표준계산기
+        // this.calcProgrammerCalculator.render(); // 프로그래머용 계산기
     }
 
     createHeaderElement() {
         const wrapper = document.createElement("div");
         wrapper.setAttribute("id", "wrapper-calculator");
         const header = document.createElement("div");
-        header.setAttribute("id", "header");
+        header.setAttribute("id", "layout-header");
         const toolbar = document.createElement("div");
         toolbar.setAttribute("id", "wrapper-toolbar");
         const toggle = document.createElement("button");
@@ -42,6 +42,10 @@ class CalcLayout {
         header.append(toolbar);
         wrapper.append(header);
 
+        const contents = document.createElement("div");
+        contents.setAttribute("id", "layout-contents");
+        wrapper.append(contents);
+
         this.calcHistory.render(header);
 
         document.body.append(wrapper);
@@ -53,5 +57,5 @@ class CalcLayout {
         this.calcHistory.toggleDisplay();
     }
 }
-const calc = new CalcLayout();
-calc.render();
+
+export default CalcLayout;

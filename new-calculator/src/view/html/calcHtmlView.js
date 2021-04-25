@@ -48,22 +48,6 @@ export default class CalcHtmlView {
         return document.querySelector("#" + id);
     }
 
-    // render할 때 새로운 데이터를 넘겨서 그려지게 해야할까? 그렇다면 dom에서 해당되는 부분만 찾아서 어떻게 지우고 추가할 수 있을까?
-    // 데이터 전체의 가상dom만들어서 현재dom과 비교하여 바뀐부분만 업데이트...? 다른방법은 없는지 고민
-    onChangeLabel(target, type) {
-        const element = this.getDomElement(target.id);
-
-        if (element.innerText === "0") {
-            element.innerText = target[type];
-        } else {
-            element.innerText += target[type];
-        }
-    }
-
-    onChangeValue() {
-
-    }
-
     // updateView(element, container) {
     //     // 참조사이트
     //     // https://github.com/sun202x/study_didact - 흥식대원군 Github

@@ -1,19 +1,23 @@
 import CalcGenerator from "./calcGenerator.js";
 import CalcOperator from "./calcOperator.js";
-import CalcHtmlView from "./view/calcHtmlView.js";
+import CalcHtmlView from "../view/html/calcHtmlView.js";
+import CalcReactView from "../view/react/calcReactView";
 
 export default class Calculator {
     constructor(parentID) {
         this.itemList = [];
         this.historyData = [];
         this.calcGenerator = new CalcGenerator();
-        this.calcHtmlView = new CalcHtmlView(parentID);
+        // this.calcHtmlView = new CalcHtmlView(parentID);
+        this.calcView = new CalcReactView();
         this.setItems(this.onInitContents());
     }
 
     render() {
         const viewData = this.getItems();
-        this.calcHtmlView.render(viewData);
+        // this.calcHtmlView.render(viewData);
+        // ReactDom.render(<CalcReactView />, document.getElementById("root"));
+        this.calcView.render(viewData);
     }
 
     // override
@@ -92,6 +96,6 @@ export default class Calculator {
         });
 
         // 2. 데이터 속성값을 변경 후 HTML을 업데이트 해준다.
-        this.calcHtmlView.render(items, state);
+        this.calcView.render(items, state);
     }
 }

@@ -10,6 +10,7 @@ export default class ComponentFactory extends React.Component {
                 return <Div {...this.props} />;
             case "button":
                 return <Button {...this.props} />;
+            default:
         }
     }
 

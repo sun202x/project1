@@ -265,9 +265,6 @@ export default class CalcGeneralCalculator extends Calculator {
     }
 
     onClick(e) {
-        debugger;
-
-        // const display = this.getControl("display");
         const target = this.getControl(e.target.id);
         const value = this.generalOperator.getCalcResult(target);
 
@@ -275,10 +272,6 @@ export default class CalcGeneralCalculator extends Calculator {
             this.historyData.push(this.generalOperator.createSnapshot());
         }
 
-        // display가 아니라 viewModel을 통째로 넘겨야 할거같음 - didact
-        // this.calcView.updateView(display, wrapper);
-
-        // 단순 데이터객체만 넘어오기때문에 변경대상, 변경값을 넘겨줘야한다.
         this.setLabel("display", value);
     }
 }

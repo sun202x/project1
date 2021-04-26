@@ -638,22 +638,22 @@ export default class CalcProgrammerCalculator extends Calculator {
 
     changeKeyPad(e) {
         const valueType = e.target.value;
-        const value = this.calcProgrammerOperator.currentValue;
-        const display = "display";
-        const items = this.getReadOnlyItems(valueType);
+        const value = this.calcProgrammerOperator.convertData();
+        const targetID = "display";
 
         switch(valueType) {
             case "HEX":
-                this.setLabel(display, value.hex);
+                this.setLabel(targetID, value.hex);
                 break;
             case "DEC":
-                this.setLabel(display, value.dec);
+                this.setLabel(targetID, value.dec);
                 break;
             case "OCT":
-                this.setLabel(display, value.oct);
+                this.setLabel(targetID, value.oct);
                 break;
             case "BIN":
-                this.setLabel(display, value.bin);
+                this.setLabel(targetID, value.bin);
+            default:
         }
     }
 

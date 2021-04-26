@@ -14,9 +14,8 @@ export default class CalcReactView {
 }
 
 class CalcReactContainer extends React.Component {
-    
     render() {
-        return (
+        return(
             <React.Fragment>
                 {this.props.itemList.map((item, index) => (
                     <ComponentFactory key={index} {...item} />

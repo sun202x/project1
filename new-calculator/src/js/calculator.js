@@ -64,8 +64,46 @@ export default class Calculator {
         return control;
     }
     
-    setReadOnly(id, flag) {
-        this.setState(id, "disabled", flag);
+    getDisabledItems(items, type) {
+        const result = [];
+        
+        
+
+        return result;
+    }
+
+    setDisabled(type) {
+        const kindType = type.toLowerCase();
+        const items = this.getItems();
+
+        // @TODO 수정
+        this.find(items, (item) => { 
+            if (kindType === "dec") {
+                if (["hex"].includes(item["data-kind"])) {
+                    item["disabled"] = true;
+                } else {
+                    item["disabled"] = false;
+                }
+            } else if (kindType === "oct") {
+                if (["hex", "dec"].includes(item["data-kind"])) {
+                    item["disabled"] = true;
+                } else {
+                    item["disabled"] = false;
+                }
+            } else if (kindType === "bin") {
+                if (["hex", "dec", "oct"].includes(item["data-kind"])) {
+                    item["disabled"] = true;
+                } else {
+                    item["disabled"] = false;
+                }
+            } else {
+                if (item["data-kind"]) {
+                    item["disabled"] = false;
+                }
+            }
+        });
+        
+        this.calcHtmlView.render(items, "disabled");
     }
 
     setValue(id, value) {

@@ -403,7 +403,6 @@ export default class CalcProgrammerCalculator extends Calculator {
             .label(".")
             .value(".")
             .type("operator")
-            .disabled(true)
             .end();
         keypadContents.add(dot);
 
@@ -597,7 +596,6 @@ export default class CalcProgrammerCalculator extends Calculator {
     }
 
     onClick(e) {
-        // 프로그래머용 계산기는 객체형태로 값을 받아야함 - 진수변환때문에
         const target = this.getControl(e.target.id);
         const value = this.calcProgrammerOperator.getCalcResult(target);
 
@@ -605,7 +603,6 @@ export default class CalcProgrammerCalculator extends Calculator {
             this.historyData.push(this.calcProgrammerOperator.createSnapshot());
         }
 
-        // viewModel update
         this.onClickHanldler(value);
     }
 
@@ -623,38 +620,12 @@ export default class CalcProgrammerCalculator extends Calculator {
         }
     }
 
-    getReadOnlyItems(type) {
-        // return this.find(this.getItems(), function (item) {
-        //     if (item["data-kind"] === type.toLowerCase()) {
-        //         console.log(item);
-        //     }
-        // });
-
-        // bin = 0, 1
-        // oct = 0, 1, 2, 3, 4, 5, 6, 7
-        // dec = 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
-        // hex = all
-    }
-
     changeKeyPad(e) {
-        const valueType = e.target.value;
-        const value = this.calcProgrammerOperator.convertData();
-        const targetID = "display";
+        const value = e.target.value;
+        const valueType = value.toLowerCase();
+        const result = this.calcProgrammerOperator.convertData();
 
-        switch(valueType) {
-            case "HEX":
-                this.setLabel(targetID, value.hex);
-                break;
-            case "DEC":
-                this.setLabel(targetID, value.dec);
-                break;
-            case "OCT":
-                this.setLabel(targetID, value.oct);
-                break;
-            case "BIN":
-                this.setLabel(targetID, value.bin);
-            default:
-        }
+        this.setLabel("display", result[valueType]);
+        this.setDisabled(valueType);
     }
-
 }

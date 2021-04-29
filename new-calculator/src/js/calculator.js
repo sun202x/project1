@@ -8,15 +8,15 @@ export default class Calculator {
         this.itemList = [];
         this.historyData = [];
         this.calcGenerator = new CalcGenerator();
-        this.calcHtmlView = new CalcHtmlView(parentID);
-        // this.calcView = new CalcReactView();
+        // this.calcHtmlView = new CalcHtmlView(parentID);
+        this.calcView = new CalcReactView();
         this.setItems(this.onInitContents());
     }
 
     render() {
         const viewData = this.getItems();
-        this.calcHtmlView.render(viewData);
-        // this.calcView.render(viewData);
+        // this.calcHtmlView.render(viewData);
+        this.calcView.render(viewData);
     }
 
     // override
@@ -75,35 +75,36 @@ export default class Calculator {
     setDisabled(type) {
         const kindType = type.toLowerCase();
         const items = this.getItems();
+        const state = "disabled";
 
         // @TODO 수정
         this.find(items, (item) => { 
             if (kindType === "dec") {
                 if (["hex"].includes(item["data-kind"])) {
-                    item["disabled"] = true;
+                    item[state] = true;
                 } else {
-                    item["disabled"] = false;
+                    item[state] = false;
                 }
             } else if (kindType === "oct") {
                 if (["hex", "dec"].includes(item["data-kind"])) {
-                    item["disabled"] = true;
+                    item[state] = true;
                 } else {
-                    item["disabled"] = false;
+                    item[state] = false;
                 }
             } else if (kindType === "bin") {
                 if (["hex", "dec", "oct"].includes(item["data-kind"])) {
-                    item["disabled"] = true;
+                    item[state] = true;
                 } else {
-                    item["disabled"] = false;
+                    item[state] = false;
                 }
             } else {
                 if (item["data-kind"]) {
-                    item["disabled"] = false;
+                    item[state] = false;
                 }
             }
         });
         
-        this.calcHtmlView.render(items, "disabled");
+        this.calcHtmlView.render(items, state);
     }
 
     setValue(id, value) {

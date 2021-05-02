@@ -272,6 +272,7 @@ export default class CalcGeneralCalculator extends Calculator {
             this.historyData.push(this.generalOperator.createSnapshot());
         }
 
+        this.setSelectItem(target);
         this.setLabel("display", value);
     }
 }

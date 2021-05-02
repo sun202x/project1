@@ -1,14 +1,15 @@
 import React from "react";
 
-export default function Button(props) {
+export default class Button extends React.Component {
+    constructor(props) {
+        super();
+    }
 
-    return (
-        <button id={props.id} 
-            data-type={props.type}
-            data-value={props.value}
-            onClick={props.onclick}
-            >
-            {props.innerText}
-        </button>
-    );
+    render() {
+        return (
+            <button id={this.props.id} className={this.props.selector ? "red" : ""} data-type={this.props.type} data-value={this.props.value} onClick={this.props.onclick}>
+                {this.props.innerText}
+            </button>
+        )
+    }
 }

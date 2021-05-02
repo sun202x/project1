@@ -8,7 +8,7 @@ export default class Calculator {
         this.itemList = [];
         this.historyData = [];
         this.calcGenerator = new CalcGenerator();
-        // this.calcHtmlView = new CalcHtmlView(parentID);
+        this.calcHtmlView = new CalcHtmlView(parentID);
         this.calcView = new CalcReactView();
         this.setItems(this.onInitContents());
     }
@@ -72,12 +72,12 @@ export default class Calculator {
         return result;
     }
 
+    // TODO 수정
     setDisabled(type) {
         const kindType = type.toLowerCase();
         const items = this.getItems();
         const state = "disabled";
 
-        // @TODO 수정
         this.find(items, (item) => { 
             if (kindType === "dec") {
                 if (["hex"].includes(item["data-kind"])) {
@@ -104,7 +104,19 @@ export default class Calculator {
             }
         });
         
-        this.calcHtmlView.render(items, state);
+        // this.calcHtmlView.render(items, state);
+    }
+
+    setSelectItem(target) {
+        const items = this.getItems();
+
+        this.find(items, (item) => {
+            if (item.id === target.id) {
+                item.selector = true;
+            } else {
+                item.selector = false;
+            }
+        });
     }
 
     setValue(id, value) {
@@ -134,6 +146,6 @@ export default class Calculator {
         });
 
         // 2. 데이터 속성값을 변경 후 HTML을 업데이트 해준다.
-        this.calcHtmlView.render(items, state);
+        this.calcView.render(items, state);
     }
 }

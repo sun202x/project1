@@ -35,7 +35,9 @@ export default class Calculator {
     }
 
     toCamelCase(str) {
-        return str.toLowerCase().replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
+        return str
+            .toLowerCase()
+            .replace(/[^a-zA-Z0-9]+(.)/g, (m, chr) => chr.toUpperCase());
     }
 
     // @TODO 제거
@@ -63,11 +65,9 @@ export default class Calculator {
 
         return control;
     }
-    
+
     getDisabledItems(items, type) {
         const result = [];
-        
-        
 
         return result;
     }
@@ -78,7 +78,7 @@ export default class Calculator {
         const items = this.getItems();
         const state = "disabled";
 
-        this.find(items, (item) => { 
+        this.find(items, (item) => {
             if (kindType === "dec") {
                 if (["hex"].includes(item["data-kind"])) {
                     item[state] = true;
@@ -103,11 +103,11 @@ export default class Calculator {
                 }
             }
         });
-        
+
         // this.calcHtmlView.render(items, state);
     }
 
-    setSelectItem(target) {
+    activeItem(target) {
         const items = this.getItems();
 
         this.find(items, (item) => {
@@ -139,7 +139,7 @@ export default class Calculator {
         const items = this.getItems();
 
         // 1. 데이터의 속성값을 찾아 변경해준다.
-        this.find(items, item => {
+        this.find(items, (item) => {
             if (item.id === id) {
                 item[state] = value;
             }

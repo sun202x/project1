@@ -6,14 +6,14 @@ export default class CalcReactView {
     render(itemList) {
         ReactDOM.render(
             <CalcReactContainer itemList={itemList} />,
-            document.getElementById('layout-contents')
+            document.getElementById("layout-contents")
         );
     }
 }
 
 class CalcReactContainer extends React.Component {
     render() {
-        return(
+        return (
             <React.Fragment>
                 {this.props.itemList.map((item, index) => (
                     <ComponentFactory key={index} {...item} />

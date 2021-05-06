@@ -11,76 +11,76 @@
     <title>React App</title>
     <style>
       * {
-          box-sizing: border-box;
-          margin: 0;
+        box-sizing: border-box;
+        margin: 0;
       }
       input {
-          display: block;
-          width: 300px;
-          height: 25px;
-          margin-bottom: 10px;
-          border: 1px solid #ccc;
+        display: block;
+        width: 300px;
+        height: 25px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
       }
       button {
-          display: inline-block;
-          width: 60px;
-          height: 30px;
-          line-height: 1;
-          border: 1px solid #ccc;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+        line-height: 1;
+        border: 1px solid #ccc;
       }
       .show {
-          display: block !important;
+        display: block !important;
       }
       .hide {
-          display: none !important;
+        display: none !important;
       }
       #button-block {
-          width: 100%;
-          display:block;
+        width: 100%;
+        display: block;
       }
       #wrapper-calculator {
-          position: relative;
-          width: 320px;
-          margin: 50px auto 0;
-          border: 1px solid #ccc;
+        position: relative;
+        width: 320px;
+        margin: 50px auto 0;
+        border: 1px solid #ccc;
       }
       #wrapper-history {
-          position: absolute;
-          top: 30px;
-          left: 20%;
-          right: 0px;
-          bottom: 0px;
-          background-color: #fff;
-          border: 1px solid #ccc;
+        position: absolute;
+        top: 30px;
+        left: 20%;
+        right: 0px;
+        bottom: 0px;
+        background-color: #fff;
+        border: 1px solid #ccc;
       }
       #wrapper-toolbar > * {
-          float: left;
+        float: left;
       }
       #wrapper-toolbar #history {
-          float: right;
+        float: right;
       }
       #wrapper-display #record {
-          height: 25px;
-          border: 1px solid #ccc;
-          border-bottom-style: none;
+        height: 25px;
+        border: 1px solid #ccc;
+        border-bottom-style: none;
       }
       #wrapper-display #display {
-          width: 100%;
-          height: 50px;
-          border: 1px solid #ccc;
-          font-size: 24px;
-          font-weight: bold;
-          text-align: right;
+        width: 100%;
+        height: 50px;
+        border: 1px solid #ccc;
+        font-size: 24px;
+        font-weight: bold;
+        text-align: right;
       }
       #wrapper-top-operator > button,
       #wrapper-operator > button {
-          float: left;
+        float: left;
       }
       #wrapper-top-operator > button {
-          width: 20%;
+        width: 20%;
       }
       #wrapper-operator > button {
-          width: 25%;
+        width: 25%;
       }
       #wrapper-toolbar:after,
       #wrapper-toolbar:before,
@@ -90,59 +90,59 @@
       #wrapper-operator:before,
       #bitpad-contents:after,
       #bitpad-contents:before {
-          content: "";
-          display: table;
-          clear: both;
+        content: "";
+        display: table;
+        clear: both;
       }
       #wrapper-notation .notation-box {
-          border-bottom: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
       }
       #wrapper-notation .notation-box > button {
-          border-bottom-style: none;
-          border-top-style: none;
+        border-bottom-style: none;
+        border-top-style: none;
       }
       #wrapper-notation .notation-box > span {
-          margin-left: 10px;
+        margin-left: 10px;
       }
       #wrapper-operator-keypad #keypad-header button {
-          width: auto;
+        width: auto;
       }
       #wrapper-operator-keypad #keypad-contents button {
-          width: 20%;
+        width: 20%;
       }
       #bitpad-contents .bit-box {
-          float: left;
-          width: 25%;
-          padding: 5px 5px 8px;
-          border: 1px solid #ccc;
-          background-color: #efefef;
+        float: left;
+        width: 25%;
+        padding: 5px 5px 8px;
+        border: 1px solid #ccc;
+        background-color: #efefef;
       }
       #bitpad-contents .bit-box > div {
-          text-align: center;
+        text-align: center;
       }
       #bitpad-contents .bit-box > div + div {
-          font-size: 12px;
-          text-align: right;
+        font-size: 12px;
+        text-align: right;
       }
       #bitpad-contents .bit-box > div > span {
-          padding-left: 3px;
-          padding-right: 3px;
-          font-size: 20px;
-          cursor: pointer;
+        padding-left: 3px;
+        padding-right: 3px;
+        font-size: 20px;
+        cursor: pointer;
       }
       .red {
         background-color: #ff2323;
         border-color: #840101;
         color: #fff;
       }
-
-  </style>
+    </style>
   </head>
   <body>
-      <!--
+    <!--
             next 0425
             0. 계산기 기능구현
             1. props, state 개념 익히기 - 버튼 색상 변경해보기 > 마지막에 클릭한 버튼에만 색깔 변경 될 수 있도록
+                ㄴ 이벤트 로직 어디에 어떻게 처리할것인가 고민
             2. 리액트 익숙해지기 - 리액트 컴포넌트 랜더 로그 찍어보기
             3. 리덕스 개념학습
             4. generator, calculator 구조화 해보기

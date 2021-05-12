@@ -1,24 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import ComponentFactory from "./componentFactory";
+import { Provider } from 'react-redux';
+import { createStore } from 'redux';
+import reducer from "./redux/reducer";
+import CalcReactContainer from "./CalcReactContainer";
 
 export default class CalcReactView {
     render(itemList) {
         ReactDOM.render(
-            <CalcReactContainer itemList={itemList} />,
+            <Provider store={createStore(reducer)}>
+                <CalcReactContainer itemList={itemList} />
+            </Provider>,
             document.getElementById("layout-contents")
-        );
-    }
-}
-
-class CalcReactContainer extends React.Component {
-    render() {
-        return (
-            <React.Fragment>
-                {this.props.itemList.map((item, index) => (
-                    <ComponentFactory key={index} {...item} />
-                ))}
-            </React.Fragment>
         );
     }
 }

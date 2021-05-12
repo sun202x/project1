@@ -1,7 +1,7 @@
 import CalcGenerator from "./calcGenerator.js";
 import CalcOperator from "./calcOperator.js";
 import CalcHtmlView from "../view/html/calcHtmlView.js";
-import CalcReactView from "../view/react/calcReactView";
+import CalcReactView from "../view/react/component/calcReactView";
 
 export default class Calculator {
     constructor(parentID) {

@@ -1,9 +1,7 @@
 import React, { useEffect } from "react";
 
 const SFCButton = (props, context) => {
-    useEffect(() => {
-        console.log("effect");
-    });
+    useEffect(() => {});
 
     return (
         <button

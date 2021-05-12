@@ -2,9 +2,7 @@ import React, { useEffect } from "react";
 import ComponentFactory from "./componentFactory";
 
 export default function Div(props) {
-    useEffect(() => {
-        console.log("effect");
-    });
+    useEffect(() => {});
 
     return (
         <div id={props.id} className={props.class}>

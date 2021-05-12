@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "./button";
+import SFCButton from "./SFCButton";
 import Div from "./div";
 
 export default class ComponentFactory extends React.Component {
@@ -8,7 +8,7 @@ export default class ComponentFactory extends React.Component {
             case "div":
                 return <Div {...this.props} />;
             case "button":
-                return <Button {...this.props} />;
+                return <SFCButton {...this.props} />;
             default:
         }
     }

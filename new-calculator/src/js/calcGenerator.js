@@ -1,6 +1,3 @@
-// import CalcButtonLayout from "./calcButtonLayout.js";
-// import CalcControl from "./calcControl.js";
-
 export default class CalcGenerator {
     div() {
         const obj = {};
@@ -76,25 +73,5 @@ export default class CalcGenerator {
                 };
             },
         };
-    }
-}
-
-class ButtonGenerator {
-    constructor(controlType, id) {
-        this.obj = {};
-        this.obj.controlType = controlType;
-        this.obj.id = id;
-    }
-
-    value(value) {
-        this.obj.value = value;
-    }
-
-    label(label) {
-        this.obj.label = label;
-    }
-
-    end() {
-        return this.obj;
     }
 }

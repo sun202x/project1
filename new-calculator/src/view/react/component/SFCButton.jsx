@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 const SFCButton = (props, context) => {
-    useEffect(() => {});
+    // const [selector, setSelector] = useState(false);
+
+    // const activeItem = () => {
+    //     setSelector(selector);
+    // };
 
     return (
         <button

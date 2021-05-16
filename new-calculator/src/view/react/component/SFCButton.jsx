@@ -1,11 +1,40 @@
 import React, { useEffect, useState } from "react";
 
 const SFCButton = (props, context) => {
-    // const [selector, setSelector] = useState(false);
+    const [selector, setSelector] = useState(props.selector ?? false);
 
-    // const activeItem = () => {
-    //     setSelector(selector);
-    // };
+    const activeItem = (e) => {
+        setSelector(!selector); 
+
+        props.onclick(e);
+    };
+
+    useEffect(
+        // componentDidMount, componentDidUpdate
+        () => {
+
+            // componentWillUnmount
+            return () => {
+
+            };
+        }
+    );
+
+    useEffect(
+        // componentDidMount
+        () => {
+
+        },
+        []
+    );
+
+    useEffect(
+        // componentDidUpdate - selector, type에 대한 update 처리
+        () => {
+            
+        },
+        [props.selector, props.type]
+    );
 
     return (
         <button
@@ -13,7 +42,7 @@ const SFCButton = (props, context) => {
             className={props.selector ? "red" : ""}
             data-type={props.type}
             data-value={props.value}
-            onClick={props.onclick}
+            onClick={activeItem}
         >
             {props.innerText}
         </button>

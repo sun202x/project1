@@ -12,11 +12,13 @@ export default class Button extends React.Component {
         // this.activeItem = this.activeItem.bind(this);
     }
 
-    // activeItem() {
-    //     this.setState((item) => ({
-    //         active: this.state.active ? false : true,
-    //     }));
-    // }
+    activeItem = (e) => {
+        this.setState((item) => ({
+            active: this.state.active ? false : true,
+        }));
+
+        this.props.onclick(e);
+    }
 
     componentWillUnmount() {
         console.log(">>>>> componentWillUnmount");
@@ -26,18 +28,24 @@ export default class Button extends React.Component {
         console.log(">>>>> componentDidMount");
     }
 
+    componentDidUpdate() {
+        console.log("componentDidUpdate");
+    }
+
     shouldComponentUpdate() {
         console.log(">>>>> shouldComponentUpdate");
         return true;
     }
 
-    componentDidUpdate() {
-        console.log("componentDidUpdate");
-    }
-
     getSnapshotBeforeUpdate() {
         console.log("getSnapshotBeforeUpdate");
         return {};
+    }
+
+    onclick = e => {
+        
+
+        this.props.onclick(e);
     }
 
     render() {
@@ -48,7 +56,7 @@ export default class Button extends React.Component {
                 className={this.props.selector ? "red" : ""}
                 data-type={this.props.type}
                 data-value={this.props.value}
-                onClick={this.props.onclick}
+                onClick={this.activeItem}
             >
                 {this.props.innerText}
             </button>

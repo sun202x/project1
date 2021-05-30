@@ -288,16 +288,6 @@ export default class CalcGeneralCalculator extends Calculator {
         contents.add(contentsWrapper3.end());
         contents.id("contents");
         return contents.end();
-
-        // generator data setting
-        // control.setting({
-        //     controlType: "button",
-        //     id: "button1",
-        //     value: "111",
-        //     label: "aa",
-        //     type: "qq",
-        // });
-        // 어차피 셋팅할 때 넘겨주는 데이터는 불가피하게 생길 수 밖에 없는데 위와 같은 방식으로 변경해보자
     }
 
     onClick(e) {
